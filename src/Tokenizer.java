@@ -4,7 +4,7 @@ import static java.lang.Character.*;
 import static java.lang.Character.isLetter;
 
 public class Tokenizer {
-    private String src, next;  private int pos;
+    private String src, next,type;  private int pos;
     public Tokenizer(String src) throws SyntaxError {
         this.src = src;  pos = 0;
         computeNext();
@@ -41,7 +41,19 @@ public class Tokenizer {
         return result;
     }
 
+    public String getType(){
+        return type;
+    }
 
+    public void assignType(){
+        if (next.equals("if")){
+            type = "ifState";
+        }else if(next.equals("while")){
+            type = "whileState";
+        }else if(next.matches("^[a-z]+$") || next.matches("^[A-Z]+$")){
+            type = "identifier";
+        }
+    }
 
     private void computeNext() throws SyntaxError{
         StringBuilder s = new StringBuilder();
@@ -56,20 +68,23 @@ public class Tokenizer {
         char c = src.charAt(pos);
         if (isDigit(c)) {  // start of number
             s.append(c);
-            for (pos++; pos < src.length() &&
-                    isDigit(src.charAt(pos)); pos++)
+            for (pos++; pos < src.length() && isDigit(src.charAt(pos)); pos++){
                 s.append(src.charAt(pos));
+            }
+            type = "number";
         }else if (c == '+' || c == '-' || c == '*' || c == '/' || c == '%' || c == '(' || c == ')') {
             s.append(c);  pos++;
+            type = "operator";
         }else if(isLetter(c)){
             s.append(c);
-            for (pos++; pos < src.length() &&
-                    isLetter(src.charAt(pos)); pos++)
+            for (pos++; pos < src.length() && isLetter(src.charAt(pos)); pos++){
                 s.append(src.charAt(pos));
+            }
+
         }else {
             throw new IllegalArgumentException("unknown character: " + c);
         }
         next = s.toString();
-
+        assignType();
     }
 }

@@ -9,10 +9,24 @@ public class ParserTest {
     }
 
     public int ParseStatement() throws SyntaxError {
+        if(token.getType().equals("whileState")){
+            token.consume();
+            return ParseWhileStatement();
+        }
+
         return ParseCommand();
     }
 
+    public int ParseWhileStatement() throws SyntaxError {
+        token.consume("(");
+        parseE();
+        token.consume(")");
+        ParseStatement();
+        return 8888;
+    }
+
     public int ParseCommand() throws SyntaxError {
+        int m = 0;
         while (token.peek("done") || token.peek("relocate") || token.peek("move")
                 || token.peek("invest") || token.peek("shoot") || token.peek("collect")){
             if(token.peek("done")){
@@ -21,7 +35,8 @@ public class ParserTest {
             }
             if(token.peek("move")){
                 token.consume();
-                return 2+ParseDirection();
+                m += m + 2+ParseDirection();
+                return m;
             }
         }
         return -99999;
@@ -56,5 +71,73 @@ public class ParserTest {
             }
         }
         return 0;
+    }
+
+    //E -> E+T | E-T | T
+    private Expr parseE() throws SyntaxError {
+        Expr E = parseT();
+        while (token.peek("+") || token.peek("-")){
+            if(token.peek("+")){
+                token.consume();
+                E = new BinaryArithExpr(E,"+",parseT());
+            }else if(token.peek("-")){
+                token.consume();
+                E = new BinaryArithExpr(E,"-",parseT());
+            }
+        }
+        return E;
+    }
+
+    //T -> T*F | T/F | F
+    private Expr parseT() throws SyntaxError{
+        Expr T = parseF();
+        while(token.peek("*") || token.peek("/") || token.peek("%")){
+            if(token.peek("*")){
+                token.consume();
+                T = new BinaryArithExpr(T,"*",parseF());
+            }else if(token.peek("/")){
+                token.consume();
+                T = new BinaryArithExpr(T,"/",parseF());
+            }else if(token.peek("%")){
+                token.consume();
+                T = new BinaryArithExpr(T,"%",parseF());
+            }
+        }
+        return T;
+    }
+
+    //F -> n | x | (E)
+    private Expr parseF() throws SyntaxError{
+        if(token.peek("-")) {
+            token.consume();
+            if (isNumber(token.peek())) {
+                int neg = Integer.parseInt(token.consume());
+                return new IntLit(-neg);
+            }
+        }else if (isNumber(token.peek())) {
+            int num = Integer.parseInt(token.consume());
+            return new IntLit(num);
+        }else if(token.peek().matches("^[a-z]+$") || token.peek().matches("^[A-Z]+$")){
+            return new Variable(token.consume());
+        }else if(token.peek("(") || token.peek(")")){
+            token.consume("(");
+            Expr F = parseE();
+            token.consume(")");
+            return F;
+        }else if(token.peek("+") || token.peek("*") || token.peek("/") || token.peek("%")){
+            throw new SyntaxError("Please check your input can't start with '"+ token.peek() + "'");
+        }else{
+            throw new SyntaxError("Please check your input "+ token.peek() +" is not accept");
+        }
+        return new IntLit(-99999999);
+    }
+
+    public static boolean isNumber(String str)
+    {
+        for (char c : str.toCharArray())
+        {
+            if (!Character.isDigit(c)) return false;
+        }
+        return true;
     }
 }
