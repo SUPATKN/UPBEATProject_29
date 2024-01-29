@@ -52,6 +52,8 @@ public class Tokenizer {
             type = "whileState";
         }else if(next.matches("^[a-z]+$") || next.matches("^[A-Z]+$")){
             type = "identifier";
+        }else{
+            type = "command";
         }
     }
 
@@ -81,6 +83,9 @@ public class Tokenizer {
                 s.append(src.charAt(pos));
             }
 
+        }else if(c == '{' || c== '}'){
+            s.append(c);
+            type = "blockState";
         }else {
             throw new IllegalArgumentException("unknown character: " + c);
         }

@@ -11,10 +11,15 @@ public class ParserTest {
     public int ParseStatement() throws SyntaxError {
         if(token.getType().equals("whileState")){
             token.consume();
-            return ParseWhileStatement();
+            ParseWhileStatement();
+        }else if(token.getType().equals("blockState")){
+            token.consume();
+            ParseBlockStatement();
+        }else if(token.getType().equals("identifier") || token.getType().equals("command")){
+            token.consume();
+            ParseCommand();
         }
-
-        return ParseCommand();
+        return 0;
     }
 
     public int ParseWhileStatement() throws SyntaxError {
@@ -22,7 +27,15 @@ public class ParserTest {
         parseE();
         token.consume(")");
         ParseStatement();
+        System.out.println("do while");
         return 8888;
+    }
+
+    public int ParseBlockStatement() throws SyntaxError {
+        ParseStatement();
+        token.consume("}");
+        System.out.println("do block");
+        return 123124;
     }
 
     public int ParseCommand() throws SyntaxError {
