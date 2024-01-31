@@ -4,7 +4,9 @@ import static java.lang.Character.*;
 import static java.lang.Character.isLetter;
 
 public class Tokenizer {
-    private String src, next,type;  private int pos;
+    private String src, next;
+    private int pos;
+    private String type = " ";
     public Tokenizer(String src) throws SyntaxError {
         this.src = src;  pos = 0;
         computeNext();
@@ -46,15 +48,16 @@ public class Tokenizer {
     }
 
     public void assignType(){
-        if (next.equals("if")){
-            type = "ifState";
-        }else if(next.equals("while")){
-            type = "whileState";
-        }else if(next.matches("^[a-z]+$") || next.matches("^[A-Z]+$")){
-            type = "identifier";
-        }else{
-            type = "command";
-        }
+            if (next.equals("if")){
+                type = "ifState";
+            }else if(next.equals("while")){
+                type = "whileState";
+
+            }else if(next.length() >= 2){
+                type = "command";
+            }else if((next.matches("^[a-z]+$")) || next.matches("^[A-Z]+$")){
+                type = "identifier";
+            }
     }
 
     private void computeNext() throws SyntaxError{
@@ -75,7 +78,7 @@ public class Tokenizer {
             }
             type = "number";
         }else if (c == '+' || c == '-' || c == '*' || c == '/' || c == '%' || c == '(' || c == ')') {
-            s.append(c);  pos++;
+            s.append(c);pos++;
             type = "operator";
         }else if(isLetter(c)){
             s.append(c);
@@ -85,6 +88,7 @@ public class Tokenizer {
 
         }else if(c == '{' || c== '}'){
             s.append(c);
+            pos++;
             type = "blockState";
         }else {
             throw new IllegalArgumentException("unknown character: " + c);

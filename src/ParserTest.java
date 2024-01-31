@@ -1,90 +1,91 @@
+import java.util.LinkedList;
+
 public class ParserTest {
     private Tokenizer token;
+    LinkedList<AST> statement = new LinkedList<>();
     ParserTest(Tokenizer t){
         this.token = t;
     }
 
-    public int ParsePlan() throws SyntaxError {
-        return ParseStatement();
+    public void ParsePlan() throws SyntaxError {
+        ParseStatement();
     }
 
-    public int ParseStatement() throws SyntaxError {
+    public LinkedList<AST> ParseStatement() throws SyntaxError {
         if(token.getType().equals("whileState")){
             token.consume();
-            ParseWhileStatement();
-        }else if(token.getType().equals("blockState")){
+            statement.add(ParseWhileStatement());
+        }else if(token.getType().equals("blockState")) {
             token.consume();
-            ParseBlockStatement();
+            statement.addAll(ParseBlockStatement());
         }else if(token.getType().equals("identifier") || token.getType().equals("command")){
-            token.consume();
-            ParseCommand();
+            statement.add(ParseCommand());
         }
-        return 0;
+        return statement;
     }
 
-    public int ParseWhileStatement() throws SyntaxError {
+    public AST ParseWhileStatement() throws SyntaxError {
         token.consume("(");
-        parseE();
+        Expr E = parseE();
         token.consume(")");
         ParseStatement();
-        System.out.println("do while");
-        return 8888;
+        AST w = new WhileNode(E, statement);
+        return  w;
     }
 
-    public int ParseBlockStatement() throws SyntaxError {
-        ParseStatement();
+    public LinkedList<AST> ParseBlockStatement() throws SyntaxError {
+        LinkedList<AST> b = ParseStatement();
+        System.out.println("dd");
         token.consume("}");
-        System.out.println("do block");
-        return 123124;
+        return b;
     }
 
-    public int ParseCommand() throws SyntaxError {
-        int m = 0;
+    public AST ParseCommand() throws SyntaxError {
+        AST command = null;
         while (token.peek("done") || token.peek("relocate") || token.peek("move")
                 || token.peek("invest") || token.peek("shoot") || token.peek("collect")){
-            if(token.peek("done")){
-                token.consume();
-                return -1;
-            }
+//            if(token.peek("done")){
+//                token.consume();
+//                return -1;
+//            }
             if(token.peek("move")){
                 token.consume();
-                m += m + 2+ParseDirection();
-                return m;
+                 command = new MoveCommandNode(token.consume());
             }
         }
-        return -99999;
+        return command;
     }
 
-    public int ParseDirection() throws SyntaxError {
-        while (token.peek("up") || token.peek("down") || token.peek("upright")
-                || token.peek("downright") || token.peek("upleft") || token.peek("downleft")) {
-            if(token.peek("up")){
-                token.consume();
-                return 1;
-            }
-            if(token.peek("upright")){
-                token.consume();
-                return 2;
-            }
-            if(token.peek("downright")){
-                token.consume();
-                return 3;
-            }
-            if(token.peek("down")){
-                token.consume();
-                return 4;
-            }
-            if(token.peek("downleft")){
-                token.consume();
-                return 5;
-            }
-            if(token.peek("upleft")){
-                token.consume();
-                return 6;
-            }
-        }
-        return 0;
-    }
+//    public AST ParseDirection() throws SyntaxError {
+//        while (token.peek("up") || token.peek("down") || token.peek("upright")
+//                || token.peek("downright") || token.peek("upleft") || token.peek("downleft")) {
+//            if(token.peek("up")){
+//                token.consume();
+//                return 1;
+//            }
+//            if(token.peek("upright")){
+//                token.consume();
+//                return 2;
+//            }
+//            if(token.peek("downright")){
+//                token.consume();
+//                return 3;
+//            }
+//            if(token.peek("down")){
+//                token.consume();
+//                return 4;
+//            }
+//            if(token.peek("downleft")){
+//                token.consume();
+//                return 5;
+//            }
+//            if(token.peek("upleft")){
+//                token.consume();
+//                return 6;
+//            }
+//        }
+//        return 0;
+//    }
 
     //E -> E+T | E-T | T
     private Expr parseE() throws SyntaxError {
