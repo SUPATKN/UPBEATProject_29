@@ -1,32 +1,35 @@
-import java.sql.Statement;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
 public class ParserTest {
     private Tokenizer token;
+    Map<String ,Integer> binding = new HashMap<>();
     LinkedList<AST> statement = new LinkedList<>();
     ParserTest(Tokenizer t){
         this.token = t;
     }
     public void ParsePlan() throws SyntaxError {
-        statement.addAll(ParseStatement());
+        while(token.hasNextToken()){
+            statement.addAll(ParseStatement());
+        }
         while(!statement.isEmpty()){
             statement.peekFirst().eval();
             statement.remove();
         }
+        System.out.println(binding.values());
     }
 
     public LinkedList<AST> ParseStatement() throws SyntaxError {
         LinkedList<AST> localState = new LinkedList<>();
         if(token.getType().equals("identifier") || token.getType().equals("command")){
-            localState.add(ParseCommand());
-        }else if(token.getType().equals("ifState")){
-            token.consume();
-            localState.addAll(ParseIfStatement());
+            localState.addAll(ParseCommand());
         }else if(token.getType().equals("blockState")) {
             token.consume();
             localState.addAll(ParseBlockStatement());
+        }else if(token.getType().equals("ifState")){
+            token.consume();
+            localState.addAll(ParseIfStatement());
         }else if(token.getType().equals("whileState")){
             token.consume();
             localState.add(ParseWhileStatement());
@@ -35,7 +38,6 @@ public class ParserTest {
     }
 
     public LinkedList<AST> ParseIfStatement() throws SyntaxError {
-        Map<String ,Integer> binding = new HashMap<>();
         LinkedList<AST> ifState = new LinkedList<>();
         token.consume("(");
         Expr E = parseE();
@@ -56,8 +58,9 @@ public class ParserTest {
         token.consume("(");
         Expr E = parseE();
         token.consume(")");
-        LinkedList<AST> s = ParseStatement();
-        AST w = new WhileNode(E,s);
+        LinkedList<AST> s = new LinkedList<>();
+        s.addAll(ParseStatement());
+        AST w = new WhileNode(E,s,binding);
         return  w;
     }
 
@@ -70,23 +73,47 @@ public class ParserTest {
         return b;
     }
 
-    public AST ParseCommand() throws SyntaxError {
-        AST command = null;
-//        while (token.peek("done") || token.peek("relocate") || token.peek("move")
-//                || token.peek("invest") || token.peek("shoot") || token.peek("collect")){
-////            if(token.peek("done")){
-////                token.consume();
-////                return -1;
-////            }
-            if(token.peek("move")){
-                token.consume();
-                String direction = ParseDirection().eval();
-                command = new MoveCommandNode(direction);
+    public LinkedList<AST> ParseCommand() throws SyntaxError {
+        LinkedList<AST> command = new LinkedList<>();
+        if(token.getType().equals("identifier")){
+            LinkedList<AST> assign = new LinkedList<>();
+            while (token.getType().equals("identifier")){
+                assign.add(ParseAssignCommand());
             }
-//        }
-        return command;
+            return assign;
+        }else {
+            command.add(ParseActionCommand());
+        }
+        return  command;
     }
 
+    public AST ParseActionCommand() throws SyntaxError{
+        AST Action = null;
+        if(token.peek("move")){
+            token.consume();
+            Action = ParseMoveCommand();
+        }
+        return Action;
+    }
+
+    public AST ParseMoveCommand() throws SyntaxError{
+        AST MoveCom = null;
+        String direction = ParseDirection().eval();
+        MoveCom = new MoveCommandNode(direction);
+        return  MoveCom;
+    }
+
+    public AST ParseAssignCommand() throws SyntaxError{
+        AST Assign = null;
+        String variable = token.consume();
+        Expr Identifier = new Variable(variable);
+        Variable var = (Variable) Identifier;
+        binding.put(var.name(), 0);
+        token.consume("=");
+        Expr E = parseE();
+        Assign = new AssignCommandNode(Identifier,E,binding);
+        return Assign;
+    }
     public DirectionNode ParseDirection() throws SyntaxError {
         DirectionNode D = null;
         while (token.peek("up") || token.peek("down") || token.peek("upright")
@@ -134,7 +161,7 @@ public class ParserTest {
         return E;
     }
 
-    //T -> T*F | T/F | F
+    //T -> T*F | T/F | T%F | F
     private Expr parseT() throws SyntaxError{
         Expr T = parseF();
         while(token.peek("*") || token.peek("/") || token.peek("%")){
@@ -152,15 +179,15 @@ public class ParserTest {
         return T;
     }
 
-    //F -> n | x | (E)
+    //F -> <number> | <identifier> | (E)
     private Expr parseF() throws SyntaxError{
-        if(token.peek("-")) {
-            token.consume();
-            if (isNumber(token.peek())) {
-                int neg = Integer.parseInt(token.consume());
-                return new IntLit(-neg);
-            }
-        }else if (isNumber(token.peek())) {
+//        if(token.peek("-")) {
+//            token.consume();
+//            if (isNumber(token.peek())) {
+//                int neg = Integer.parseInt(token.consume());
+//                return new IntLit(-neg);
+//            }
+        if (isNumber(token.peek())) {
             int num = Integer.parseInt(token.consume());
             return new IntLit(num);
         }else if(token.peek().matches("^[a-z]+$") || token.peek().matches("^[A-Z]+$")){
@@ -175,7 +202,6 @@ public class ParserTest {
         }else{
             throw new SyntaxError("Please check your input "+ token.peek() +" is not accept");
         }
-        return new IntLit(-99999999);
     }
 
     public static boolean isNumber(String str)
