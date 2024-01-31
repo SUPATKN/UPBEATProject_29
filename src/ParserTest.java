@@ -43,8 +43,10 @@ public class ParserTest {
         if(E.eval(binding) > 0){
             token.consume("then");
             ifState.addAll(ParseStatement());
-            if(token.peek("else")) token.consume();
         }else if(E.eval(binding) < 0){
+            while(!token.peek("else")){
+                token.consume();
+            }
             token.consume("else");
             ifState.addAll(ParseStatement());
         }
