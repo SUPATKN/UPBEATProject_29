@@ -3,7 +3,7 @@ import java.util.List;
 
 public class Game {
     private Map gameMap;
-    private List<Player> players;
+    private List<PlayerForMap> playerForMaps;
     private int currentPlayerIndex;
     private boolean isPlayer1Turn;
 
@@ -12,16 +12,16 @@ public class Game {
         gameMap = new Map(size, size);
         isPlayer1Turn = true;
 
-        players = new ArrayList<>();
+        playerForMaps = new ArrayList<>();
         for (int i = 1; i <= numPlayers; i++) {
             MapCell startingCell = gameMap.getRandomEmptyCell();
-            Player player = new Player(i, startingCell);
-            players.add(player);
+            PlayerForMap playerForMap = new PlayerForMap(i, startingCell);
+            playerForMaps.add(playerForMap);
             startingCell.setOccupied(true);
         }
 
         // Ensure that currentPlayerIndex is a valid index within the bounds of the players list
-        currentPlayerIndex = (players.isEmpty()) ? 0 : currentPlayerIndex % players.size();
+        currentPlayerIndex = (playerForMaps.isEmpty()) ? 0 : currentPlayerIndex % playerForMaps.size();
     }
 
     public int getCurrentPlayerNumber() {
@@ -32,13 +32,13 @@ public class Game {
         return gameMap;
     }
 
-    public List<Player> getPlayers() {
-        return players;
+    public List<PlayerForMap> getPlayers() {
+        return playerForMaps;
     }
 
-    public Player getCurrentPlayer() {
-        if (!players.isEmpty() && currentPlayerIndex >= 0 && currentPlayerIndex < players.size()) {
-            return players.get(currentPlayerIndex);
+    public PlayerForMap getCurrentPlayer() {
+        if (!playerForMaps.isEmpty() && currentPlayerIndex >= 0 && currentPlayerIndex < playerForMaps.size()) {
+            return playerForMaps.get(currentPlayerIndex);
         } else {
             // Handle the situation where the players list is empty or currentPlayerIndex is invalid
             throw new IllegalStateException("No players or invalid currentPlayerIndex.");
@@ -46,17 +46,17 @@ public class Game {
     }
 
     public void move(Map.Direction direction) throws InvalidMoveException {
-        Player currentPlayer = getCurrentPlayer();
-        MapCell currentCell = currentPlayer.getPosition();
+        PlayerForMap currentPlayerForMap = getCurrentPlayer();
+        MapCell currentCell = currentPlayerForMap.getPosition();
         MapCell newCell = calculateNewCell(currentCell, direction);
 
         if (isValidCell(newCell)) {
             currentCell.setOccupied(false);
             newCell.setOccupied(true);
-            currentPlayer.setPosition(newCell);
+            currentPlayerForMap.setPosition(newCell);
 
             // Increment currentPlayerIndex to switch to the next player
-            currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
+            currentPlayerIndex = (currentPlayerIndex + 1) % playerForMaps.size();
             isPlayer1Turn = !isPlayer1Turn;
 
             // Uncomment the following line if you want to print the map after each move

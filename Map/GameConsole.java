@@ -1,4 +1,4 @@
-package demoMap;
+
 
 import java.util.Scanner;
 
@@ -21,7 +21,7 @@ public class GameConsole {
 
             try {
                 Map.Direction direction = Map.Direction.valueOf(input.toUpperCase());
-                Player currentPlayer = game.getCurrentPlayer();
+                PlayerForMap currentPlayerForMap = game.getCurrentPlayer();
                 game.move(direction);
                 displayMap();
                 displayPlayerPositions();
@@ -42,8 +42,8 @@ public class GameConsole {
             for (int j = 0; j < cells[i].length; j++) {
                 System.out.print("(" + (i + 1) + "," + (j + 1) + ")");
                 if (cells[i][j].isOccupied()) {
-                    Player occupyingPlayer = getPlayerAtPosition(i, j);
-                    System.out.print("P" + occupyingPlayer.getPlayerNumber());
+                    PlayerForMap occupyingPlayerForMap = getPlayerAtPosition(i, j);
+                    System.out.print("P" + occupyingPlayerForMap.getPlayerNumber());
                 } else {
                     System.out.print("-");
                 }
@@ -54,11 +54,11 @@ public class GameConsole {
     }
 
 
-    private Player getPlayerAtPosition(int row, int col) {
-        for (Player player : game.getPlayers()) {
-            MapCell position = player.getPosition();
+    private PlayerForMap getPlayerAtPosition(int row, int col) {
+        for (PlayerForMap playerForMap : game.getPlayers()) {
+            MapCell position = playerForMap.getPosition();
             if (position.getRow() == row && position.getCol() == col) {
-                return player;
+                return playerForMap;
             }
         }
         return null;
@@ -66,9 +66,9 @@ public class GameConsole {
 
 
     private void displayPlayerPositions() {
-        for (Player player : game.getPlayers()) {
-            MapCell position = player.getPosition();
-            System.out.println("\nPlayer " + player.getPlayerNumber() + " position: (" +
+        for (PlayerForMap playerForMap : game.getPlayers()) {
+            MapCell position = playerForMap.getPosition();
+            System.out.println("\nPlayer " + playerForMap.getPlayerNumber() + " position: (" +
                     (position.getRow() + 1) + "," + (position.getCol() + 1) + ")" + " value position is : " +game.getMap().getCell(position.getRow(), position.getCol()).getValue());
         }
         System.out.println();
