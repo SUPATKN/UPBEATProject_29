@@ -53,10 +53,14 @@ public class Game {
 
             currentPlayerIndex = (isPlayer1Turn) ? 1 : 0;
             isPlayer1Turn = !isPlayer1Turn;
+
+            System.out.println("Current Map:");
+            gameMap.printMapValues(); // Display the map after each move
         } else {
             throw new InvalidMoveException("Invalid move. Trying to move out of bounds.");
         }
     }
+
 
     private boolean isValidCell(MapCell cell) {
         int row = cell.getRow();

@@ -15,6 +15,7 @@ public class Map {
         for (int i = 0; i < cells.length; i++) {
             for (int j = 0; j < cells[i].length; j++) {
                 cells[i][j] = new MapCell(i, j);
+                cells[i][j].setValue(cells[i][j].generateRandomOccupiedValue());
             }
         }
     }
@@ -47,12 +48,16 @@ public class Map {
         }
     }
 
-    public void checkValue(int row,int col){
-        for(int i = 0;i<row;i++){
-            for (int j = 0;j<col;j++){
-                System.out.println(cells[i][j].getValue());
-            }
+    public void checkValue(int row, int col) {
+        if (isValidPosition(row, col)) {
+            System.out.printf("Position: (%d, %d), Value: %d%n", row, col, cells[row-1][col-1].getValue());
+        } else {
+            System.out.println("Invalid position.");
         }
+    }
+
+    private boolean isValidPosition(int row, int col) {
+        return row >= 0 && row < getRows() && col >= 0 && col < getCols();
     }
 
 

@@ -69,7 +69,7 @@ public class GameConsole {
         for (Player player : game.getPlayers()) {
             MapCell position = player.getPosition();
             System.out.println("\nPlayer " + player.getPlayerNumber() + " position: (" +
-                    (position.getRow() + 1) + "," + (position.getCol() + 1) + ")");
+                    (position.getRow() + 1) + "," + (position.getCol() + 1) + ")" + " value position is : " +game.getMap().getCell(position.getRow(), position.getCol()).getValue());
         }
         System.out.println();
     }
@@ -79,10 +79,16 @@ public class GameConsole {
 //        MapCell myCell = new MapCell(1, 2);
 //        System.out.println("value cell at (" + myCell.getRow() +","+ myCell.getCol() + ") = "+ myCell.generateRandomOccupiedValue() );
 
-        Map myMap = new Map(3, 3);
-        myMap.printMapValues();
+//        Map myMap = new Map(3, 3);
+//        myMap.printMapValues();
 //        myMap.printMapPositions();
-        myMap.checkValue(1,2);
+//        myMap.checkValue(1,2);
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter the number of players: ");
+        int numPlayers = scanner.nextInt();
+        GameConsole gameConsole = new GameConsole(numPlayers);
 
     }
 }
