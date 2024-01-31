@@ -8,4 +8,8 @@ public class CityCrew {
 //        return 100x+y;
 //    }
 
+    public void Shoot(){
+
+    }
+
 }

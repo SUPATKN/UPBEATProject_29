@@ -3,6 +3,4 @@ public class Player {
     private int Budjet;
     private CityCrew c = new CityCrew();
 
-
-
 }
