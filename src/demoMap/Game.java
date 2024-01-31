@@ -75,36 +75,25 @@ public class Game {
         int newCol = currentCell.getCol();
 
         try {
-            switch (direction) {
-                case UP_LEFT:
+            if (direction == Map.Direction.UP_LEFT) {
+                newRow--;
+                newCol--;
+            } else if (direction == Map.Direction.UP) {
+                newRow--;
+            } else if (direction == Map.Direction.UP_RIGHT) {
+
+                newCol++;
+            } else if (direction == Map.Direction.DOWN_RIGHT) {
+                newCol++;
+            } else if (direction == Map.Direction.DOWN) {
+                newRow++;
+            } else if (direction == Map.Direction.DOWN_LEFT) {
+                if (newRow != currentCell.getRow()) {
                     newRow--;
-                    newCol--;
-                    break;
-                case UP:
-                    newRow--;
-                    break;
-                case UP_RIGHT:
-                    newRow--;
-                    newCol++;
-                    break;
-                case RIGHT:
-                    newCol++;
-                    break;
-                case DOWN_RIGHT:
-                    newRow++;
-                    newCol++;
-                    break;
-                case DOWN:
-                    newRow++;
-                    break;
-                case DOWN_LEFT:
-                    newRow++;
-                    newCol--;
-                    break;
-                case LEFT:
-                    newCol--;
-                    break;
+                }
+                newCol--;
             }
+
 
             if (isValidCell(newRow, newCol)) {
                 return gameMap.getCell(newRow, newCol);
