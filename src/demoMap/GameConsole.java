@@ -25,6 +25,8 @@ public class GameConsole {
                 game.move(direction);
                 displayMap();
                 displayPlayerPositions();
+            } catch (InvalidMoveException e) {
+                System.out.println(e.getMessage());
             } catch (IllegalArgumentException e) {
                 System.out.println("Invalid direction. Try again.");
             }
@@ -73,7 +75,14 @@ public class GameConsole {
     }
 
     public static void main(String[] args) {
-        new GameConsole(2);
+//        new GameConsole(2);
+//        MapCell myCell = new MapCell(1, 2);
+//        System.out.println("value cell at (" + myCell.getRow() +","+ myCell.getCol() + ") = "+ myCell.generateRandomOccupiedValue() );
+
+        Map myMap = new Map(3, 3);
+        myMap.printMapValues();
+//        myMap.printMapPositions();
+        myMap.checkValue(1,2);
+
     }
 }
-

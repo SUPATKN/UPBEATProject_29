@@ -41,7 +41,7 @@ public class Game {
         return players.get(currentPlayerIndex);
     }
 
-    public void move(Map.Direction direction) {
+    public void move(Map.Direction direction) throws InvalidMoveException {
         Player currentPlayer = getCurrentPlayer();
         MapCell currentCell = currentPlayer.getPosition();
         MapCell newCell = calculateNewCell(currentCell, direction);
@@ -51,57 +51,70 @@ public class Game {
             newCell.setOccupied(true);
             currentPlayer.setPosition(newCell);
 
-            if (isPlayer1Turn) {
-                currentPlayerIndex = 1;
-            } else {
-                currentPlayerIndex = 0;
-            }
-
+            currentPlayerIndex = (isPlayer1Turn) ? 1 : 0;
             isPlayer1Turn = !isPlayer1Turn;
+        } else {
+            throw new InvalidMoveException("Invalid move. Trying to move out of bounds.");
         }
-    }
-
-    private MapCell calculateNewCell(MapCell currentCell, Map.Direction direction) {
-        int newRow = currentCell.getRow();
-        int newCol = currentCell.getCol();
-
-        switch (direction) {
-            case UP_LEFT:
-                newRow--;
-                newCol--;
-                break;
-            case UP:
-                newRow--;
-                break;
-            case UP_RIGHT:
-                newRow--;
-                newCol++;
-                break;
-            case RIGHT:
-                newCol++;
-                break;
-            case DOWN_RIGHT:
-                newRow++;
-                newCol++;
-                break;
-            case DOWN:
-                newRow++;
-                break;
-            case DOWN_LEFT:
-                newRow++;
-                newCol--;
-                break;
-            case LEFT:
-                newCol--;
-                break;
-        }
-
-        return gameMap.getCell(newRow, newCol);
     }
 
     private boolean isValidCell(MapCell cell) {
-        return cell.getRow() >= 0 && cell.getRow() < gameMap.getRows()
-                && cell.getCol() >= 0 && cell.getCol() < gameMap.getCols();
+        int row = cell.getRow();
+        int col = cell.getCol();
+        return row >= 0 && row < gameMap.getRows() && col >= 0 && col < gameMap.getCols();
     }
+
+
+
+    private MapCell calculateNewCell(MapCell currentCell, Map.Direction direction) throws InvalidMoveException {
+        int newRow = currentCell.getRow();
+        int newCol = currentCell.getCol();
+
+        try {
+            switch (direction) {
+                case UP_LEFT:
+                    newRow--;
+                    newCol--;
+                    break;
+                case UP:
+                    newRow--;
+                    break;
+                case UP_RIGHT:
+                    newRow--;
+                    newCol++;
+                    break;
+                case RIGHT:
+                    newCol++;
+                    break;
+                case DOWN_RIGHT:
+                    newRow++;
+                    newCol++;
+                    break;
+                case DOWN:
+                    newRow++;
+                    break;
+                case DOWN_LEFT:
+                    newRow++;
+                    newCol--;
+                    break;
+                case LEFT:
+                    newCol--;
+                    break;
+            }
+
+            if (isValidCell(newRow, newCol)) {
+                return gameMap.getCell(newRow, newCol);
+            } else {
+                throw new InvalidMoveException("Invalid move. Trying to move out of bounds.");
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new InvalidMoveException("Invalid move. Trying to move out of bounds.");
+        }
+    }
+
+    private boolean isValidCell(int row, int col) {
+        return row >= 0 && row < gameMap.getRows() && col >= 0 && col < gameMap.getCols();
+    }
+
 }
 
