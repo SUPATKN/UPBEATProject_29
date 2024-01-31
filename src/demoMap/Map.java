@@ -31,14 +31,14 @@ public class Map {
         }
     }
 
-    public void printMapValues() {
-        for (int i = 0; i < cells.length; i++) {
-            for (int j = 0; j < cells[i].length; j++) {
-                System.out.printf("(%d, %d): %d\t", i+1, j+1, cells[i][j].getValue());
-            }
-            System.out.println();
-        }
-    }
+//    public void printMapValues() {
+//        for (int i = 0; i < cells.length; i++) {
+//            for (int j = 0; j < cells[i].length; j++) {
+//                System.out.printf("(%d, %d): %d\t", i+1, j+1, cells[i][j].getValue());
+//            }
+//            System.out.println();
+//        }
+//    }
     public void printMapPositions() {
         for (int i = 0; i < cells.length; i++) {
             for (int j = 0; j < cells[i].length; j++) {

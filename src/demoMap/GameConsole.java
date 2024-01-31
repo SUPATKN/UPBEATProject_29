@@ -12,7 +12,7 @@ public class GameConsole {
 
         Scanner scanner = new Scanner(System.in);
         while (true) {
-            System.out.print("Enter direction (UP_LEFT, UP_RIGHT, DOWN_RIGHT, DOWN_LEFT): ");
+            System.out.print("Enter direction (UP, UP_LEFT, UP_RIGHT, DOWN, DOWN_RIGHT, DOWN_LEFT): ");
             String input = scanner.nextLine();
 
             if (input.equalsIgnoreCase("exit")) {
