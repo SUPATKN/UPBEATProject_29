@@ -48,7 +48,7 @@ public class Tokenizer {
     }
 
     public void assignType(){
-            if (next.equals("if")){
+            if (next.equals("if") || next.equals("else")){
                 type = "ifState";
             }else if(next.equals("while")){
                 type = "whileState";
