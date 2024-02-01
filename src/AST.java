@@ -47,3 +47,9 @@ record AssignCommandNode(Expr identifier, Expr expression,Map<String ,Integer> b
     }
 }
 
+record IfStateNode(LinkedList<AST> statement,LinkedList<AST> s1) implements AST{
+    @Override
+    public void eval() throws SyntaxError {
+        statement.addAll(s1);
+    }
+}
