@@ -1,12 +1,12 @@
 import java.util.Random;
 
-public class MapCell {
+public class Cell {
     private int row;
     private int col;
     private boolean isOccupied;
     private int value;
 
-    public MapCell(int row, int col) {
+    public Cell(int row, int col) {
         this.row = row;
         this.col = col;
         this.value = 0;

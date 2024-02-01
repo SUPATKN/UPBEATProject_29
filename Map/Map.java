@@ -1,10 +1,10 @@
 import java.util.Random;
 
 public class Map {
-    private MapCell[][] cells;
+    private Cell[][] cells;
 
     public Map(int rows, int cols) {
-        cells = new MapCell[rows][cols];
+        cells = new Cell[rows][cols];
         initializeMap();
         randomizeCellValues();
     }
@@ -12,7 +12,7 @@ public class Map {
     private void initializeMap() {
         for (int i = 0; i < cells.length; i++) {
             for (int j = 0; j < cells[i].length; j++) {
-                cells[i][j] = new MapCell(i, j);
+                cells[i][j] = new Cell(i, j);
                 cells[i][j].setValue(cells[i][j].generateRandomOccupiedValue());
             }
         }
@@ -67,16 +67,16 @@ public class Map {
         return cells[0].length;
     }
 
-    public MapCell getCell(int row, int col) {
+    public Cell getCell(int row, int col) {
         return cells[row][col];
     }
-    public MapCell[][] getCells() {
+    public Cell[][] getCells() {
         return cells;
     }
 
-    public MapCell getRandomEmptyCell() {
+    public Cell getRandomEmptyCell() {
         Random random = new Random();
-        MapCell randomCell;
+        Cell randomCell;
 
         do {
             int randomRow = random.nextInt(getRows());

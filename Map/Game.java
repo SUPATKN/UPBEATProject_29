@@ -14,7 +14,7 @@ public class Game {
 
         playerForMaps = new ArrayList<>();
         for (int i = 1; i <= numPlayers; i++) {
-            MapCell startingCell = gameMap.getRandomEmptyCell();
+            Cell startingCell = gameMap.getRandomEmptyCell();
             PlayerForMap playerForMap = new PlayerForMap(i, startingCell);
             playerForMaps.add(playerForMap);
             startingCell.setOccupied(true);
@@ -47,8 +47,8 @@ public class Game {
 
     public void move(Map.Direction direction) throws InvalidMoveException {
         PlayerForMap currentPlayerForMap = getCurrentPlayer();
-        MapCell currentCell = currentPlayerForMap.getPosition();
-        MapCell newCell = calculateNewCell(currentCell, direction);
+        Cell currentCell = currentPlayerForMap.getPosition();
+        Cell newCell = calculateNewCell(currentCell, direction);
 
         if (isValidCell(newCell)) {
             currentCell.setOccupied(false);
@@ -67,14 +67,14 @@ public class Game {
     }
 
 
-    private boolean isValidCell(MapCell cell) {
+    private boolean isValidCell(Cell cell) {
         int row = cell.getRow();
         int col = cell.getCol();
         return row >= 0 && row < gameMap.getRows() && col >= 0 && col < gameMap.getCols();
     }
 
 
-    private MapCell calculateNewCell(MapCell currentCell, Map.Direction direction) throws InvalidMoveException {
+    private Cell calculateNewCell(Cell currentCell, Map.Direction direction) throws InvalidMoveException {
         int newRow = currentCell.getRow();
         int newCol = currentCell.getCol();
 

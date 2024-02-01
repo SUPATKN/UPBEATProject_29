@@ -1,9 +1,9 @@
 public class PlayerForMap {
     private int playerNumber;
-    private MapCell position;
+    private Cell position;
 
 
-    public PlayerForMap(int playerNumber, MapCell initialPosition) {
+    public PlayerForMap(int playerNumber, Cell initialPosition) {
         this.playerNumber = playerNumber;
         this.position = initialPosition;
     }
@@ -12,11 +12,11 @@ public class PlayerForMap {
         return playerNumber;
     }
 
-    public MapCell getPosition() {
+    public Cell getPosition() {
         return position;
     }
 
-    public void setPosition(MapCell newPosition) {
+    public void setPosition(Cell newPosition) {
         this.position = newPosition;
     }
 }

@@ -35,7 +35,7 @@ public class GameConsole {
     }
 
     private void displayMap() {
-        MapCell[][] cells = game.getMap().getCells();
+        Cell[][] cells = game.getMap().getCells();
 
         System.out.println("\nCurrent turn: Player " + game.getCurrentPlayerNumber());
 
@@ -57,7 +57,7 @@ public class GameConsole {
 
     private PlayerForMap getPlayerAtPosition(int row, int col) {
         for (PlayerForMap player : game.getPlayers()) {
-            MapCell position = player.getPosition();
+            Cell position = player.getPosition();
             if (position.getRow() == row && position.getCol() == col) {
                 return player;
             }
@@ -68,7 +68,7 @@ public class GameConsole {
 
     private void displayPlayerPositions() {
         for (PlayerForMap player : game.getPlayers()) {
-            MapCell position = player.getPosition();
+            Cell position = player.getPosition();
             System.out.println("\nPlayer " + player.getPlayerNumber() + " position: (" +
                     (position.getRow() + 1) + "," + (position.getCol() + 1) + ")" + " value position is : " +game.getMap().getCell(position.getRow(), position.getCol()).getValue());
         }
