@@ -1,14 +1,15 @@
 
-
 import java.util.Scanner;
 
 public class GameConsole {
     private Game game;
 
+
     public GameConsole(int numPlayers) {
         game = new Game(numPlayers);
         displayMap();
         displayPlayerPositions();
+
 
         Scanner scanner = new Scanner(System.in);
         while (true) {
@@ -21,7 +22,7 @@ public class GameConsole {
 
             try {
                 Map.Direction direction = Map.Direction.valueOf(input.toUpperCase());
-                PlayerForMap currentPlayerForMap = game.getCurrentPlayer();
+                PlayerForMap currentPlayer = game.getCurrentPlayer();
                 game.move(direction);
                 displayMap();
                 displayPlayerPositions();
@@ -42,8 +43,8 @@ public class GameConsole {
             for (int j = 0; j < cells[i].length; j++) {
                 System.out.print("(" + (i + 1) + "," + (j + 1) + ")");
                 if (cells[i][j].isOccupied()) {
-                    PlayerForMap occupyingPlayerForMap = getPlayerAtPosition(i, j);
-                    System.out.print("P" + occupyingPlayerForMap.getPlayerNumber());
+                    PlayerForMap occupyingPlayer = getPlayerAtPosition(i, j);
+                    System.out.print("P" + occupyingPlayer.getPlayerNumber());
                 } else {
                     System.out.print("-");
                 }
@@ -55,10 +56,10 @@ public class GameConsole {
 
 
     private PlayerForMap getPlayerAtPosition(int row, int col) {
-        for (PlayerForMap playerForMap : game.getPlayers()) {
-            MapCell position = playerForMap.getPosition();
+        for (PlayerForMap player : game.getPlayers()) {
+            MapCell position = player.getPosition();
             if (position.getRow() == row && position.getCol() == col) {
-                return playerForMap;
+                return player;
             }
         }
         return null;
@@ -66,9 +67,9 @@ public class GameConsole {
 
 
     private void displayPlayerPositions() {
-        for (PlayerForMap playerForMap : game.getPlayers()) {
-            MapCell position = playerForMap.getPosition();
-            System.out.println("\nPlayer " + playerForMap.getPlayerNumber() + " position: (" +
+        for (PlayerForMap player : game.getPlayers()) {
+            MapCell position = player.getPosition();
+            System.out.println("\nPlayer " + player.getPlayerNumber() + " position: (" +
                     (position.getRow() + 1) + "," + (position.getCol() + 1) + ")" + " value position is : " +game.getMap().getCell(position.getRow(), position.getCol()).getValue());
         }
         System.out.println();

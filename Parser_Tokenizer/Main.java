@@ -1,8 +1,8 @@
 public class Main {
     public static void main(String[] args) throws SyntaxError {
-        String s ="m = 0 while (2) { }";
+        String s ="while (2) if(-2 ) then move up else move down";
         Tokenizer t = new Tokenizer(s);
-        ParserTest p = new ParserTest(t);
+        ParserGrammar p = new ParserGrammar(t);
         p.ParsePlan();
 
     }

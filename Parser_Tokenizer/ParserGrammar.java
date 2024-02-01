@@ -2,11 +2,11 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
-public class ParserTest {
+public class ParserGrammar {
     private Tokenizer token;
     Map<String ,Integer> binding = new HashMap<>();
     LinkedList<AST> statement = new LinkedList<>();
-    ParserTest(Tokenizer t){
+    ParserGrammar(Tokenizer t){
         this.token = t;
     }
     public void ParsePlan() throws SyntaxError {
@@ -38,19 +38,21 @@ public class ParserTest {
     }
 
     public LinkedList<AST> ParseIfStatement() throws SyntaxError {
+        AST calculateIf = null;
         LinkedList<AST> ifState = new LinkedList<>();
         token.consume("(");
         Expr E = parseE();
         token.consume(")");
+        token.consume("then");
+        LinkedList<AST> s1 = ParseStatement();
+        token.consume("else");
+        LinkedList<AST> s2 = ParseStatement();
         if(E.eval(binding) > 0){
-            token.consume("then");
-            ifState.addAll(ParseStatement());
+            calculateIf = new IfStateNode(ifState,s1);
+            calculateIf.eval();
         }else if(E.eval(binding) < 0){
-            while(!token.peek("else")){
-                token.consume();
-            }
-            token.consume("else");
-            ifState.addAll(ParseStatement());
+            calculateIf = new IfStateNode(ifState,s2);
+            calculateIf.eval();
         }
         return ifState;
     }
@@ -181,12 +183,13 @@ public class ParserTest {
 
     //F -> <number> | <identifier> | (E)
     private Expr parseF() throws SyntaxError{
-//        if(token.peek("-")) {
-//            token.consume();
-//            if (isNumber(token.peek())) {
-//                int neg = Integer.parseInt(token.consume());
-//                return new IntLit(-neg);
-//            }
+        if(token.peek("-")) {
+            token.consume();
+            if (isNumber(token.peek())) {
+                int neg = Integer.parseInt(token.consume());
+                return new IntLit(-neg);
+            }
+        }
         if (isNumber(token.peek())) {
             int num = Integer.parseInt(token.consume());
             return new IntLit(num);
