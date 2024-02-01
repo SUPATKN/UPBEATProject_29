@@ -16,7 +16,9 @@ public class ParserGrammar {
         }
         while(!statement.isEmpty()){
             statement.peekFirst().eval();
-            statement.remove();
+            if(!statement.isEmpty()){
+                statement.remove();
+            }
         }
         System.out.println(binding.values());
     }
@@ -34,6 +36,8 @@ public class ParserGrammar {
         }else if(token.getType().equals("whileState")){
             token.consume();
             localState.add(ParseWhileStatement());
+        }else{
+            throw new SyntaxError("not following grammar");
         }
         return localState;
     }
@@ -92,7 +96,12 @@ public class ParserGrammar {
 
     public AST ParseActionCommand() throws SyntaxError{
         AST Action = null;
-        if(token.peek("move")){
+        if(token.peek("done")){
+            while(token.hasNextToken()){
+                token.consume();
+            }
+            Action = new DoneCommandNode(statement);
+        }else if(token.peek("move")){
             token.consume();
             Action = ParseMoveCommand();
         }
@@ -108,6 +117,9 @@ public class ParserGrammar {
 
     public AST ParseAssignCommand() throws SyntaxError{
         AST Assign = null;
+        if(!token.previousType.equals("identifier")){
+            throw new SyntaxError("Can't use a reserved word as identifier");
+        }
         String variable = token.consume();
         Expr Identifier = new Variable(variable);
         Variable var = (Variable) Identifier;

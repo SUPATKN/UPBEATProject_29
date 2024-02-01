@@ -52,3 +52,10 @@ record IfStateNode(LinkedList<AST> statement,LinkedList<AST> s1) implements AST{
         statement.addAll(s1);
     }
 }
+
+record DoneCommandNode(LinkedList<AST> statement)implements AST{
+    @Override
+    public void eval() throws SyntaxError {
+        statement.clear();
+    }
+}

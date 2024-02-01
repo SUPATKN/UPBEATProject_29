@@ -7,9 +7,11 @@ public class Tokenizer {
     private String src, next;
     private int pos;
     private String type = " ";
+    protected String previousType;
     public Tokenizer(String src) throws SyntaxError {
         this.src = src;  pos = 0;
         computeNext();
+        previousType = this.type;
     }
 
     public boolean peek(String s) {
@@ -38,6 +40,7 @@ public class Tokenizer {
 
     public String consume() throws SyntaxError {
         checkNextToken();
+        previousType = this.type;
         String result = next;
         computeNext();
         return result;
@@ -63,7 +66,7 @@ public class Tokenizer {
                 next.equals("upright") || next.equals("downright") || next.equals("downleft")
                 || next.equals("upleft")) {
             type = "direction";
-        }else if((next.matches("^[a-z]+$")) || next.matches("^[A-Z]+$")){
+        }else if((next.matches("^[a-z]+$")) || next.matches("^[A-Z]+$") || next.equals("=")){
                 type = "identifier";
         }
     }
