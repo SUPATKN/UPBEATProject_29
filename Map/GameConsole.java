@@ -4,6 +4,7 @@ import java.util.Scanner;
 public class GameConsole {
     private Game game;
 
+
     public GameConsole(int numPlayers) {
         game = new Game(numPlayers);
         displayMap();
