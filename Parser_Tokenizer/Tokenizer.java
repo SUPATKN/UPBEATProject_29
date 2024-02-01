@@ -52,16 +52,20 @@ public class Tokenizer {
     public void assignType(){
         String TokenType = null;
         if (next.equals("if") || next.equals("else")){
-                type = "ifState";
-            }else if(next.equals("while")){
-                type = "whileState";
-            }else if(next.equals("done") || next.equals("relocated") ||
+            type = "ifState";
+        }else if(next.equals("while")){
+            type = "whileState";
+        }else if(next.equals("done") || next.equals("relocated") ||
                 next.equals("move") || next.equals("invest") || next.equals("collect")
                 || next.equals("shoot")) {
                 type = "command";
-            }else if((next.matches("^[a-z]+$")) || next.matches("^[A-Z]+$")){
+        }else if(next.equals("up") || next.equals("down") ||
+                next.equals("upright") || next.equals("downright") || next.equals("downleft")
+                || next.equals("upleft")) {
+            type = "direction";
+        }else if((next.matches("^[a-z]+$")) || next.matches("^[A-Z]+$")){
                 type = "identifier";
-            }
+        }
     }
 
     private void computeNext() throws SyntaxError{
@@ -81,7 +85,7 @@ public class Tokenizer {
                 s.append(src.charAt(pos));
             }
             type = "number";
-        }else if (c == '+' || c == '-' || c == '*' || c == '/' || c == '%' || c == '(' || c == ')' || c == '=') {
+        }else if (c == '+' || c == '-' || c == '*' || c == '/' || c == '%' || c == '(' || c == ')' || c == '=' || c=='^') {
             s.append(c);pos++;
             type = "operator";
         }else if(isLetter(c)){
