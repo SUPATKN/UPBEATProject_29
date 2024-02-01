@@ -16,7 +16,9 @@ public class ParserGrammar {
         }
         while(!statement.isEmpty()){
             statement.peekFirst().eval();
-            statement.remove();
+            if(!statement.isEmpty()){
+                statement.remove();
+            }
         }
         System.out.println(binding.values());
     }
@@ -94,7 +96,12 @@ public class ParserGrammar {
 
     public AST ParseActionCommand() throws SyntaxError{
         AST Action = null;
-        if(token.peek("move")){
+        if(token.peek("done")){
+            while(token.hasNextToken()){
+                token.consume();
+            }
+            Action = new DoneCommandNode(statement);
+        }else if(token.peek("move")){
             token.consume();
             Action = ParseMoveCommand();
         }
