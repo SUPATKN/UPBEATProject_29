@@ -10,6 +10,7 @@ public class GameConsole {
         displayMap();
         displayPlayerPositions();
 
+
         Scanner scanner = new Scanner(System.in);
         while (true) {
             System.out.print("Enter direction (UP, UP_LEFT, UP_RIGHT, DOWN, DOWN_RIGHT, DOWN_LEFT): ");
