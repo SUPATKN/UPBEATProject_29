@@ -4,6 +4,7 @@ import java.util.Map;
 
 public class ParserGrammar {
     private Tokenizer token;
+    private Tokenizer Pretoken;
     Map<String ,Integer> binding = new HashMap<>();
     LinkedList<AST> statement = new LinkedList<>();
     ParserGrammar(Tokenizer t){
@@ -118,8 +119,6 @@ public class ParserGrammar {
     }
     public DirectionNode ParseDirection() throws SyntaxError {
         DirectionNode D = null;
-        while (token.peek("up") || token.peek("down") || token.peek("upright")
-                || token.peek("downright") || token.peek("upleft") || token.peek("downleft")) {
             if(token.peek("up")){
                 token.consume();
                 D = new DirectionNode("up");
@@ -144,7 +143,6 @@ public class ParserGrammar {
                 token.consume();
                 D = new DirectionNode("upleft");
             }
-        }
         return D;
     }
 
@@ -181,8 +179,21 @@ public class ParserGrammar {
         return T;
     }
 
-    //F -> <number> | <identifier> | (E)
+    //F -> P ^ F | P
     private Expr parseF() throws SyntaxError{
+        Expr F = parseP();
+        while(token.peek("^")){
+            if(token.peek("^")){
+                token.consume();
+                F = new BinaryArithExpr(parseP(),"^",F);
+            }
+        }
+        return F;
+
+    }
+
+    //P -> <number> | <identifier> | (E) | infoExpr
+    private Expr parseP() throws SyntaxError{
         if(token.peek("-")) {
             token.consume();
             if (isNumber(token.peek())) {
