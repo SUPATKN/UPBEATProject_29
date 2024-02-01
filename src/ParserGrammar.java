@@ -2,11 +2,11 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
-public class ParserTest {
+public class ParserGrammar {
     private Tokenizer token;
     Map<String ,Integer> binding = new HashMap<>();
     LinkedList<AST> statement = new LinkedList<>();
-    ParserTest(Tokenizer t){
+    ParserGrammar(Tokenizer t){
         this.token = t;
     }
     public void ParsePlan() throws SyntaxError {
