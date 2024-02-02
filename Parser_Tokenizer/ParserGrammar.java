@@ -3,11 +3,10 @@ import java.util.LinkedList;
 import java.util.Map;
 
 public class ParserGrammar {
-    private Tokenizer token;
-    private Tokenizer Pretoken;
-    Map<String ,Integer> binding = new HashMap<>();
-    LinkedList<AST> statement = new LinkedList<>();
-    ParserGrammar(Tokenizer t){
+    private final Tokenizer token;
+    private Map<String ,Integer> binding = new HashMap<>();
+    private LinkedList<AST> statement = new LinkedList<>();
+    public ParserGrammar(Tokenizer t){
         this.token = t;
     }
     public void ParsePlan() throws SyntaxError {
@@ -128,11 +127,17 @@ public class ParserGrammar {
     }
 
     public AST ParseMoveCommand() throws SyntaxError{
+        if(!token.getType().equals("direction")){
+            throw new SyntaxError("Move command must follow by direction");
+        }
         String direction = ParseDirection().eval();
         return new MoveCommandNode(direction);
     }
 
     public AST ParseAttackCommand() throws SyntaxError {
+        if(!token.getType().equals("direction")){
+            throw new SyntaxError("Shoot command must follow by direction");
+        }
         String direction = ParseDirection().eval();
         Expr E = parseE();
         return new AttackCommandNode(direction,E,binding);

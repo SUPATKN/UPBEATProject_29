@@ -53,7 +53,6 @@ public class Tokenizer {
 
 
     public void assignType(){
-        String TokenType = null;
         if (next.equals("if") || next.equals("else")){
             type = "ifState";
         }else if(next.equals("while")){
