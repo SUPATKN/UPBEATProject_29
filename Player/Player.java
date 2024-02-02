@@ -1,7 +1,7 @@
 import java.util.Scanner;
 public class Player {
     private String name;
-    private int Budjet;
+    private int Budget;
     private CityCrew crew;
     private Map map;
     private ParserGrammar p;
@@ -10,8 +10,8 @@ public class Player {
         this.name = name;
         this.map = map;
         crew = new CityCrew(this,map,map.getRandomEmptyCell());
-        System.out.println(crew.getPosition().getCol());
         System.out.println(crew.getPosition().getRow());
+        System.out.println(crew.getPosition().getCol());
     }
 
     public void Plan() throws SyntaxError, InvalidMoveException {
@@ -21,6 +21,10 @@ public class Player {
         tokenizer = new Tokenizer(input);
         p = new ParserGrammar(tokenizer,crew);
         p.ParsePlan();
+    }
+
+    public void Invest(int cost){
+        Budget -= cost + 1;
     }
 
 }

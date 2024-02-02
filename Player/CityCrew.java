@@ -1,7 +1,7 @@
 
 
 public class CityCrew {
-    private Player player;
+    private final Player player;
     private Map map;
     private Cell position;
 
@@ -98,7 +98,9 @@ public class CityCrew {
     }
 
     public void Invest(int cost){
+        player.Invest(cost);
         position.getDeposit().InvestDeposit(cost);
+        position.setPlayer(player);
     }
 
 }

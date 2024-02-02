@@ -1,6 +1,7 @@
 import java.util.Random;
 
 public class Cell {
+    private Player whoBelong;
     private int row;
     private int col;
     private boolean isOccupied;
@@ -30,6 +31,9 @@ public class Cell {
     }
     public void setDeposit(int value){
         this.deposit = new Deposit(value);
+    }
+    public void setPlayer(Player player){
+        this.whoBelong = player;
     }
 
     public void printCellValues() {
