@@ -23,7 +23,4 @@ public class Player {
         p.ParsePlan();
     }
 
-    public void callCrewMove(String direction) throws InvalidMoveException {
-        crew.move(direction);
-    }
 }

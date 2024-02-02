@@ -31,6 +31,7 @@ public class Cell {
     public void setDeposit(int value){
         this.deposit = new Deposit(value);
     }
+
     public void printCellValues() {
         System.out.println("Cell at (" + row + ", " + col + ") is : " );
     }

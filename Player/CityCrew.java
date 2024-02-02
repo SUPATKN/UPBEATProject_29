@@ -97,4 +97,8 @@ public class CityCrew {
 
     }
 
+    public void Invest(int cost){
+        position.getDeposit().InvestDeposit(cost);
+    }
+
 }

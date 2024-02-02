@@ -61,10 +61,11 @@ record DoneCommandNode(LinkedList<AST> statement)implements AST{
     }
 }
 
-record InvestCommandNode(Expr expr,Map<String ,Integer> binding)implements AST{
+record InvestCommandNode(Expr expr,Map<String ,Integer> binding,CityCrew crew)implements AST{
     @Override
     public void eval() throws SyntaxError {
-        System.out.println("Invest " + expr.eval(binding));
+        crew.Invest(expr.eval(binding));
+        System.out.println(crew.getPosition().getDeposit().getCurrentdep());
     }
 }
 

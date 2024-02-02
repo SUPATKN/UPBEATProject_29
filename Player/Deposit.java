@@ -1,8 +1,8 @@
 import java.lang.Math;
 public class Deposit {
-    int max_dep = 1000000;
-    int interaest_pct = 5;
-    double Currentdep;
+    private int max_dep = 1000000;
+    private int interaest_pct = 5;
+    private double Currentdep;
 
     public Deposit(double dep){
         this.Currentdep = dep;
@@ -26,6 +26,10 @@ public class Deposit {
         if(Currentdep >= max_dep){
             Currentdep = max_dep;
         }
+    }
+
+    public double getCurrentdep(){
+        return Currentdep;
     }
 
     public void CollectDeposit(int collect){

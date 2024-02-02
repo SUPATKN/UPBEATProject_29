@@ -119,7 +119,7 @@ public class ParserGrammar {
         if(token.peek("invest")){
             token.consume();
             Expr E = parseE();
-            Region = new InvestCommandNode(E,binding);
+            Region = new InvestCommandNode(E,binding,crew);
         }else if(token.peek("collect")){
             token.consume();
             Expr E = parseE();
