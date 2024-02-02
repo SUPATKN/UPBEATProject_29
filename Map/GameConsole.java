@@ -70,7 +70,7 @@ public class GameConsole {
         for (PlayerForMap player : game.getPlayers()) {
             Cell position = player.getPosition();
             System.out.println("\nPlayer " + player.getPlayerNumber() + " position: (" +
-                    (position.getRow() + 1) + "," + (position.getCol() + 1) + ")" + " value position is : " +game.getMap().getCell(position.getRow(), position.getCol()).getValue());
+                    (position.getRow() + 1) + "," + (position.getCol() + 1) + ")" + " value position is : " +game.getMap().getCell(position.getRow(), position.getCol()).getDeposit());
         }
         System.out.println();
     }

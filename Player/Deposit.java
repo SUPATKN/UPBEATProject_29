@@ -4,6 +4,10 @@ public class Deposit {
     int interaest_pct = 5;
     double Currentdep;
 
+    public Deposit(double dep){
+        this.Currentdep = dep;
+    }
+
     public void CalDeposit(int turn){
         int b = interaest_pct;
         int t = turn;

@@ -5,6 +5,7 @@ public class CityCrew {
     private Map map;
     private Cell position;
 
+
     public CityCrew(Player player,Map map,Cell initialPosition){
         this.player = player;
         this.map = map;
