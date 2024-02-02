@@ -104,15 +104,29 @@ public class ParserGrammar {
         }else if(token.peek("move")){
             token.consume();
             Action = ParseMoveCommand();
+        }else if(token.peek("invest") || token.peek("collect")){
+            Action = ParseRegionCommand();
         }
         return Action;
     }
 
+    public AST ParseRegionCommand() throws SyntaxError{
+        AST Region = null;
+        if(token.peek("invest")){
+            token.consume();
+            Expr E = parseE();
+            Region = new InvestCommandNode(E,binding);
+        }else if(token.peek("collect")){
+            token.consume();
+            Expr E = parseE();
+            Region = new CollectCommandNode(E,binding);
+        }
+        return Region;
+    }
+
     public AST ParseMoveCommand() throws SyntaxError{
-        AST MoveCom = null;
         String direction = ParseDirection().eval();
-        MoveCom = new MoveCommandNode(direction);
-        return  MoveCom;
+        return new MoveCommandNode(direction);
     }
 
     public AST ParseAssignCommand() throws SyntaxError{

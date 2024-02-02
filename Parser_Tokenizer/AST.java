@@ -59,3 +59,19 @@ record DoneCommandNode(LinkedList<AST> statement)implements AST{
         statement.clear();
     }
 }
+
+record InvestCommandNode(Expr expr,Map<String ,Integer> binding)implements AST{
+    @Override
+    public void eval() throws SyntaxError {
+        System.out.println("Invest " + expr.eval(binding));
+//        player.move(direction);
+    }
+}
+
+record CollectCommandNode(Expr expr,Map<String ,Integer> binding)implements AST{
+    @Override
+    public void eval() throws SyntaxError {
+        System.out.println("Collect " + expr.eval(binding));
+//        player.move(direction);
+    }
+}
