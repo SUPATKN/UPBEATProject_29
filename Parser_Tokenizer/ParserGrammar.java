@@ -6,10 +6,12 @@ public class ParserGrammar {
     private final Tokenizer token;
     private Map<String ,Integer> binding = new HashMap<>();
     private LinkedList<AST> statement = new LinkedList<>();
-    public ParserGrammar(Tokenizer t){
+    private CityCrew crew;
+    public ParserGrammar(Tokenizer t,CityCrew crew){
         this.token = t;
+        this.crew = crew;
     }
-    public void ParsePlan() throws SyntaxError {
+    public void ParsePlan() throws SyntaxError, InvalidMoveException {
         while(token.hasNextToken()){
             statement.addAll(ParseStatement());
         }
@@ -22,7 +24,7 @@ public class ParserGrammar {
         System.out.println(binding.values());
     }
 
-    public LinkedList<AST> ParseStatement() throws SyntaxError {
+    public LinkedList<AST> ParseStatement() throws SyntaxError, InvalidMoveException {
         LinkedList<AST> localState = new LinkedList<>();
         if(token.getType().equals("identifier") || token.getType().equals("command")){
             localState.addAll(ParseCommand());
@@ -41,7 +43,7 @@ public class ParserGrammar {
         return localState;
     }
 
-    public LinkedList<AST> ParseIfStatement() throws SyntaxError {
+    public LinkedList<AST> ParseIfStatement() throws SyntaxError, InvalidMoveException {
         AST calculateIf = null;
         LinkedList<AST> ifState = new LinkedList<>();
         token.consume("(");
@@ -60,7 +62,7 @@ public class ParserGrammar {
         }
         return ifState;
     }
-    public AST ParseWhileStatement() throws SyntaxError {
+    public AST ParseWhileStatement() throws SyntaxError, InvalidMoveException {
         token.consume("(");
         Expr E = parseE();
         token.consume(")");
@@ -70,7 +72,7 @@ public class ParserGrammar {
         return  w;
     }
 
-    public LinkedList<AST> ParseBlockStatement() throws SyntaxError {
+    public LinkedList<AST> ParseBlockStatement() throws SyntaxError, InvalidMoveException {
         LinkedList<AST> b = new LinkedList<>();
         while(!token.peek("}")){
             b.addAll(ParseStatement());
@@ -131,7 +133,7 @@ public class ParserGrammar {
             throw new SyntaxError("Move command must follow by direction");
         }
         String direction = ParseDirection().eval();
-        return new MoveCommandNode(direction);
+        return new MoveCommandNode(direction,crew);
     }
 
     public AST ParseAttackCommand() throws SyntaxError {

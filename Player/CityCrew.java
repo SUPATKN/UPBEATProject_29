@@ -20,7 +20,7 @@ public class CityCrew {
     }
 
 
-    public void move(Map.Direction direction) throws InvalidMoveException {
+    public void move(String direction) throws InvalidMoveException {
         Cell currentCell = this.getPosition();
         Cell newCell = calculateNewCell(currentCell, direction);
 
@@ -41,34 +41,34 @@ public class CityCrew {
     }
 
 
-    private Cell calculateNewCell(Cell currentCell, Map.Direction direction) throws InvalidMoveException {
+    private Cell calculateNewCell(Cell currentCell, String direction) throws InvalidMoveException {
         int newRow = currentCell.getRow();
         int newCol = currentCell.getCol();
 
         try {
-            if (direction == Map.Direction.UP) {
+            if (direction.equals("up")) {
                 newRow--;
-            } else if (direction == Map.Direction.DOWN) {
+            } else if (direction.equals("down")) {
                 newRow++;
-            } else if (direction == Map.Direction.UP_LEFT) {
+            } else if (direction.equals("upleft")) {
                 newCol--;
                 System.out.println(newCol);
                 if (newCol % 2 == 0) {
                     newRow--;
                 }
-            } else if (direction == Map.Direction.UP_RIGHT) {
+            } else if (direction.equals("upright")) {
                 newCol++;
                 System.out.println(newCol);
                 if (newCol % 2 == 0) {
                     newRow--;
                 }
-            } else if (direction == Map.Direction.DOWN_RIGHT) {
+            } else if (direction.equals("downright")) {
                 newCol++;
                 System.out.println(newCol);
                 if (newCol % 2 != 0) {
                     newRow++;
                 }
-            } else if (direction == Map.Direction.DOWN_LEFT) {
+            } else if (direction.equals("downleft")) {
                 newCol--;
                 System.out.println(newCol);
                 if (newCol % 2 != 0) {

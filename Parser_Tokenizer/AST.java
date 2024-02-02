@@ -2,14 +2,14 @@ import java.util.LinkedList;
 import java.util.Map;
 
 public interface AST {
-    void eval() throws SyntaxError;
+    void eval() throws SyntaxError, InvalidMoveException;
 
 }
 
 record WhileNode(Expr exp,LinkedList<AST> s,Map<String ,Integer> binding) implements AST{
 
     @Override
-    public void eval() throws SyntaxError {
+    public void eval() throws SyntaxError, InvalidMoveException {
         for(int i = 0 ;i<10000 && exp.eval(binding) > 0 ;i++){
             for (AST temp : s) {
                 temp.eval();
@@ -18,11 +18,12 @@ record WhileNode(Expr exp,LinkedList<AST> s,Map<String ,Integer> binding) implem
     }
 }
 
-record MoveCommandNode(String direction)implements AST{
+record MoveCommandNode(String direction,CityCrew crew)implements AST{
     @Override
-    public void eval(){
-        System.out.println("move " + direction);
-//        player.move(direction);
+    public void eval() throws InvalidMoveException {
+        crew.move(direction);
+        System.out.println(crew.getPosition().getCol());
+        System.out.println(crew.getPosition().getRow());
     }
 }
 

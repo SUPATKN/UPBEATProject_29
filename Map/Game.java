@@ -79,29 +79,29 @@ public class Game {
         int newCol = currentCell.getCol();
 
         try {
-            if (direction == Map.Direction.UP) {
+            if (direction == Map.Direction.up) {
                 newRow--;
-            } else if (direction == Map.Direction.DOWN) {
+            } else if (direction == Map.Direction.down) {
                 newRow++;
-            } else if (direction == Map.Direction.UP_LEFT) {
+            } else if (direction == Map.Direction.upleft) {
                 newCol--;
                 System.out.println(newCol);
                 if (newCol % 2 == 0) {
                     newRow--;
                 }
-            } else if (direction == Map.Direction.UP_RIGHT) {
+            } else if (direction == Map.Direction.upright) {
                 newCol++;
                 System.out.println(newCol);
                 if (newCol % 2 == 0) {
                     newRow--;
                 }
-            } else if (direction == Map.Direction.DOWN_RIGHT) {
+            } else if (direction == Map.Direction.downright) {
                 newCol++;
                 System.out.println(newCol);
                 if (newCol % 2 != 0) {
                     newRow++;
                 }
-            } else if (direction == Map.Direction.DOWN_LEFT) {
+            } else if (direction == Map.Direction.downleft) {
                 newCol--;
                 System.out.println(newCol);
                 if (newCol % 2 != 0) {

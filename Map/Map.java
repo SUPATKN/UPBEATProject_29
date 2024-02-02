@@ -88,14 +88,13 @@ public class Map {
     }
 
     public enum Direction {
-        UP_LEFT,
-        UP,
-        UP_RIGHT,
+        upleft,
+        up,
+        upright,
         RIGHT,
-        DOWN_RIGHT,
-        DOWN,
-        DOWN_LEFT,
-        LEFT
+        downright,
+        down,
+        downleft,
     }
 
 
