@@ -106,6 +106,9 @@ public class ParserGrammar {
             Action = ParseMoveCommand();
         }else if(token.peek("invest") || token.peek("collect")){
             Action = ParseRegionCommand();
+        }else if(token.peek("shoot")){
+            token.consume();
+            Action = ParseAttackCommand();
         }
         return Action;
     }
@@ -127,6 +130,12 @@ public class ParserGrammar {
     public AST ParseMoveCommand() throws SyntaxError{
         String direction = ParseDirection().eval();
         return new MoveCommandNode(direction);
+    }
+
+    public AST ParseAttackCommand() throws SyntaxError {
+        String direction = ParseDirection().eval();
+        Expr E = parseE();
+        return new AttackCommandNode(direction,E,binding);
     }
 
     public AST ParseAssignCommand() throws SyntaxError{
