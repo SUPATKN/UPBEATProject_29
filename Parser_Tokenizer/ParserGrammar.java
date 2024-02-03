@@ -259,8 +259,10 @@ public class ParserGrammar {
         if (isNumber(token.peek())) {
             int num = Integer.parseInt(token.consume());
             return new IntLit(num);
-        }else if(token.peek().matches("^[a-z]+$") || token.peek().matches("^[A-Z]+$")){
+        }else if(token.getType().equals("identifier")){
             return new Variable(token.consume());
+        }else if(token.getType().equals("specialVariable")){
+            return new SpecialVariable(token.consume(),crew.getPlayer(),crew);
         }else if(token.peek("(") || token.peek(")")){
             token.consume("(");
             Expr F = parseE();

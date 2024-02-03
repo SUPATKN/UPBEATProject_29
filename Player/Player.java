@@ -7,11 +7,19 @@ public class Player {
     private ParserGrammar p;
     private Tokenizer tokenizer;
     public Player(String name,Map map){
+        Budget = 10000;
         this.name = name;
         this.map = map;
         crew = new CityCrew(this,map,map.getRandomEmptyCell());
-        System.out.println(crew.getPosition().getRow());
-        System.out.println(crew.getPosition().getCol());
+        System.out.println("row = " + crew.getPosition().getRow());
+        System.out.println("col = " + crew.getPosition().getCol());
+    }
+
+    public int getBudget(){
+        return Budget;
+    }
+    public Map getMap(){
+        return map;
     }
 
     public void Plan() throws SyntaxError, InvalidMoveException {

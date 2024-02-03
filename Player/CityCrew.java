@@ -103,4 +103,7 @@ public class CityCrew {
         position.setPlayer(player);
     }
 
+    public Player getPlayer(){
+        return player;
+    }
 }

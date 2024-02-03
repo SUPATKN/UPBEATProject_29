@@ -4,7 +4,36 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="be3eb78b-7ac1-4402-b453-97bc542039f9" name="Changes" comment="resolve conflict" />
+    <list default="true" id="be3eb78b-7ac1-4402-b453-97bc542039f9" name="Changes" comment="resolve conflict">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_3_2_2567_13_48__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_3_2_2567_13_48__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_3_2_2567_13_48__Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_3_2_2567_13_48__Changes_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Map/GameConsole.java" beforeDir="false" afterPath="$PROJECT_DIR$/Map/GameConsole.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parser_Tokenizer/AST.java" beforeDir="false" afterPath="$PROJECT_DIR$/Parser_Tokenizer/AST.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parser_Tokenizer/ExprNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/Parser_Tokenizer/ExprNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parser_Tokenizer/ParserGrammar.java" beforeDir="false" afterPath="$PROJECT_DIR$/Parser_Tokenizer/ParserGrammar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Player/CityCrew.java" beforeDir="false" afterPath="$PROJECT_DIR$/Player/CityCrew.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Player/Deposit.java" beforeDir="false" afterPath="$PROJECT_DIR$/Player/Deposit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Player/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/Player/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/AssignCommandNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UPBEATProject_29/AssignCommandNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/AttackCommandNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UPBEATProject_29/AttackCommandNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/BinaryArithExpr.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UPBEATProject_29/BinaryArithExpr.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/CityCrew.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UPBEATProject_29/CityCrew.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/CollectCommandNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UPBEATProject_29/CollectCommandNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/Deposit.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UPBEATProject_29/Deposit.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/DirectionNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UPBEATProject_29/DirectionNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/DoneCommandNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UPBEATProject_29/DoneCommandNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/GameConsole.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UPBEATProject_29/GameConsole.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/IfStateNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UPBEATProject_29/IfStateNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/IntLit.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UPBEATProject_29/IntLit.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/InvestCommandNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UPBEATProject_29/InvestCommandNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UPBEATProject_29/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/MoveCommandNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UPBEATProject_29/MoveCommandNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/ParserGrammar.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UPBEATProject_29/ParserGrammar.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UPBEATProject_29/Player.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/Tokenizer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UPBEATProject_29/Tokenizer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/Variable.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UPBEATProject_29/Variable.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -21,7 +50,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="workingY" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -54,14 +83,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;21&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "workingY",
+    "jdk.selected.JAVA_MODULE": "21",
+    "last_opened_file_path": "D:/project/code/OOP/UPBEATProject_29",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="" />
@@ -69,6 +102,21 @@
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="UPBEATProject_29" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="UPBEATProject_29" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -286,7 +334,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="upgrade some Tokenizer and Parser" />
     <MESSAGE value="update parser but not finish" />
     <MESSAGE value="parse 20%" />
     <MESSAGE value="update parser if while" />
@@ -311,6 +358,27 @@
     <MESSAGE value="make special variable reading can't assign (read only)" />
     <MESSAGE value="commit to main" />
     <MESSAGE value="resolve conflict" />
-    <option name="LAST_COMMIT_MESSAGE" value="resolve conflict" />
+    <MESSAGE value="edit main class" />
+    <option name="LAST_COMMIT_MESSAGE" value="edit main class" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Parser_Tokenizer/Main.java</url>
+          <line>5</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/Map/GameConsole.java</url>
+          <line>7</line>
+          <properties class="GameConsole" method="&lt;init&gt;">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
