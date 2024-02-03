@@ -1,0 +1,24 @@
+<changelist name="Uncommitted_changes_before_Checkout_at_3_2_2567_13_48_[Changes]1" date="1706942944326" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_3_2_2567_13_48_[Changes]1/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 3/2/2567 13:48 [Changes]" />
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/UPBEATProject_29/BinaryArithExpr.class" />
+    <option name="AFTER_PATH" value="out/production/UPBEATProject_29/BinaryArithExpr.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_3_2_2567_13_48_[Changes]1/BinaryArithExpr.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/UPBEATProject_29/Tokenizer.class" />
+    <option name="AFTER_PATH" value="out/production/UPBEATProject_29/Tokenizer.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_3_2_2567_13_48_[Changes]1/Tokenizer.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/UPBEATProject_29/Variable.class" />
+    <option name="AFTER_PATH" value="out/production/UPBEATProject_29/Variable.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_3_2_2567_13_48_[Changes]1/Variable.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/UPBEATProject_29/ParserGrammar.class" />
+    <option name="AFTER_PATH" value="out/production/UPBEATProject_29/ParserGrammar.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_3_2_2567_13_48_[Changes]1/ParserGrammar.class" />
+  </binary>
+</changelist>
