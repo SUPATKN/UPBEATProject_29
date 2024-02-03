@@ -19,6 +19,7 @@ record IntLit(int val) implements Expr {
 
 record Variable(String name) implements Expr {
     public int eval(Map<String, Integer> bindings) throws SyntaxError {
+        if(name.isEmpty()) return 0;
         if (bindings.containsKey(name)) return bindings.get(name);
         throw new SyntaxError("undefined variable: " + name);
     }
