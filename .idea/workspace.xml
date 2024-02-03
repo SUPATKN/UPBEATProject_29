@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="be3eb78b-7ac1-4402-b453-97bc542039f9" name="Changes" comment="make special variable reading can't assign (read only)" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="workingY" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;SUPATKN&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="recentNewPullRequestHead">
+      <RepoCoordinatesHolder>
+        <option name="owner" value="SUPATKN" />
+        <option name="repository" value="UPBEATProject_29" />
+      </RepoCoordinatesHolder>
+    </option>
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="c4083695-5fca-4ff4-94bf-7ae85a4e8a9a" />
+        <option name="url" value="https://github.com/SUPATKN/UPBEATProject_29.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="2bOKbDSPbAJfnUQelxt1Eichylk" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "jdk.selected.JAVA_MODULE": "21"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="be3eb78b-7ac1-4402-b453-97bc542039f9" name="Changes" comment="" />
+      <created>1706080754442</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1706080754442</updated>
+    </task>
+    <task id="LOCAL-00001" summary="add first commit">
+      <option name="closed" value="true" />
+      <created>1706080832855</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1706080832855</updated>
+    </task>
+    <task id="LOCAL-00002" summary="demo stupid ParserTest">
+      <option name="closed" value="true" />
+      <created>1706087967808</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1706087967808</updated>
+    </task>
+    <task id="LOCAL-00003" summary="upgrade some Tokenizer and Parser">
+      <option name="closed" value="true" />
+      <created>1706449019144</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1706449019144</updated>
+    </task>
+    <task id="LOCAL-00004" summary="update parser but not finish">
+      <option name="closed" value="true" />
+      <created>1706545506400</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1706545506400</updated>
+    </task>
+    <task id="LOCAL-00005" summary="parse 20%">
+      <option name="closed" value="true" />
+      <created>1706677478553</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1706677478553</updated>
+    </task>
+    <task id="LOCAL-00006" summary="update parser if while">
+      <option name="closed" value="true" />
+      <created>1706695281761</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1706695281761</updated>
+    </task>
+    <task id="LOCAL-00007" summary="create directory">
+      <option name="closed" value="true" />
+      <created>1706695715767</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1706695715767</updated>
+    </task>
+    <task id="LOCAL-00008" summary="can parse if while block">
+      <option name="closed" value="true" />
+      <created>1706696294419</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1706696294419</updated>
+    </task>
+    <task id="LOCAL-00009" summary="parse, while, if(not finish), assign, move , เหลือ edit Expr Parse">
+      <option name="closed" value="true" />
+      <created>1706703974632</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1706703974632</updated>
+    </task>
+    <task id="LOCAL-00010" summary="rename ParserTest to ParserGrammar">
+      <option name="closed" value="true" />
+      <created>1706790051726</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1706790051726</updated>
+    </task>
+    <task id="LOCAL-00011" summary="can Parse IfState and add IfStateNode">
+      <option name="closed" value="true" />
+      <created>1706791619397</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1706791619397</updated>
+    </task>
+    <task id="LOCAL-00012" summary="rename directory src to Parser_Tokenizer">
+      <option name="closed" value="true" />
+      <created>1706792242701</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1706792242701</updated>
+    </task>
+    <task id="LOCAL-00013" summary="can Parse Expr and make PowerParse">
+      <option name="closed" value="true" />
+      <created>1706801406567</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1706801406567</updated>
+    </task>
+    <task id="LOCAL-00014" summary="add CityCrew move">
+      <option name="closed" value="true" />
+      <created>1706803130728</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1706803130728</updated>
+    </task>
+    <task id="LOCAL-00015" summary="edit tokenizer and parser to not assign reserved  word as identifier">
+      <option name="closed" value="true" />
+      <created>1706804962057</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1706804962057</updated>
+    </task>
+    <task id="LOCAL-00016" summary="add DoneCommandNode , done command can parse success">
+      <option name="closed" value="true" />
+      <created>1706806250524</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1706806250524</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Can invest and collect , add InvestCommandNode and CollectCommandNode">
+      <option name="closed" value="true" />
+      <created>1706841692430</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1706841692430</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Can shoot command , Add ParseAttackCommand , Add AttackCommandNode">
+      <option name="closed" value="true" />
+      <created>1706842157004</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1706842157004</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Add exception for shoot and move">
+      <option name="closed" value="true" />
+      <created>1706842577369</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1706842577369</updated>
+    </task>
+    <task id="LOCAL-00020" summary="edit Cell class (add Deposit instead value)">
+      <option name="closed" value="true" />
+      <created>1706843481093</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1706843481093</updated>
+    </task>
+    <task id="LOCAL-00021" summary="can make city crew move , edit enum">
+      <option name="closed" value="true" />
+      <created>1706859904017</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1706859904018</updated>
+    </task>
+    <task id="LOCAL-00022" summary="can make city crew invest to Cell">
+      <option name="closed" value="true" />
+      <created>1706870492520</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1706870492520</updated>
+    </task>
+    <task id="LOCAL-00023" summary="make player belong region when invest">
+      <option name="closed" value="true" />
+      <created>1706871667811</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1706871667811</updated>
+    </task>
+    <task id="LOCAL-00024" summary="make special variable reading can't assign (read only)">
+      <option name="closed" value="true" />
+      <created>1706942665077</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1706942665077</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="add first commit" />
+    <MESSAGE value="demo stupid ParserTest" />
+    <MESSAGE value="upgrade some Tokenizer and Parser" />
+    <MESSAGE value="update parser but not finish" />
+    <MESSAGE value="parse 20%" />
+    <MESSAGE value="update parser if while" />
+    <MESSAGE value="create directory" />
+    <MESSAGE value="can parse if while block" />
+    <MESSAGE value="parse, while, if(not finish), assign, move , เหลือ edit Expr Parse" />
+    <MESSAGE value="COMIT TEST" />
+    <MESSAGE value="rename ParserTest to ParserGrammar" />
+    <MESSAGE value="can Parse IfState and add IfStateNode" />
+    <MESSAGE value="rename directory src to Parser_Tokenizer" />
+    <MESSAGE value="can Parse Expr and make PowerParse" />
+    <MESSAGE value="add CityCrew move" />
+    <MESSAGE value="edit tokenizer and parser to not assign reserved  word as identifier" />
+    <MESSAGE value="add DoneCommandNode , done command can parse success" />
+    <MESSAGE value="Can invest and collect , add InvestCommandNode and CollectCommandNode" />
+    <MESSAGE value="Can shoot command , Add ParseAttackCommand , Add AttackCommandNode" />
+    <MESSAGE value="Add exception for shoot and move" />
+    <MESSAGE value="edit Cell class (add Deposit instead value)" />
+    <MESSAGE value="can make city crew move , edit enum" />
+    <MESSAGE value="can make city crew invest to Cell" />
+    <MESSAGE value="make player belong region when invest" />
+    <MESSAGE value="make special variable reading can't assign (read only)" />
+    <option name="LAST_COMMIT_MESSAGE" value="make special variable reading can't assign (read only)" />
+  </component>
+</project>
