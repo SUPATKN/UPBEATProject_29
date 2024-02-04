@@ -22,8 +22,8 @@ record MoveCommandNode(String direction,CityCrew crew)implements AST{
     @Override
     public void eval() throws InvalidMoveException {
         crew.move(direction);
-        System.out.println("row = " +crew.getPosition().getRow());
-        System.out.println("col = " +crew.getPosition().getCol());
+        System.out.println("row = " +(crew.getPosition().getRow()+1));
+        System.out.println("col = " +(crew.getPosition().getCol()+1));
     }
 }
 

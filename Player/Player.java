@@ -11,8 +11,8 @@ public class Player {
         this.name = name;
         this.map = map;
         crew = new CityCrew(this,map,map.getRandomEmptyCell());
-        System.out.println("row = " + crew.getPosition().getRow());
-        System.out.println("col = " + crew.getPosition().getCol());
+        System.out.println("row = " + (crew.getPosition().getRow()+1));
+        System.out.println("col = " + (crew.getPosition().getCol()+1));
     }
 
     public int getBudget(){
