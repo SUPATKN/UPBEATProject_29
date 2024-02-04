@@ -1,5 +1,6 @@
 import java.util.Scanner;
 public class Player {
+    private int TotolRegion;
     private Cell cityCenter;
     private String name;
     private int Budget;
@@ -14,8 +15,10 @@ public class Player {
         crew = new CityCrew(this,map,map.getRandomEmptyCell());
         cityCenter = crew.getPosition();
         cityCenter.setDeposit(100);
-        System.out.println("row = " + (crew.getPosition().getRow()+1));
-        System.out.println("col = " + (crew.getPosition().getCol()+1));
+        TotolRegion = 1;
+        System.out.print("[ " + name + " ]" + " City Center on : ");
+        System.out.print("row = " + (crew.getPosition().getRow()+1));
+        System.out.println(" | col = " + (crew.getPosition().getCol()+1));
     }
 
     public int getBudget(){
@@ -25,9 +28,13 @@ public class Player {
         return map;
     }
 
+    public Cell getCityCenter(){
+        return cityCenter;
+    }
+
     public void Plan() throws SyntaxError, InvalidMoveException {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter plan");
+        System.out.println(name + " turn "+ "Enter plan");
         String input = scanner.nextLine();
         tokenizer = new Tokenizer(input);
         p = new ParserGrammar(tokenizer,crew);
@@ -36,6 +43,8 @@ public class Player {
 
     public void InvestCost(int cost){
         Budget -= cost + 1;
+        TotolRegion += 1;
+        //don't forget to make it not + when it already have this cell
         if(Budget < 0){
             Budget = 0;
         }

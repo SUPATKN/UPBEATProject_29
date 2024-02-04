@@ -5,16 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="be3eb78b-7ac1-4402-b453-97bc542039f9" name="Changes" comment="move method don't need to edit(correct already)">
+      <change afterPath="$PROJECT_DIR$/Player/StartGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_3_2_2567_13_48__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_3_2_2567_13_48__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_3_2_2567_13_48__Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_3_2_2567_13_48__Changes_1.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Map/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/Map/Cell.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Map/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/Map/Map.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Player/CityCrew.java" beforeDir="false" afterPath="$PROJECT_DIR$/Player/CityCrew.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Player/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/Player/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/Cell.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UPBEATProject_29/Cell.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/CityCrew.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UPBEATProject_29/CityCrew.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/GameConsole.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UPBEATProject_29/GameConsole.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/Map.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UPBEATProject_29/Map.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/MoveCommandNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UPBEATProject_29/MoveCommandNode.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UPBEATProject_29/Player.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -62,6 +59,7 @@
   &quot;associatedIndex&quot;: 8
 }</component>
   <component name="ProjectId" id="2bOKbDSPbAJfnUQelxt1Eichylk" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />

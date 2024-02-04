@@ -80,10 +80,10 @@ public class CityCrew {
             if (isValidCell(newRow, newCol)) {
                 return map.getCell(newRow, newCol);
             } else {
-                throw new InvalidMoveException("Invalid move. Trying to move out of bounds.");
+                return map.getCell(currentCell.getRow(), currentCell.getCol());
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new InvalidMoveException("Invalid move. Trying to move out of bounds.");
+            return map.getCell(currentCell.getRow(), currentCell.getCol());
         }
     }
 
@@ -102,6 +102,7 @@ public class CityCrew {
         player.InvestCost(cost);
         position.InvestDeposit(cost);
         position.setPlayer(player);
+
     }
 
     public Player getPlayer(){
