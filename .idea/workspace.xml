@@ -4,9 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="be3eb78b-7ac1-4402-b453-97bc542039f9" name="Changes" comment="add SpecialVariable , can parse SpecialVariable to read only , must edit move method">
+    <list default="true" id="be3eb78b-7ac1-4402-b453-97bc542039f9" name="Changes" comment="move method don't need to edit(correct already)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Map/GameConsole.java" beforeDir="false" afterPath="$PROJECT_DIR$/Map/GameConsole.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Map/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/Map/Cell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Map/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/Map/Map.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Player/CityCrew.java" beforeDir="false" afterPath="$PROJECT_DIR$/Player/CityCrew.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Player/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/Player/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/Cell.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UPBEATProject_29/Cell.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/CityCrew.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UPBEATProject_29/CityCrew.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/GameConsole.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UPBEATProject_29/GameConsole.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/Map.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UPBEATProject_29/Map.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/MoveCommandNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UPBEATProject_29/MoveCommandNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UPBEATProject_29/Player.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -286,7 +295,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706949664247</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="move method don't need to edit(correct already)">
+      <option name="closed" value="true" />
+      <created>1707026465330</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1707026465330</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -301,7 +318,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="update parser if while" />
     <MESSAGE value="create directory" />
     <MESSAGE value="can parse if while block" />
     <MESSAGE value="parse, while, if(not finish), assign, move , เหลือ edit Expr Parse" />
@@ -326,7 +342,8 @@
     <MESSAGE value="edit main class" />
     <MESSAGE value="add SpecialVariable , can parse SpecialVariable to read only" />
     <MESSAGE value="add SpecialVariable , can parse SpecialVariable to read only , must edit move method" />
-    <option name="LAST_COMMIT_MESSAGE" value="add SpecialVariable , can parse SpecialVariable to read only , must edit move method" />
+    <MESSAGE value="move method don't need to edit(correct already)" />
+    <option name="LAST_COMMIT_MESSAGE" value="move method don't need to edit(correct already)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

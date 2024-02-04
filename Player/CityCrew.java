@@ -21,6 +21,7 @@ public class CityCrew {
 
 
     public void move(String direction) throws InvalidMoveException {
+        player.MoveCost();
         Cell currentCell = this.getPosition();
         Cell newCell = calculateNewCell(currentCell, direction);
 
@@ -98,8 +99,8 @@ public class CityCrew {
     }
 
     public void Invest(int cost){
-        player.Invest(cost);
-        position.getDeposit().InvestDeposit(cost);
+        player.InvestCost(cost);
+        position.InvestDeposit(cost);
         position.setPlayer(player);
     }
 

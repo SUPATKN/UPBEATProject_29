@@ -13,7 +13,7 @@ public class Map {
         for (int i = 0; i < cells.length; i++) {
             for (int j = 0; j < cells[i].length; j++) {
                 cells[i][j] = new Cell(i, j);
-                cells[i][j].setDeposit(cells[i][j].generateRandomOccupiedValue());
+                cells[i][j].setDeposit(0);
             }
         }
     }
@@ -24,7 +24,7 @@ public class Map {
             for (int j = 0; j < cells[i].length; j++) {
                 // Assume values are integers for simplicity
                 int randomValue = random.nextInt(1000001); // Adjust the range as needed
-                cells[i][j].setDeposit(randomValue);
+                cells[i][j].setDeposit(0);
             }
         }
     }
