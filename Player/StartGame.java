@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class StartGame {
-    MapCell mapCell;
+    MapCell map;
     private static List<Player> Allplayer  = new ArrayList<>();
     private int CountTurn = 0;
     private static int CountPlayer = 1;
@@ -17,17 +17,21 @@ public class StartGame {
         System.out.print("Please enter the number of players : ");
         String count = "";
         count = sc.nextLine();
-        if(count.isEmpty() || count.equals(" ")){
+        if(count.isEmpty() || count.equals(" ") || !count.matches("\\d+")){
             System.out.println("You did not enter the number of players , Set default player = 2");
             CountPlayer = 2;
-        }else {
+        }else if(Integer.parseInt(count) <= 1){
+            System.out.println("The number of players you entered is too few , Set default player = 2");
+            CountPlayer = 2;
+        }
+        else {
             CountPlayer = Integer.parseInt(count);
         }
     }
 
     public void namePlayer(String nameplayer, int i) throws SyntaxError, InvalidMoveException {
         if (nameplayer.isEmpty() || nameplayer.equals(" ")) nameplayer = "Unknown player" + i;
-        Allplayer.add(new Player(nameplayer, mapCell));
+        Allplayer.add(new Player(nameplayer,map));
     }
 
     public void EnterNamePlayer() throws SyntaxError, InvalidMoveException {
@@ -41,12 +45,50 @@ public class StartGame {
 
     public void CreateMap(){
         if(CountPlayer == 2){
-            mapCell = new MapCell(7,7);
+            map = new MapCell(7,7);
         }else if(CountPlayer >= 3 && CountPlayer <= 5 ){
-            mapCell = new MapCell(15,15);
+            map = new MapCell(15,15);
         }else{
-            mapCell = new MapCell(30,30);
+            map = new MapCell(30,30);
         }
+    }
+
+    private void displayMap() {
+        Cell[][] cells = map.getCells();
+
+        // Print the map header
+        System.out.println("Current Player Positions:");
+
+        // Iterate through all players
+        for (Player player : Allplayer) {
+            int playerX = player.getCrew().getPosition().getRow();
+            int playerY = player.getCrew().getPosition().getCol();
+
+            // Mark the player's position on the map
+            cells[playerX][playerY].setOccupied(true);
+
+            // Print the player's name and position
+            System.out.println(player.getName() + " is at position (" + (playerX + 1) + "," + (playerY + 1) + ")");
+        }
+
+        // Display the map
+        for (int i = 0; i < cells.length; i++) {
+            for (int j = 0; j < cells[i].length; j++) {
+                System.out.print("(" + (i + 1) + "," + (j + 1) + ")");
+
+                for (int p = 0; p < Allplayer.size(); p++) {
+                    if (cells[i][j].isOccupied()) {
+                        System.out.print("[ " + Allplayer.get(p).getName() + " ]"); // X represents the presence of a player
+                        p++;
+                    } else {
+                        System.out.print("-");
+                    }
+                }
+                System.out.print(" ");
+            }
+                System.out.println();
+        }
+
     }
 
     public void Start() throws SyntaxError, InvalidMoveException {
@@ -66,8 +108,14 @@ public class StartGame {
 
         // Run Turn
         for(int i = 0; i<5 ; i++){
-            Allplayer.get(0).Plan();
-            Allplayer.get(1).Plan();
+            displayMap();
+            for(int j=0;j < CountPlayer ; j++){
+                Allplayer.get(j).Plan();
+                displayMap();
+                if(j==CountPlayer){
+                    j=0;
+                }
+            }
         }
 
     }

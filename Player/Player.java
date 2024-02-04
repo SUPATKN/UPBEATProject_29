@@ -1,5 +1,3 @@
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 public class Player {
     private int TotolRegion;
@@ -10,7 +8,7 @@ public class Player {
     private MapCell map;
     private ParserGrammar p;
     private Tokenizer tokenizer;
-    public Player(String name,MapCell map) throws SyntaxError, InvalidMoveException {
+    public Player(String name,MapCell map){
         Budget = 10000;
         this.name = name;
         this.map = map;
@@ -21,12 +19,6 @@ public class Player {
         System.out.print("[ " + name + " ]" + " City Center on : ");
         System.out.print("row = " + (crew.getPosition().getRow()+1));
         System.out.println(" | col = " + (crew.getPosition().getCol()+1));
-        Scanner scanner = new Scanner(System.in);
-        System.out.println(name + " turn "+ "Enter plan");
-        String input = scanner.nextLine();
-        tokenizer = new Tokenizer(input);
-        p = new ParserGrammar(tokenizer,crew);
-        doSamePlan();
     }
 
     public int getBudget(){
@@ -40,16 +32,17 @@ public class Player {
         return cityCenter;
     }
 
-    public void Plan() throws SyntaxError, InvalidMoveException {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println(name + " turn "+ "Enter plan");
-        String input = scanner.nextLine();
-        tokenizer = new Tokenizer(input);
-        p.setToken(tokenizer);
-        doSamePlan();
+    public String getName(){
+        return name;
     }
 
-    public void doSamePlan() throws SyntaxError, InvalidMoveException {
+    public void Plan() throws SyntaxError, InvalidMoveException {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println();
+        System.out.println("[ " + name + " ]" + " turn enter plan : ");
+        String input = scanner.nextLine();
+        tokenizer = new Tokenizer(input);
+        p = new ParserGrammar(tokenizer,crew);
         p.ParsePlan();
     }
 
@@ -67,6 +60,10 @@ public class Player {
         if(Budget < 0){
             Budget = 0;
         }
+    }
+
+    public CityCrew getCrew(){
+        return crew;
     }
 
     public void Relocate(){

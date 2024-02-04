@@ -4,36 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="be3eb78b-7ac1-4402-b453-97bc542039f9" name="Changes" comment="add CityCenter in Player class">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Map/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/Map/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Map/GameConsole.java" beforeDir="false" afterPath="$PROJECT_DIR$/Map/GameConsole.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Map/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/Map/MapCell.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Parser_Tokenizer/AST.java" beforeDir="false" afterPath="$PROJECT_DIR$/Parser_Tokenizer/AST.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Parser_Tokenizer/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Parser_Tokenizer/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Parser_Tokenizer/ParserGrammar.java" beforeDir="false" afterPath="$PROJECT_DIR$/Parser_Tokenizer/ParserGrammar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Player/CityCrew.java" beforeDir="false" afterPath="$PROJECT_DIR$/Player/CityCrew.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Player/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/Player/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Player/StartGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/Player/StartGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/AssignCommandNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UPBEATProject_29/AssignCommandNode.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/AttackCommandNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UPBEATProject_29/AttackCommandNode.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/CityCrew.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UPBEATProject_29/CityCrew.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/CollectCommandNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UPBEATProject_29/CollectCommandNode.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/DirectionNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UPBEATProject_29/DirectionNode.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/DoneCommandNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UPBEATProject_29/DoneCommandNode.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UPBEATProject_29/Game.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/GameConsole.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UPBEATProject_29/GameConsole.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/IfStateNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UPBEATProject_29/IfStateNode.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/InvestCommandNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UPBEATProject_29/InvestCommandNode.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UPBEATProject_29/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/Map$Direction.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/Map.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/MoveCommandNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UPBEATProject_29/MoveCommandNode.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/ParserGrammar.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UPBEATProject_29/ParserGrammar.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UPBEATProject_29/Player.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/SpecialVariable.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UPBEATProject_29/SpecialVariable.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/WhileNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UPBEATProject_29/WhileNode.class" afterDir="false" />
-    </list>
+    <list default="true" id="be3eb78b-7ac1-4402-b453-97bc542039f9" name="Changes" comment="add CityCenter in Player class" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -79,6 +50,7 @@
   &quot;associatedIndex&quot;: 8
 }</component>
   <component name="ProjectId" id="2bOKbDSPbAJfnUQelxt1Eichylk" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -381,11 +353,6 @@
             <option name="WATCH_EXIT" value="false" />
           </properties>
           <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Parser_Tokenizer/Main.java</url>
-          <line>3</line>
-          <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
