@@ -2,19 +2,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
-    private Map gameMap;
+    private MapCell gameMapCell;
     private List<PlayerForMap> playerForMaps;
     private int currentPlayerIndex;
     private boolean isPlayer1Turn;
 
     public Game(int numPlayers) {
         int size = (numPlayers == 2) ? 3 : 5;
-        gameMap = new Map(size, size);
+        gameMapCell = new MapCell(size, size);
         isPlayer1Turn = true;
 
         playerForMaps = new ArrayList<>();
         for (int i = 1; i <= numPlayers; i++) {
-            Cell startingCell = gameMap.getRandomEmptyCell();
+            Cell startingCell = gameMapCell.getRandomEmptyCell();
             PlayerForMap playerForMap = new PlayerForMap(i, startingCell);
             playerForMaps.add(playerForMap);
             startingCell.setOccupied(true);
@@ -28,8 +28,8 @@ public class Game {
         return getCurrentPlayer().getPlayerNumber();
     }
 
-    public Map getMap() {
-        return gameMap;
+    public MapCell getMap() {
+        return gameMapCell;
     }
 
     public List<PlayerForMap> getPlayers() {
@@ -45,7 +45,7 @@ public class Game {
         }
     }
 
-    public void move(Map.Direction direction) throws InvalidMoveException {
+    public void move(MapCell.Direction direction) throws InvalidMoveException {
         PlayerForMap currentPlayerForMap = getCurrentPlayer();
         Cell currentCell = currentPlayerForMap.getPosition();
         Cell newCell = calculateNewCell(currentCell, direction);
@@ -70,38 +70,38 @@ public class Game {
     private boolean isValidCell(Cell cell) {
         int row = cell.getRow();
         int col = cell.getCol();
-        return row >= 0 && row < gameMap.getRows() && col >= 0 && col < gameMap.getCols();
+        return row >= 0 && row < gameMapCell.getRows() && col >= 0 && col < gameMapCell.getCols();
     }
 
 
-    private Cell calculateNewCell(Cell currentCell, Map.Direction direction) throws InvalidMoveException {
+    private Cell calculateNewCell(Cell currentCell, MapCell.Direction direction) throws InvalidMoveException {
         int newRow = currentCell.getRow();
         int newCol = currentCell.getCol();
 
         try {
-            if (direction == Map.Direction.up) {
+            if (direction == MapCell.Direction.up) {
                 newRow--;
-            } else if (direction == Map.Direction.down) {
+            } else if (direction == MapCell.Direction.down) {
                 newRow++;
-            } else if (direction == Map.Direction.upleft) {
+            } else if (direction == MapCell.Direction.upleft) {
                 newCol--;
                 System.out.println(newCol);
                 if (newCol % 2 == 0) {
                     newRow--;
                 }
-            } else if (direction == Map.Direction.upright) {
+            } else if (direction == MapCell.Direction.upright) {
                 newCol++;
                 System.out.println(newCol);
                 if (newCol % 2 == 0) {
                     newRow--;
                 }
-            } else if (direction == Map.Direction.downright) {
+            } else if (direction == MapCell.Direction.downright) {
                 newCol++;
                 System.out.println(newCol);
                 if (newCol % 2 != 0) {
                     newRow++;
                 }
-            } else if (direction == Map.Direction.downleft) {
+            } else if (direction == MapCell.Direction.downleft) {
                 newCol--;
                 System.out.println(newCol);
                 if (newCol % 2 != 0) {
@@ -110,7 +110,7 @@ public class Game {
             }
 
             if (isValidCell(newRow, newCol)) {
-                return gameMap.getCell(newRow, newCol);
+                return gameMapCell.getCell(newRow, newCol);
             } else {
                 throw new InvalidMoveException("Invalid move. Trying to move out of bounds.");
             }
@@ -122,7 +122,7 @@ public class Game {
 
     // Additional method for checking if a cell is valid by row and col
     private boolean isValidCell(int row, int col) {
-        return row >= 0 && row < gameMap.getRows() && col >= 0 && col < gameMap.getCols();
+        return row >= 0 && row < gameMapCell.getRows() && col >= 0 && col < gameMapCell.getCols();
     }
 
 }

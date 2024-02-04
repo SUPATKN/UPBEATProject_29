@@ -1,3 +1,5 @@
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 public class Player {
     private int TotolRegion;
@@ -5,10 +7,10 @@ public class Player {
     private String name;
     private int Budget;
     private CityCrew crew;
-    private Map map;
+    private MapCell map;
     private ParserGrammar p;
     private Tokenizer tokenizer;
-    public Player(String name,Map map){
+    public Player(String name,MapCell map) throws SyntaxError, InvalidMoveException {
         Budget = 10000;
         this.name = name;
         this.map = map;
@@ -19,12 +21,18 @@ public class Player {
         System.out.print("[ " + name + " ]" + " City Center on : ");
         System.out.print("row = " + (crew.getPosition().getRow()+1));
         System.out.println(" | col = " + (crew.getPosition().getCol()+1));
+        Scanner scanner = new Scanner(System.in);
+        System.out.println(name + " turn "+ "Enter plan");
+        String input = scanner.nextLine();
+        tokenizer = new Tokenizer(input);
+        p = new ParserGrammar(tokenizer,crew);
+        doSamePlan();
     }
 
     public int getBudget(){
         return Budget;
     }
-    public Map getMap(){
+    public MapCell getMap(){
         return map;
     }
 
@@ -37,7 +45,11 @@ public class Player {
         System.out.println(name + " turn "+ "Enter plan");
         String input = scanner.nextLine();
         tokenizer = new Tokenizer(input);
-        p = new ParserGrammar(tokenizer,crew);
+        p.setToken(tokenizer);
+        doSamePlan();
+    }
+
+    public void doSamePlan() throws SyntaxError, InvalidMoveException {
         p.ParsePlan();
     }
 

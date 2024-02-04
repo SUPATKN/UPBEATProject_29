@@ -2,13 +2,13 @@
 
 public class CityCrew {
     private final Player player;
-    private Map map;
+    private MapCell mapCell;
     private Cell position;
 
 
-    public CityCrew(Player player,Map map,Cell initialPosition){
+    public CityCrew(Player player, MapCell mapCell, Cell initialPosition){
         this.player = player;
-        this.map = map;
+        this.mapCell = mapCell;
         this.position = initialPosition;
     }
     public Cell getPosition() {
@@ -38,7 +38,7 @@ public class CityCrew {
     private boolean isValidCell(Cell cell) {
         int row = cell.getRow();
         int col = cell.getCol();
-        return row >= 0 && row < map.getRows() && col >= 0 && col < map.getCols();
+        return row >= 0 && row < mapCell.getRows() && col >= 0 && col < mapCell.getCols();
     }
 
 
@@ -78,19 +78,19 @@ public class CityCrew {
             }
 
             if (isValidCell(newRow, newCol)) {
-                return map.getCell(newRow, newCol);
+                return mapCell.getCell(newRow, newCol);
             } else {
-                return map.getCell(currentCell.getRow(), currentCell.getCol());
+                return mapCell.getCell(currentCell.getRow(), currentCell.getCol());
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            return map.getCell(currentCell.getRow(), currentCell.getCol());
+            return mapCell.getCell(currentCell.getRow(), currentCell.getCol());
         }
     }
 
 
     // Additional method for checking if a cell is valid by row and col
     private boolean isValidCell(int row, int col) {
-        return row >= 0 && row < map.getRows() && col >= 0 && col < map.getCols();
+        return row >= 0 && row < mapCell.getRows() && col >= 0 && col < mapCell.getCols();
     }
 
 
