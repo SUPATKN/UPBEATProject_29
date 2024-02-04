@@ -1,5 +1,6 @@
 import java.util.Scanner;
 public class Player {
+    private Cell cityCenter;
     private String name;
     private int Budget;
     private CityCrew crew;
@@ -11,6 +12,8 @@ public class Player {
         this.name = name;
         this.map = map;
         crew = new CityCrew(this,map,map.getRandomEmptyCell());
+        cityCenter = crew.getPosition();
+        cityCenter.setDeposit(100);
         System.out.println("row = " + (crew.getPosition().getRow()+1));
         System.out.println("col = " + (crew.getPosition().getCol()+1));
     }
@@ -31,8 +34,32 @@ public class Player {
         p.ParsePlan();
     }
 
-    public void Invest(int cost){
+    public void InvestCost(int cost){
         Budget -= cost + 1;
+        if(Budget < 0){
+            Budget = 0;
+        }
+    }
+
+    public void MoveCost(){
+        Budget -= 1;
+        if(Budget < 0){
+            Budget = 0;
+        }
+    }
+
+    public void Relocate(){
+        int cost = 0;
+        int newRow = crew.getPosition().getRow();
+        int newCol = crew.getPosition().getCol();
+        int cityRow = cityCenter.getRow();
+        int cityCol = cityCenter.getCol();
+
+        if(cityRow == newRow){
+            cost = Math.abs(newCol - cityCol);
+        }else if(cityRow != newRow && cityCol == newCol){
+            cost =  Math.abs(newRow - cityRow);
+        }
     }
 
 }
