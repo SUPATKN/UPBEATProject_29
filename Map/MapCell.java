@@ -1,9 +1,9 @@
 import java.util.Random;
 
-public class Map {
+public class MapCell {
     private Cell[][] cells;
 
-    public Map(int rows, int cols) {
+    public MapCell(int rows, int cols) {
         cells = new Cell[rows][cols];
         initializeMap();
         randomizeCellValues();

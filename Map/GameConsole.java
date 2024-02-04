@@ -21,7 +21,7 @@ public class GameConsole {
             }
 
             try {
-                Map.Direction direction = Map.Direction.valueOf(input   );
+                MapCell.Direction direction = MapCell.Direction.valueOf(input   );
                 PlayerForMap currentPlayer = game.getCurrentPlayer();
                 game.move(direction);
                 displayMap();

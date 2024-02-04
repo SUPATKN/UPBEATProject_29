@@ -10,10 +10,11 @@ record WhileNode(Expr exp,LinkedList<AST> s,Map<String ,Integer> binding) implem
 
     @Override
     public void eval() throws SyntaxError, InvalidMoveException {
-        for(int i = 0 ;i<10000 && exp.eval(binding) > 0 ;i++){
+        for(int i = 0 ;i<10000 && exp.eval(binding) >= 0 ;i++){
             for (AST temp : s) {
                 temp.eval();
             }
+            exp.eval(binding);
         }
     }
 }

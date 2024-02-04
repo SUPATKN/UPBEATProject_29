@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class StartGame {
-    Map map;
+    MapCell mapCell;
     private static List<Player> Allplayer  = new ArrayList<>();
     private int CountTurn = 0;
     private static int CountPlayer = 1;
@@ -25,12 +25,12 @@ public class StartGame {
         }
     }
 
-    public void namePlayer(String nameplayer, int i){
+    public void namePlayer(String nameplayer, int i) throws SyntaxError, InvalidMoveException {
         if (nameplayer.isEmpty() || nameplayer.equals(" ")) nameplayer = "Unknown player" + i;
-        Allplayer.add(new Player(nameplayer,map));
+        Allplayer.add(new Player(nameplayer, mapCell));
     }
 
-    public void EnterNamePlayer(){
+    public void EnterNamePlayer() throws SyntaxError, InvalidMoveException {
         for(int i = 1 ; i <= CountPlayer ; i++){
             Scanner sc = new Scanner((System.in));
             System.out.print("Enter player " + i + " name : ");
@@ -41,11 +41,11 @@ public class StartGame {
 
     public void CreateMap(){
         if(CountPlayer == 2){
-            map = new Map(7,7);
+            mapCell = new MapCell(7,7);
         }else if(CountPlayer >= 3 && CountPlayer <= 5 ){
-            map = new Map(15,15);
+            mapCell = new MapCell(15,15);
         }else{
-            map = new Map(30,30);
+            mapCell = new MapCell(30,30);
         }
     }
 

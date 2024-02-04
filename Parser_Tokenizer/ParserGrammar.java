@@ -4,13 +4,17 @@ import java.util.Map;
 
 
 public class ParserGrammar {
-    private final Tokenizer token;
+    private Tokenizer token;
     private Map<String ,Integer> binding = new HashMap<>();
     private LinkedList<AST> statement = new LinkedList<>();
     private CityCrew crew;
     public ParserGrammar(Tokenizer t,CityCrew crew){
         this.token = t;
         this.crew = crew;
+    }
+
+    public void setToken(Tokenizer token){
+        this.token = token;
     }
 
     public void ParsePlan() throws SyntaxError, InvalidMoveException {
@@ -61,7 +65,7 @@ public class ParserGrammar {
         LinkedList<AST> s1 = ParseStatement();
         token.consume("else");
         LinkedList<AST> s2 = ParseStatement();
-        if(E.eval(binding) > 0){
+        if(E.eval(binding) >= 0){
             calculateIf = new IfStateNode(ifState,s1);
             calculateIf.eval();
         }else if(E.eval(binding) < 0){
@@ -164,7 +168,9 @@ public class ParserGrammar {
             String variable = token.consume();
             Expr Identifier = new Variable(variable);
             Variable var = (Variable) Identifier;
-            binding.put(var.name(), 0);
+            if(!binding.containsKey(var.name())){
+                binding.put(var.name(), 0);
+            }
             token.consume("=");
             Expr E = parseE();
             Assign = new AssignCommandNode(Identifier,E,binding);
