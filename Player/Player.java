@@ -1,15 +1,38 @@
+import java.util.Scanner;
 public class Player {
     private String name;
-    private int Budjet;
+    private int Budget;
     private CityCrew crew;
     private Map map;
+    private ParserGrammar p;
+    private Tokenizer tokenizer;
     public Player(String name,Map map){
+        Budget = 10000;
         this.name = name;
         this.map = map;
         crew = new CityCrew(this,map,map.getRandomEmptyCell());
+        System.out.println("row = " + (crew.getPosition().getRow()+1));
+        System.out.println("col = " + (crew.getPosition().getCol()+1));
     }
 
-    public void callCrewMove(String direction) throws InvalidMoveException {
-        crew.move(Map.Direction.valueOf(direction));
+    public int getBudget(){
+        return Budget;
     }
+    public Map getMap(){
+        return map;
+    }
+
+    public void Plan() throws SyntaxError, InvalidMoveException {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter plan");
+        String input = scanner.nextLine();
+        tokenizer = new Tokenizer(input);
+        p = new ParserGrammar(tokenizer,crew);
+        p.ParsePlan();
+    }
+
+    public void Invest(int cost){
+        Budget -= cost + 1;
+    }
+
 }

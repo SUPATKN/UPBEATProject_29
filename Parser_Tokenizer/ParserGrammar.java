@@ -2,35 +2,44 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
+
 public class ParserGrammar {
-    private Tokenizer token;
-    private Tokenizer Pretoken;
-    Map<String ,Integer> binding = new HashMap<>();
-    LinkedList<AST> statement = new LinkedList<>();
-    ParserGrammar(Tokenizer t){
+    private final Tokenizer token;
+    private Map<String ,Integer> binding = new HashMap<>();
+    private LinkedList<AST> statement = new LinkedList<>();
+    private CityCrew crew;
+    public ParserGrammar(Tokenizer t,CityCrew crew){
         this.token = t;
+        this.crew = crew;
     }
-    public void ParsePlan() throws SyntaxError {
+
+    public void ParsePlan() throws SyntaxError, InvalidMoveException {
         while(token.hasNextToken()){
             statement.addAll(ParseStatement());
         }
         while(!statement.isEmpty()){
-            statement.peekFirst().eval();
+            if(statement.peekFirst() == null){
+                statement.remove();
+            }
+            if(statement.peekFirst() != null)statement.peekFirst().eval();
             if(!statement.isEmpty()){
                 statement.remove();
             }
         }
+
+        System.out.println(binding.keySet());
         System.out.println(binding.values());
+
     }
 
-    public LinkedList<AST> ParseStatement() throws SyntaxError {
+    public LinkedList<AST> ParseStatement() throws SyntaxError, InvalidMoveException {
         LinkedList<AST> localState = new LinkedList<>();
-        if(token.getType().equals("identifier") || token.getType().equals("command")){
+        if(token.getType().equals("identifier") || token.getType().equals("command") || token.getType().equals("specialVariable")){
             localState.addAll(ParseCommand());
         }else if(token.getType().equals("blockState")) {
             token.consume();
             localState.addAll(ParseBlockStatement());
-        }else if(token.getType().equals("ifState")){
+        }else if(token.getType().equals("ifState") || token.getType().equals("elseState")){
             token.consume();
             localState.addAll(ParseIfStatement());
         }else if(token.getType().equals("whileState")){
@@ -42,7 +51,7 @@ public class ParserGrammar {
         return localState;
     }
 
-    public LinkedList<AST> ParseIfStatement() throws SyntaxError {
+    public LinkedList<AST> ParseIfStatement() throws SyntaxError, InvalidMoveException {
         AST calculateIf = null;
         LinkedList<AST> ifState = new LinkedList<>();
         token.consume("(");
@@ -61,7 +70,7 @@ public class ParserGrammar {
         }
         return ifState;
     }
-    public AST ParseWhileStatement() throws SyntaxError {
+    public AST ParseWhileStatement() throws SyntaxError, InvalidMoveException {
         token.consume("(");
         Expr E = parseE();
         token.consume(")");
@@ -71,7 +80,7 @@ public class ParserGrammar {
         return  w;
     }
 
-    public LinkedList<AST> ParseBlockStatement() throws SyntaxError {
+    public LinkedList<AST> ParseBlockStatement() throws SyntaxError, InvalidMoveException {
         LinkedList<AST> b = new LinkedList<>();
         while(!token.peek("}")){
             b.addAll(ParseStatement());
@@ -82,11 +91,9 @@ public class ParserGrammar {
 
     public LinkedList<AST> ParseCommand() throws SyntaxError {
         LinkedList<AST> command = new LinkedList<>();
-        if(token.getType().equals("identifier")){
+        if(token.getType().equals("identifier") || token.getType().equals("specialVariable")){
             LinkedList<AST> assign = new LinkedList<>();
-            while (token.getType().equals("identifier")){
-                assign.add(ParseAssignCommand());
-            }
+            assign.add(ParseAssignCommand());
             return assign;
         }else {
             command.add(ParseActionCommand());
@@ -104,29 +111,65 @@ public class ParserGrammar {
         }else if(token.peek("move")){
             token.consume();
             Action = ParseMoveCommand();
+        }else if(token.peek("invest") || token.peek("collect")){
+            Action = ParseRegionCommand();
+        }else if(token.peek("shoot")){
+            token.consume();
+            Action = ParseAttackCommand();
         }
         return Action;
     }
 
+    public AST ParseRegionCommand() throws SyntaxError{
+        AST Region = null;
+        if(token.peek("invest")){
+            token.consume();
+            Expr E = parseE();
+            Region = new InvestCommandNode(E,binding,crew);
+        }else if(token.peek("collect")){
+            token.consume();
+            Expr E = parseE();
+            Region = new CollectCommandNode(E,binding);
+        }
+        return Region;
+    }
+
     public AST ParseMoveCommand() throws SyntaxError{
-        AST MoveCom = null;
+        if(!token.getType().equals("direction")){
+            throw new SyntaxError("Move command must follow by direction");
+        }
         String direction = ParseDirection().eval();
-        MoveCom = new MoveCommandNode(direction);
-        return  MoveCom;
+        return new MoveCommandNode(direction,crew);
+    }
+
+    public AST ParseAttackCommand() throws SyntaxError {
+        if(!token.getType().equals("direction")){
+            throw new SyntaxError("Shoot command must follow by direction");
+        }
+        String direction = ParseDirection().eval();
+        Expr E = parseE();
+        return new AttackCommandNode(direction,E,binding);
     }
 
     public AST ParseAssignCommand() throws SyntaxError{
         AST Assign = null;
-        if(!token.previousType.equals("identifier")){
+        if(token.getType().equals("command") || token.getType().equals("ifState") || token.getType().equals("direction") || token.getType().equals("whileState")){
             throw new SyntaxError("Can't use a reserved word as identifier");
         }
-        String variable = token.consume();
-        Expr Identifier = new Variable(variable);
-        Variable var = (Variable) Identifier;
-        binding.put(var.name(), 0);
-        token.consume("=");
-        Expr E = parseE();
-        Assign = new AssignCommandNode(Identifier,E,binding);
+        if(token.getType().equals("specialVariable") || token.previousType.equals("elseState")){
+            token.consume();
+            token.consume("=");
+            Expr E = parseE();
+        }else if(!token.getType().equals("specialVariable")){
+            String variable = token.consume();
+            Expr Identifier = new Variable(variable);
+            Variable var = (Variable) Identifier;
+            binding.put(var.name(), 0);
+            token.consume("=");
+            Expr E = parseE();
+            Assign = new AssignCommandNode(Identifier,E,binding);
+        }
+
         return Assign;
     }
     public DirectionNode ParseDirection() throws SyntaxError {
@@ -216,8 +259,10 @@ public class ParserGrammar {
         if (isNumber(token.peek())) {
             int num = Integer.parseInt(token.consume());
             return new IntLit(num);
-        }else if(token.peek().matches("^[a-z]+$") || token.peek().matches("^[A-Z]+$")){
+        }else if(token.getType().equals("identifier")){
             return new Variable(token.consume());
+        }else if(token.getType().equals("specialVariable")){
+            return new SpecialVariable(token.consume(),crew.getPlayer(),crew);
         }else if(token.peek("(") || token.peek(")")){
             token.consume("(");
             Expr F = parseE();

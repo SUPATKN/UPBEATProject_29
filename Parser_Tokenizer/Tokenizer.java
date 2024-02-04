@@ -53,10 +53,12 @@ public class Tokenizer {
 
 
     public void assignType(){
-        String TokenType = null;
-        if (next.equals("if") || next.equals("else")){
+        if (next.equals("if") || next.equals("then")){
             type = "ifState";
-        }else if(next.equals("while")){
+        }else if(next.equals("else")){
+            type = "elseState";
+        }
+        else if(next.equals("while")){
             type = "whileState";
         }else if(next.equals("done") || next.equals("relocated") ||
                 next.equals("move") || next.equals("invest") || next.equals("collect")
@@ -66,7 +68,10 @@ public class Tokenizer {
                 next.equals("upright") || next.equals("downright") || next.equals("downleft")
                 || next.equals("upleft")) {
             type = "direction";
-        }else if((next.matches("^[a-z]+$")) || next.matches("^[A-Z]+$") || next.equals("=")){
+        }else if(next.equals("rows") || next.equals("cols") || next.equals("currow") || next.equals("curcol") || next.equals("budget")
+            || next.equals("deposit") || next.equals("int") || next.equals("maxdeposit") || next.equals("random")){
+                type = "specialVariable";
+        }else{
                 type = "identifier";
         }
     }

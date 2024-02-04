@@ -1,15 +1,14 @@
 import java.util.Random;
 
 public class Cell {
+    private Player whoBelong;
     private int row;
     private int col;
     private boolean isOccupied;
-    private int value;
-
+    private Deposit deposit;
     public Cell(int row, int col) {
         this.row = row;
         this.col = col;
-        this.value = 0;
     }
 
     public int getRow() {
@@ -27,12 +26,16 @@ public class Cell {
     public void setOccupied(boolean occupied) {
         isOccupied = occupied;
     }
-    public int getValue(){
-        return value;
+    public Deposit getDeposit(){
+        return deposit;
     }
-    public void setValue(int value){
-        this.value = value;
+    public void setDeposit(int value){
+        this.deposit = new Deposit(value);
     }
+    public void setPlayer(Player player){
+        this.whoBelong = player;
+    }
+
     public void printCellValues() {
         System.out.println("Cell at (" + row + ", " + col + ") is : " );
     }
