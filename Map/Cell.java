@@ -61,4 +61,5 @@ public class Cell {
         int randomValue = random.nextInt(1000000);
         return randomValue;
     }
+
 }
