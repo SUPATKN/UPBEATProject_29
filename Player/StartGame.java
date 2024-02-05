@@ -76,11 +76,18 @@ public class StartGame {
             for (int j = 0; j < cells[i].length; j++) {
                 System.out.print("(" + (i + 1) + "," + (j + 1) + ")");
 
-                for (int p = 0; p < Allplayer.size(); p++) {
-                    if (cells[i][j].isOccupied()) {
-                        System.out.print("[ " + Allplayer.get(p).getName() + " ]"); // X represents the presence of a player
-                        p++;
-                    } else {
+                boolean playerFound = false;
+                for (Player player : Allplayer) {
+                    int playerX = player.getCrew().getPosition().getRow();
+                    int playerY = player.getCrew().getPosition().getCol();
+
+                    if (i == playerX && j == playerY) {
+                        System.out.print("[ " + player.getName() + " ]");
+                        playerFound = true;
+                        break;
+                    }
+                    if (!playerFound) {
+                        // If no player is in this cell, print a dash
                         System.out.print("-");
                     }
                 }

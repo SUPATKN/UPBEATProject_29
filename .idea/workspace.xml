@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="be3eb78b-7ac1-4402-b453-97bc542039f9" name="Changes" comment="add CityCenter in Player class" />
+    <list default="true" id="be3eb78b-7ac1-4402-b453-97bc542039f9" name="Changes" comment="add CityCenter in Player class">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_3_2_2567_13_48__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_3_2_2567_13_48__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_3_2_2567_13_48__Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_3_2_2567_13_48__Changes_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Map/GameConsole.java" beforeDir="false" afterPath="$PROJECT_DIR$/Map/GameConsole.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Player/StartGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/Player/StartGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/GameConsole.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UPBEATProject_29/GameConsole.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/StartGame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UPBEATProject_29/StartGame.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -50,7 +58,10 @@
   &quot;associatedIndex&quot;: 8
 }</component>
   <component name="ProjectId" id="2bOKbDSPbAJfnUQelxt1Eichylk" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <OptionsSetting value="false" id="Update" />
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
