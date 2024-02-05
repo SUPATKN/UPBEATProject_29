@@ -7,34 +7,39 @@ public class ParserGrammar {
     private Tokenizer token;
     private Map<String ,Integer> binding = new HashMap<>();
     private LinkedList<AST> statement = new LinkedList<>();
+    private LinkedList<AST> WhileState = new LinkedList<>();
     private CityCrew crew;
     public ParserGrammar(Tokenizer t,CityCrew crew){
         this.token = t;
         this.crew = crew;
     }
 
+
     public void setToken(Tokenizer token){
         this.token = token;
     }
 
+
     public void ParsePlan() throws SyntaxError, InvalidMoveException {
-        while(token.hasNextToken()){
-            statement.addAll(ParseStatement());
-        }
-        while(!statement.isEmpty()){
-            if(statement.peekFirst() == null){
-                statement.remove();
+            while(token.hasNextToken()){
+                statement.addAll(ParseStatement());
             }
-            if(statement.peekFirst() != null)statement.peekFirst().eval();
-            if(!statement.isEmpty()){
-                statement.remove();
+
+            while(!statement.isEmpty()){
+                if(statement.peekFirst() == null){
+                    statement.remove();
+                }
+                if(statement.peekFirst() != null)statement.peekFirst().eval();
+                if(!statement.isEmpty()){
+                    statement.remove();
+                }
+
             }
+
+            System.out.println(binding.keySet());
+            System.out.println(binding.values());
+
         }
-
-        System.out.println(binding.keySet());
-        System.out.println(binding.values());
-
-    }
 
     public LinkedList<AST> ParseStatement() throws SyntaxError, InvalidMoveException {
         LinkedList<AST> localState = new LinkedList<>();
@@ -56,8 +61,6 @@ public class ParserGrammar {
     }
 
     public AST ParseIfStatement() throws SyntaxError, InvalidMoveException {
-        AST calculateIf = null;
-        LinkedList<AST> ifState = new LinkedList<>();
         token.consume("(");
         Expr E = parseE();
         token.consume(")");
@@ -65,15 +68,14 @@ public class ParserGrammar {
         LinkedList<AST> s1 = ParseStatement();
         token.consume("else");
         LinkedList<AST> s2 = ParseStatement();
-        return new IfStateNode(ifState,s1,s2,E,binding);
+        return new IfStateNode(s1,s2,E,binding);
     }
     public AST ParseWhileStatement() throws SyntaxError, InvalidMoveException {
         token.consume("(");
         Expr E = parseE();
         token.consume(")");
-        LinkedList<AST> s = new LinkedList<>();
-        s.addAll(ParseStatement());
-        AST w = new WhileNode(E,s,binding);
+        WhileState.addAll(ParseStatement());
+        AST w = new WhileNode(E,WhileState,binding);
         return  w;
     }
 
@@ -101,10 +103,8 @@ public class ParserGrammar {
     public AST ParseActionCommand() throws SyntaxError{
         AST Action = null;
         if(token.peek("done")){
-            while(token.hasNextToken() && !token.peek("}") ){
-                token.consume();
-            }
-            Action = new DoneCommandNode(statement);
+            token.consume();
+            Action = new DoneCommandNode(statement,WhileState);
         }else if(token.peek("relocate")){
             token.consume();
             Action = new RelocateNode(crew);
