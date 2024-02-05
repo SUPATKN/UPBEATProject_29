@@ -172,9 +172,14 @@ public class CityCrew {
     }
 
     public void Invest(int cost){
-        player.InvestCost(cost);
-        position.InvestDeposit(cost);
-        position.setPlayer(player);
+        if(player.getBudget() < cost){
+            player.InvestCost(0);
+        }else{
+            player.InvestCost(cost);
+            position.InvestDeposit(cost);
+            position.setPlayer(player);
+        }
+
 
     }
 
