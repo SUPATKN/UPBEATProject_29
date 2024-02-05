@@ -87,16 +87,50 @@ public class CityCrew {
         }
     }
 
-
     // Additional method for checking if a cell is valid by row and col
     private boolean isValidCell(int row, int col) {
         return row >= 0 && row < mapCell.getRows() && col >= 0 && col < mapCell.getCols();
     }
 
+    public void Shoot(String direction, int expenditure) throws InvalidMoveException {
+        int totalCost = expenditure + 1;  // Calculate total attack cost
+        if (player.getBudget() >= totalCost) {  // Check if player has enough budget
+            Cell targetCell = calculateNewCell(getPosition(), direction);
 
-    public void Shoot(){
+            if (isValidCell(targetCell)) {
+                CityCrew targetOwner = targetCell.getWhoBelong().getCrew();
+                if (targetOwner != null) {
+                    if (targetOwner.equals(this)) {  // Handle attack on own region
+                        targetCell.setDeposit((int) Math.max(0, targetCell.getDeposit().getCurrentdep() - expenditure));
+                        if (targetCell.getDeposit().getCurrentdep() == 0) {
+                            // Handle loss of region due to self-attack
+                            targetCell.setPlayer(null);
+                            targetCell.setOccupied(false);
+                        }
+                    } else {  // Handle attack on opponent's region
+                        targetOwner.player.DecreaseBudget(expenditure);  // Deduct expenditure from opponent's budget
+                        targetCell.setDeposit((int) Math.max(0, targetCell.getDeposit().getCurrentdep() - expenditure));
+                        if (targetCell.getDeposit().getCurrentdep() == 0) {
+                            // Handle opponent's loss of region
+                            targetCell.setPlayer(null);
+                            targetCell.setOccupied(false);
 
+                            if (targetCell.isCityCenter()) {  // Handle loss of city center
+                                targetOwner.player.loseGame();  // Opponent loses the game
+                            }
+                        }
+                    }
+                } else {
+                    // Player pays the cost, but no effect on the region
+                }
+            }
+
+            player.DecreaseBudget(totalCost);  // Deduct total attack cost from player's budget
+        } else {  // Handle insufficient budget
+            // No-op, attack fails due to lack of budget
+        }
     }
+
 
     public Cell nearby() {
         Cell nearestPlayerPosition = null;
@@ -137,11 +171,15 @@ public class CityCrew {
         return rowDiff + Math.max(0, (colDiff - rowDiff) / 2);
     }
 
-
     public void Invest(int cost){
-        player.InvestCost(cost);
-        position.InvestDeposit(cost);
-        position.setPlayer(player);
+        if(player.getBudget() < cost){
+            player.InvestCost(0);
+        }else{
+            player.InvestCost(cost);
+            position.InvestDeposit(cost);
+            position.setPlayer(player);
+        }
+
 
     }
 

@@ -13,6 +13,7 @@ record WhileNode(Expr exp,LinkedList<AST> s,Map<String ,Integer> binding) implem
         for(int i = 0 ;i<10000 && exp.eval(binding) > 0 ;i++){
             for (AST temp : s) {
                 temp.eval();
+
             }
         }
     }
@@ -47,21 +48,26 @@ record AssignCommandNode(Expr identifier, Expr expression,Map<String ,Integer> b
     }
 }
 
-record IfStateNode(LinkedList<AST> statement,LinkedList<AST> s1,LinkedList<AST> s2,Expr exp,Map<String ,Integer> binding) implements AST{
+record IfStateNode(LinkedList<AST> s1,LinkedList<AST> s2,Expr exp,Map<String ,Integer> binding) implements AST{
     @Override
-    public void eval() throws SyntaxError {
+    public void eval() throws SyntaxError, InvalidMoveException {
         if(exp.eval(binding) > 0){
-            statement.addAll(s1);
-        }else if(exp.eval(binding) <= 0){
-            statement.addAll(s2);
+            for(AST temp : s1){
+                temp.eval();
+            }
+        }else{
+            for(AST temp : s2){
+                temp.eval();
+            }
         }
-
     }
 }
 
-record DoneCommandNode(LinkedList<AST> statement)implements AST{
+
+record DoneCommandNode(LinkedList<AST> statement,LinkedList<AST> w)implements AST{
     @Override
     public void eval(){
+        w.clear();
         statement.clear();
     }
 }
