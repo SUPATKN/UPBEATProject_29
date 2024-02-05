@@ -11,6 +11,10 @@ public class Cell {
         this.col = col;
     }
 
+    public Player getWhoBelong(){
+        return whoBelong;
+    }
+
     public int getRow() {
         return row;
     }
