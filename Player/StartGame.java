@@ -9,6 +9,7 @@ public class StartGame {
     private static int CountPlayer = 1;
 
     public void Turn(){
+        System.out.println();
         CountTurn +=1;
     }
 
@@ -57,6 +58,7 @@ public class StartGame {
         Cell[][] cells = map.getCells();
 
         // Print the map header
+        System.out.println();
         System.out.println("Current Player Positions:");
 
         // Iterate through all players
@@ -98,6 +100,22 @@ public class StartGame {
 
     }
 
+    public void RunGame() throws SyntaxError, InvalidMoveException {
+        for(int i = 0; i<5 ; i++){
+
+            Turn();
+            System.out.println("+---------- Turn : " + CountTurn +" ----------+");
+            displayMap();
+            for(int j=0;j < CountPlayer ; j++){
+                Allplayer.get(j).Plan();
+                displayMap();
+                if(j==CountPlayer){
+                    j=0;
+                }
+            }
+        }
+    }
+
     public void Start() throws SyntaxError, InvalidMoveException {
         System.out.println("+----------------------------------------+");
         System.out.println("|     WELCOME TO UPBEAT GROUP29 GAME     |");
@@ -114,16 +132,7 @@ public class StartGame {
         EnterNamePlayer();
 
         // Run Turn
-        for(int i = 0; i<5 ; i++){
-            displayMap();
-            for(int j=0;j < CountPlayer ; j++){
-                Allplayer.get(j).Plan();
-                displayMap();
-                if(j==CountPlayer){
-                    j=0;
-                }
-            }
-        }
+        RunGame();
 
     }
 
