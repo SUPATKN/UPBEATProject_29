@@ -19,11 +19,11 @@ public class StartGame {
         String count = "";
         count = sc.nextLine();
         if(count.isEmpty() || count.equals(" ") || !count.matches("\\d+")){
-            System.out.println("You did not enter the number of players , Set default player = 2");
-            CountPlayer = 2;
-        }else if(Integer.parseInt(count) <= 1){
-            System.out.println("The number of players you entered is too few , Set default player = 2");
-            CountPlayer = 2;
+            System.out.println("You did not enter the number of players , Set default player = 1");
+            CountPlayer = 1;
+        }else if(Integer.parseInt(count) == 1){
+            System.out.println("The number of players you entered is too few , Set default player = 1");
+            CountPlayer = 1;
         }
         else {
             CountPlayer = Integer.parseInt(count);
@@ -45,7 +45,9 @@ public class StartGame {
     }
 
     public void CreateMap(){
-        if(CountPlayer == 2){
+        if(CountPlayer == 1){
+            map = new MapCell(5,5);
+        }else if(CountPlayer == 2){
             map = new MapCell(7,7);
         }else if(CountPlayer >= 3 && CountPlayer <= 5 ){
             map = new MapCell(15,15);
@@ -63,6 +65,13 @@ public class StartGame {
 
         // Iterate through all players
         for (Player player : Allplayer) {
+            Cell cityCenter = player.getCityCenter();
+            int centerRow = cityCenter.getRow();
+            int centerCol = cityCenter.getCol();
+
+            System.out.println("[ " + player.getName() + " ]" + " City Center on : row = " + (centerRow + 1 ) + " | col = " + (centerCol + 1));
+
+
             int playerX = player.getCrew().getPosition().getRow();
             int playerY = player.getCrew().getPosition().getCol();
 
@@ -98,19 +107,35 @@ public class StartGame {
                 System.out.println();
         }
 
+
+//        // Display the map before relocation
+//        System.out.println("\nBefore Relocation:");
+//        displayMap();
+//
+//        // Call the Relocate method for each player
+//        for (Player player : Allplayer) {
+//            player.Relocate();
+//        }
+//
+//        // Display the map after relocation
+//        System.out.println("\nAfter Relocation:");
+//        displayMap();
+
     }
 
     public void RunGame() throws SyntaxError, InvalidMoveException {
-        for(int i = 0; i<5 ; i++){
+        for(int i = 0; i<1000 ; i++){
 
             Turn();
             System.out.println("+---------- Turn : " + CountTurn +" ----------+");
             displayMap();
             for(int j=0;j < CountPlayer ; j++){
+//                Allplayer.get(j).Relocate();
                 Allplayer.get(j).Plan();
-                displayMap();
+//                displayMap();
                 if(j==CountPlayer){
                     j=0;
+                    displayMap();
                 }
             }
         }
@@ -139,6 +164,7 @@ public class StartGame {
     public static void main(String[] args) throws SyntaxError, InvalidMoveException {
         StartGame s = new StartGame();
         s.Start();
+
     }
 
 }

@@ -16,9 +16,9 @@ public class Player {
         cityCenter = crew.getPosition();
         cityCenter.setDeposit(100);
         TotolRegion = 1;
-        System.out.print("[ " + name + " ]" + " City Center on : ");
-        System.out.print("row = " + (crew.getPosition().getRow()+1));
-        System.out.println(" | col = " + (crew.getPosition().getCol()+1));
+//        System.out.print("[ " + name + " ]" + " City Center on : ");
+//        System.out.print("row = " + (crew.getPosition().getRow()+1));
+//        System.out.println(" | col = " + (crew.getPosition().getCol()+1));
     }
 
     public int getBudget(){
@@ -27,6 +27,7 @@ public class Player {
     public MapCell getMap(){
         return map;
     }
+    public int getTotolRegion(){return TotolRegion;}
 
     public Cell getCityCenter(){
         return cityCenter;
@@ -43,7 +44,7 @@ public class Player {
         String input = scanner.nextLine();
         tokenizer = new Tokenizer(input);
         p = new ParserGrammar(tokenizer,crew);
-        p.ParsePlan();
+        p.ParssePlan();
     }
 
     public void InvestCost(int cost){
@@ -66,18 +67,30 @@ public class Player {
         return crew;
     }
 
-    public void Relocate(){
-        int cost = 0;
+    public void Relocate() {
         int newRow = crew.getPosition().getRow();
         int newCol = crew.getPosition().getCol();
         int cityRow = cityCenter.getRow();
         int cityCol = cityCenter.getCol();
 
-        if(cityRow == newRow){
-            cost = Math.abs(newCol - cityCol);
-        }else if(cityRow != newRow && cityCol == newCol){
-            cost =  Math.abs(newRow - cityRow);
+        if (cityRow != newRow || cityCol != newCol) {
+            int distance;
+
+            if (Math.abs(newRow - cityRow) % 2 == 0 && Math.abs(newCol - cityCol) % 2 == 0) {
+                distance = Math.max(Math.abs(newRow - cityRow), Math.abs(newCol - cityCol));
+            } else {
+                distance = Math.max(Math.abs(newRow - cityRow), Math.abs(newCol - cityCol)) +
+                        Math.min(Math.abs(newRow - cityRow), Math.abs(newCol - cityCol));
+            }
+
+            System.out.println("Distance to relocate is: " + distance);
+            cityCenter = crew.getPosition();
+        } else {
+            int distance = 0;
+            System.out.println("Distance to relocate is: " + distance);
         }
     }
+
+
 
 }

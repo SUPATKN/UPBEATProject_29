@@ -4,11 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="be3eb78b-7ac1-4402-b453-97bc542039f9" name="Changes" comment="can update variable in while">
+    <list default="true" id="be3eb78b-7ac1-4402-b453-97bc542039f9" name="Changes" comment="edit display map">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Parser_Tokenizer/AST.java" beforeDir="false" afterPath="$PROJECT_DIR$/Parser_Tokenizer/AST.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Parser_Tokenizer/ParserGrammar.java" beforeDir="false" afterPath="$PROJECT_DIR$/Parser_Tokenizer/ParserGrammar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/WhileNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UPBEATProject_29/WhileNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Player/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/Player/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Player/StartGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/Player/StartGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/Cell.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UPBEATProject_29/Cell.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/CityCrew.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UPBEATProject_29/CityCrew.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/ParserGrammar.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UPBEATProject_29/ParserGrammar.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UPBEATProject_29/Player.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/StartGame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UPBEATProject_29/StartGame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/Tokenizer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UPBEATProject_29/Tokenizer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/demoMap/Game$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/demoMap/Game.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/demoMap/GameConsole.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/demoMap/Map$Direction.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/demoMap/Map.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/demoMap/MapCell.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/demoMap/Player.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +68,10 @@
   &quot;associatedIndex&quot;: 8
 }</component>
   <component name="ProjectId" id="2bOKbDSPbAJfnUQelxt1Eichylk" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <OptionsSetting value="false" id="Update" />
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -79,6 +95,28 @@
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="" />
     </key>
+  </component>
+  <component name="RunManager" selected="Application.StartGame">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="UPBEATProject_29" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="StartGame" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="StartGame" />
+      <module name="UPBEATProject_29" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.StartGame" />
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -305,13 +343,13 @@
       <option name="project" value="LOCAL" />
       <updated>1707035649819</updated>
     </task>
-    <task id="LOCAL-00028" summary="can update variable in while">
+    <task id="LOCAL-00028" summary="edit display map">
       <option name="closed" value="true" />
-      <created>1707115184269</created>
+      <created>1707114121650</created>
       <option name="number" value="00028" />
       <option name="presentableId" value="LOCAL-00028" />
       <option name="project" value="LOCAL" />
-      <updated>1707115184269</updated>
+      <updated>1707114121650</updated>
     </task>
     <option name="localTasksCounter" value="29" />
     <servers />
@@ -352,8 +390,8 @@
     <MESSAGE value="add SpecialVariable , can parse SpecialVariable to read only , must edit move method" />
     <MESSAGE value="move method don't need to edit(correct already)" />
     <MESSAGE value="add CityCenter in Player class" />
-    <MESSAGE value="can update variable in while" />
-    <option name="LAST_COMMIT_MESSAGE" value="can update variable in while" />
+    <MESSAGE value="edit display map" />
+    <option name="LAST_COMMIT_MESSAGE" value="edit display map" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -367,19 +405,14 @@
           </properties>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Parser_Tokenizer/Main.java</url>
-          <line>5</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
         <watch expression="((ParserGrammar)this).token.next" custom="ParserGrammar" />
-        <watch expression="crew.player.Budget" />
-        <watch expression="crew.player.Budget" />
+        <watch expression="((Player)this).Budget" custom="Player" />
         <watch expression="((HashMap)binding).entrySet().toArray()[0]" custom="java.util.HashMap" />
+        <watch expression="crew.player.Budget" />
       </configuration>
     </watches-manager>
   </component>

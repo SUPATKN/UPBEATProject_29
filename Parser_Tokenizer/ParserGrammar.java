@@ -17,7 +17,7 @@ public class ParserGrammar {
         this.token = token;
     }
 
-    public void ParsePlan() throws SyntaxError, InvalidMoveException {
+    public void ParssePlan() throws SyntaxError, InvalidMoveException {
         while(token.hasNextToken()){
             statement.addAll(ParseStatement());
         }
