@@ -14,7 +14,6 @@ record WhileNode(Expr exp,LinkedList<AST> s,Map<String ,Integer> binding) implem
             for (AST temp : s) {
                 temp.eval();
             }
-            exp.eval(binding);
         }
     }
 }
@@ -48,10 +47,15 @@ record AssignCommandNode(Expr identifier, Expr expression,Map<String ,Integer> b
     }
 }
 
-record IfStateNode(LinkedList<AST> statement,LinkedList<AST> s1) implements AST{
+record IfStateNode(LinkedList<AST> statement,LinkedList<AST> s1,LinkedList<AST> s2,Expr exp,Map<String ,Integer> binding) implements AST{
     @Override
-    public void eval(){
-        statement.addAll(s1);
+    public void eval() throws SyntaxError {
+        if(exp.eval(binding) > 0){
+            statement.addAll(s1);
+        }else if(exp.eval(binding) <= 0){
+            statement.addAll(s2);
+        }
+
     }
 }
 

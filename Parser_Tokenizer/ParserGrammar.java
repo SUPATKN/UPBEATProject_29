@@ -45,7 +45,7 @@ public class ParserGrammar {
             localState.addAll(ParseBlockStatement());
         }else if(token.getType().equals("ifState") || token.getType().equals("elseState")){
             token.consume();
-            localState.addAll(ParseIfStatement());
+            localState.add(ParseIfStatement());
         }else if(token.getType().equals("whileState")){
             token.consume();
             localState.add(ParseWhileStatement());
@@ -55,7 +55,7 @@ public class ParserGrammar {
         return localState;
     }
 
-    public LinkedList<AST> ParseIfStatement() throws SyntaxError, InvalidMoveException {
+    public AST ParseIfStatement() throws SyntaxError, InvalidMoveException {
         AST calculateIf = null;
         LinkedList<AST> ifState = new LinkedList<>();
         token.consume("(");
@@ -65,14 +65,7 @@ public class ParserGrammar {
         LinkedList<AST> s1 = ParseStatement();
         token.consume("else");
         LinkedList<AST> s2 = ParseStatement();
-        if(E.eval(binding) >= 0){
-            calculateIf = new IfStateNode(ifState,s1);
-            calculateIf.eval();
-        }else if(E.eval(binding) < 0){
-            calculateIf = new IfStateNode(ifState,s2);
-            calculateIf.eval();
-        }
-        return ifState;
+        return new IfStateNode(ifState,s1,s2,E,binding);
     }
     public AST ParseWhileStatement() throws SyntaxError, InvalidMoveException {
         token.consume("(");
@@ -108,10 +101,13 @@ public class ParserGrammar {
     public AST ParseActionCommand() throws SyntaxError{
         AST Action = null;
         if(token.peek("done")){
-            while(token.hasNextToken()){
+            while(token.hasNextToken() && !token.peek("}") ){
                 token.consume();
             }
             Action = new DoneCommandNode(statement);
+        }else if(token.peek("relocate")){
+            token.consume();
+            crew.getPlayer().Relocate();
         }else if(token.peek("move")){
             token.consume();
             Action = ParseMoveCommand();

@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="be3eb78b-7ac1-4402-b453-97bc542039f9" name="Changes" comment="add CityCenter in Player class">
+    <list default="true" id="be3eb78b-7ac1-4402-b453-97bc542039f9" name="Changes" comment="can update variable in while">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Parser_Tokenizer/AST.java" beforeDir="false" afterPath="$PROJECT_DIR$/Parser_Tokenizer/AST.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Parser_Tokenizer/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Parser_Tokenizer/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Parser_Tokenizer/Tokenizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Parser_Tokenizer/Tokenizer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UPBEATProject_29/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parser_Tokenizer/ParserGrammar.java" beforeDir="false" afterPath="$PROJECT_DIR$/Parser_Tokenizer/ParserGrammar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/WhileNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UPBEATProject_29/WhileNode.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -306,7 +305,15 @@
       <option name="project" value="LOCAL" />
       <updated>1707035649819</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="can update variable in while">
+      <option name="closed" value="true" />
+      <created>1707115184269</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1707115184269</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -321,7 +328,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="can parse if while block" />
     <MESSAGE value="parse, while, if(not finish), assign, move , เหลือ edit Expr Parse" />
     <MESSAGE value="COMIT TEST" />
     <MESSAGE value="rename ParserTest to ParserGrammar" />
@@ -346,7 +352,8 @@
     <MESSAGE value="add SpecialVariable , can parse SpecialVariable to read only , must edit move method" />
     <MESSAGE value="move method don't need to edit(correct already)" />
     <MESSAGE value="add CityCenter in Player class" />
-    <option name="LAST_COMMIT_MESSAGE" value="add CityCenter in Player class" />
+    <MESSAGE value="can update variable in while" />
+    <option name="LAST_COMMIT_MESSAGE" value="can update variable in while" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -363,7 +370,7 @@
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Parser_Tokenizer/Main.java</url>
           <line>5</line>
-          <option name="timeStamp" value="6" />
+          <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
