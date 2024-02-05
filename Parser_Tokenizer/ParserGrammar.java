@@ -107,7 +107,7 @@ public class ParserGrammar {
             Action = new DoneCommandNode(statement);
         }else if(token.peek("relocate")){
             token.consume();
-            crew.getPlayer().Relocate();
+            Action = new RelocateNode(crew);
         }else if(token.peek("move")){
             token.consume();
             Action = ParseMoveCommand();

@@ -87,3 +87,10 @@ record AttackCommandNode(String direction,Expr expr,Map<String ,Integer> binding
         System.out.println("Shoot " + direction + " " +  expr.eval(binding));
     }
 }
+
+record RelocateNode(CityCrew crew)implements AST{
+    @Override
+    public void eval(){
+        crew.getPlayer().Relocate();
+    }
+}

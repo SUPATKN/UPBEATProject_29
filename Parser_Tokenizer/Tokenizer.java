@@ -60,7 +60,7 @@ public class Tokenizer {
         }
         else if(next.equals("while")){
             type = "whileState";
-        }else if(next.equals("done") || next.equals("relocated") ||
+        }else if(next.equals("done") || next.equals("relocate") ||
                 next.equals("move") || next.equals("invest") || next.equals("collect")
                 || next.equals("shoot")) {
                 type = "command";
