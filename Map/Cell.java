@@ -2,6 +2,7 @@ import java.util.Random;
 
 public class Cell {
     private Player whoBelong;
+    private boolean isCityCenter = false;
     private int row;
     private int col;
     private boolean isOccupied;
@@ -13,6 +14,14 @@ public class Cell {
 
     public Player getWhoBelong(){
         return whoBelong;
+    }
+
+    public void SetCityCenter(){
+        isCityCenter = true;
+    }
+
+    public boolean isCityCenter(){
+        return isCityCenter;
     }
 
     public int getRow() {
