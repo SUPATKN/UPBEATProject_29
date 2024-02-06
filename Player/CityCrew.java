@@ -151,7 +151,7 @@ public class CityCrew {
                 // Check if the neighbor cell has a player and calculate distance
                 while (isValidCell(neighborCell.getRow(),neighborCell.getCol())) {
                     if (neighborCell.getWhoBelong() != null && !neighborCell.getWhoBelong().equals(this.player)) {
-
+                        distance = calculateDistance(getPosition(), neighborCell);
                         // Update nearest opponent position if closer
                         if (distance < minDistance || (distance == minDistance && getDirectionNumber(direction) < minDirection)) {
                             minDistance = distance;
@@ -161,7 +161,7 @@ public class CityCrew {
                         break; // Exit the loop after finding the first opponent in this direction
                     }
                     neighborCell = calculateNewCell(neighborCell, direction);
-                    distance+=10;
+
                 }
             } catch (InvalidMoveException e) {
                 // Handle invalid moves if necessary
@@ -169,7 +169,7 @@ public class CityCrew {
             }
         }
 
-        return nearestOpponentPosition != null ? minDirection + minDistance : 0;
+        return nearestOpponentPosition != null ?  minDistance+minDirection : 0;
     }
 
     // Helper method to get the direction number
@@ -197,8 +197,10 @@ public class CityCrew {
     private int calculateDistance(Cell cell1, Cell cell2) {
         int rowDiff = Math.abs(cell1.getRow() - cell2.getRow());
         int colDiff = Math.abs(cell1.getCol() - cell2.getCol());
-
-        return 10*(rowDiff + (int)Math.floor((double)(colDiff) / 2));
+        double temp = (double)(colDiff) / 2;
+        if(temp == 0.5) temp = 1;
+        else Math.floor(temp);
+        return 10*(rowDiff + (int)temp);
     }
 
     public void Invest(int cost){
