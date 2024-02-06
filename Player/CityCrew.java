@@ -81,7 +81,7 @@ public class CityCrew {
             if (isValidCell(newRow, newCol)) {
                 return mapCell.getCell(newRow, newCol);
             } else {
-                return mapCell.getCell(currentCell.getRow(), currentCell.getCol());
+                return new Cell(-1,-1);
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             return mapCell.getCell(currentCell.getRow(), currentCell.getCol());
@@ -149,9 +149,9 @@ public class CityCrew {
                 int distance = 0;
 
                 // Check if the neighbor cell has a player and calculate distance
-                while (isValidCell(neighborCell)) {
+                while (isValidCell(neighborCell.getRow(),neighborCell.getCol())) {
                     if (neighborCell.getWhoBelong() != null && !neighborCell.getWhoBelong().equals(this.player)) {
-                        distance+=10;
+
                         // Update nearest opponent position if closer
                         if (distance < minDistance || (distance == minDistance && getDirectionNumber(direction) < minDirection)) {
                             minDistance = distance;
@@ -159,12 +159,9 @@ public class CityCrew {
                             nearestOpponentPosition = neighborCell;
                         }
                         break; // Exit the loop after finding the first opponent in this direction
-                    }else{
-                        neighborCell = calculateNewCell(neighborCell, direction);
-                        break;
                     }
-                    // Move to the next cell in the current direction
-
+                    neighborCell = calculateNewCell(neighborCell, direction);
+                    distance+=10;
                 }
             } catch (InvalidMoveException e) {
                 // Handle invalid moves if necessary
