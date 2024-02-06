@@ -100,31 +100,93 @@ public class Player {
 
     public void Relocate() {
         int distance = 0;
-        int newRow = getCrew().getPosition().getRow();
-        int newCol = getCrew().getPosition().getCol();
-        int cityRow = getCityCenter().getRow();
-        int cityCol = getCityCenter().getCol();
+        int newRow = getCrew().getPosition().getRow() + 1;
+        int newCol = getCrew().getPosition().getCol() + 1;
+        int cityRow = getCityCenter().getRow() + 1;
+        int cityCol = getCityCenter().getCol() + 1;
 
-        if (cityRow == newRow && cityCol != newCol) {
+        if(cityRow == cityCol && newRow == newCol && Math.abs(cityRow - newRow) % 2 == 0){
+            distance = (Math.abs(cityRow - newRow) + Math.abs(cityCol - newCol)) - (Math.abs(newRow - cityRow)/2);
+            cityCenter = crew.getPosition();
+            System.out.println("Distance: " + distance);
+            System.out.println("คี่");
+
+        } else if (cityRow == cityCol && newRow == newCol && Math.abs(cityRow - newRow) % 2 == 1) {
+            if(cityRow<newRow){
+                if(cityRow % 2 == 1 && newRow % 2 == 0 && Math.abs(cityRow-newRow) <= 1){
+                    distance = Math.abs(newRow - cityRow);
+                    cityCenter = crew.getPosition();
+                    System.out.println(Math.abs(cityRow-newRow));
+                    System.out.println("มามาตี้มันรวมกันเพะ");
+                }else if (Math.abs(cityRow-newRow) > 1){
+                    distance = (Math.abs(cityRow - newRow) + Math.abs(cityCol - newCol)) - (newRow)/2;
+                    cityCenter = crew.getPosition();
+                    System.out.println(Math.abs(cityRow-newRow));
+                    System.out.println("ผลต่างมันนักกว่า1");
+                }else{
+                    distance = (Math.abs(cityRow - newRow) + Math.abs(cityCol - newCol));
+                    cityCenter = crew.getPosition();
+                    System.out.println(Math.abs(cityRow-newRow));
+                    System.out.println("จ้างมันเตอะ");
+
+                }
+//                System.out.println("cityRow%2 " + cityRow%2 + "newRow%2 "+ newRow%2);
+                System.out.println("ตัวที่จะไปนักกว่า");
+
+            } else if (cityRow>newRow) {
+                System.out.println(Math.abs(cityRow-newRow));
+                if(cityRow % 2 == 0 || newRow % 2 == 1 && Math.abs(cityRow-newRow) <= 1) {
+                    distance = Math.abs(cityRow - newRow );
+                    cityCenter = crew.getPosition();
+                }else if (Math.abs(cityRow-newRow) > 1){
+                    distance = (Math.abs(cityRow - newRow) + Math.abs(cityCol - newCol)) - (newRow)/2;
+                    cityCenter = crew.getPosition();
+                    System.out.println(Math.abs(cityRow-newRow));
+                }else{
+                    distance = (Math.abs(cityRow - newRow) + Math.abs(cityCol - newCol));
+                    cityCenter = crew.getPosition();
+                    System.out.println(Math.abs(cityRow-newRow));
+                    System.out.println("มาelse");
+
+                }
+//                System.out.println("cityRow%2 " + cityRow%2 + "newRow%2 "+ newRow%2);
+                System.out.println("ตัวที่จะไปน้อยกว่า");
+            }
+
+//            System.out.println("Distance: " + distance);
+            System.out.println("คู่");
+
+        } else if (cityRow == newRow && cityCol != newCol) {
             distance = Math.abs(cityCol - newCol);
             cityCenter = crew.getPosition();
+            System.out.println("Distance: " + distance);
+            System.out.println("case1");
+
         } else if (cityRow != newRow && cityCol == newCol) {
             distance = Math.abs(cityRow - newRow);
             cityCenter = crew.getPosition();
+            System.out.println("Distance: " + distance);
+            System.out.println("case2");
+
         } else if (cityRow != newRow && cityCol != newCol) {
+            System.out.println("case3");
             if(Math.abs(cityRow - newRow) % 2 ==  0 && Math.abs(cityCol - newCol) % 2 != 0){
-                if(Math.abs(cityCol - newCol) % 2 == 0){
-                    distance = Math.abs(cityRow - newRow) + Math.abs(cityCol - newCol);
-                    cityCenter = crew.getPosition();
-                }else{
+                if(Math.abs(cityRow - newRow) >= 1){
                     distance = (Math.max(Math.abs(cityRow - newRow) , Math.abs(cityCol - newCol)) + Math.max(Math.abs(cityRow - newRow) , Math.abs(cityCol - newCol))) - 1;
                     cityCenter = crew.getPosition();
+                    System.out.println("Distance: " + distance);
+
+                }else{
+                    distance = Math.abs(cityRow - newRow) + Math.abs(cityCol - newCol);
+                    cityCenter = crew.getPosition();
+                    System.out.println("Distance: " + distance);
+
                 }
 
 
             } else if(Math.abs(cityRow - newRow) % 2 !=  0 && Math.abs(cityCol - newCol) % 2 == 0){
-                if(Math.abs(cityRow - newRow) % 2 == 0){
-                    distance = Math.abs(cityRow - newRow) + Math.abs(cityCol - newCol);
+                if(Math.abs(cityCol - newCol)  >= 1){
+                    distance = (Math.max(Math.abs(cityRow - newRow) , Math.abs(cityCol - newCol)) + Math.min(Math.abs(cityRow - newRow) , Math.abs(cityCol - newCol))) - 1;
                     cityCenter = crew.getPosition();
                 }else{
                     distance = (Math.max(Math.abs(cityRow - newRow) , Math.abs(cityCol - newCol)) + Math.max(Math.abs(cityRow - newRow) , Math.abs(cityCol - newCol))) - 1;
@@ -135,16 +197,31 @@ public class Player {
                 if(Math.abs(cityCol - newCol) <= 1){
                     distance = Math.abs(cityRow - newRow) + Math.abs(cityCol - newCol);
                     cityCenter = crew.getPosition();
-                } else if (Math.abs(cityCol - newCol) > 1) {
-                    distance = (Math.max(Math.abs(cityRow - newRow) , Math.abs(cityCol - newCol)) + Math.max(Math.abs(cityRow - newRow) , Math.abs(cityCol - newCol))) - 1;
+                    System.out.println("Distance: " + distance);
+                    System.out.println("col เป็น 1");
+
+                }else if (Math.abs(cityCol - newCol) > 1 && Math.abs(cityRow - newRow) == 1 ){
+                    distance = Math.abs(cityRow - newRow) + Math.abs(cityCol - newCol) - newCol;
                     cityCenter = crew.getPosition();
+
+                    System.out.println("Distance: " + distance);
+                    System.out.println("row เป็น 1");
+
+                } else if (Math.abs(cityCol - newCol) >= 3 && Math.abs(cityRow - newRow) >= 3 ) {
+                    distance = Math.abs(cityRow - newRow) + Math.abs(cityCol - newCol) - cityCol;
+                    cityCenter = crew.getPosition();
+
+                    System.out.println("Distance: " + distance);
+                    System.out.println("ตึงกู้นักกว่า3");
                 }
 
             }
 
+
         }
 
         System.out.println("[ " + getName() + " ]" + " Distance to relocate is: " + distance);
+
     }
 
 }
