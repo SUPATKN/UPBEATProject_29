@@ -5,6 +5,7 @@ public class Main {
         Player p1 = new Player("Y", mapCell);
         Player p2 = new Player("T", mapCell);
         System.out.println(p1.getCrew().nearby());
+        System.out.println(p2.getCrew().nearby());
 
     }
 }
