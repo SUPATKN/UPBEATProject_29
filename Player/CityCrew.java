@@ -10,6 +10,7 @@ public class CityCrew {
         this.player = player;
         this.mapCell = mapCell;
         this.position = initialPosition;
+        position.setOccupied(true);
     }
     public Cell getPosition() {
         return position;
@@ -53,25 +54,25 @@ public class CityCrew {
                 newRow++;
             } else if (direction.equals("upleft")) {
                 newCol--;
-                System.out.println(newCol);
+
                 if (newCol % 2 == 0) {
                     newRow--;
                 }
             } else if (direction.equals("upright")) {
                 newCol++;
-                System.out.println(newCol);
+
                 if (newCol % 2 == 0) {
                     newRow--;
                 }
             } else if (direction.equals("downright")) {
                 newCol++;
-                System.out.println(newCol);
+
                 if (newCol % 2 != 0) {
                     newRow++;
                 }
             } else if (direction.equals("downleft")) {
                 newCol--;
-                System.out.println(newCol);
+
                 if (newCol % 2 != 0) {
                     newRow++;
                 }
@@ -132,26 +133,38 @@ public class CityCrew {
 //    }
 
 
-    public Cell nearby() {
-        Cell nearestPlayerPosition = null;
+
+
+    public int nearby() {
+        Cell nearestOpponentPosition = null;
         int minDistance = Integer.MAX_VALUE;
+        int minDirection = Integer.MAX_VALUE;
 
         // Define the directions to check
-        String[] directions = {"up", "upleft", "upright", "down", "downright", "downleft"};
+        String[] directions = {"up", "upright", "downright", "down", "downleft", "upleft"};
 
         for (String direction : directions) {
             try {
                 Cell neighborCell = calculateNewCell(getPosition(), direction);
+                int distance = 0;
 
                 // Check if the neighbor cell has a player and calculate distance
-                if (neighborCell.getWhoBelong() != null && !neighborCell.getWhoBelong().equals(this)) {
-                    int distance = calculateDistance(getPosition(), neighborCell);
-
-                    // Update nearest player if closer
-                    if (distance < minDistance) {
-                        minDistance = distance;
-                        nearestPlayerPosition = neighborCell;
+                while (isValidCell(neighborCell)) {
+                    if (neighborCell.getWhoBelong() != null && !neighborCell.getWhoBelong().equals(this.player)) {
+                        distance+=10;
+                        // Update nearest opponent position if closer
+                        if (distance < minDistance || (distance == minDistance && getDirectionNumber(direction) < minDirection)) {
+                            minDistance = distance;
+                            minDirection = getDirectionNumber(direction);
+                            nearestOpponentPosition = neighborCell;
+                        }
+                        break; // Exit the loop after finding the first opponent in this direction
+                    }else{
+                        neighborCell = calculateNewCell(neighborCell, direction);
+                        break;
                     }
+                    // Move to the next cell in the current direction
+
                 }
             } catch (InvalidMoveException e) {
                 // Handle invalid moves if necessary
@@ -159,16 +172,36 @@ public class CityCrew {
             }
         }
 
-        return nearestPlayerPosition;
+        return nearestOpponentPosition != null ? minDirection + minDistance : 0;
     }
+
+    // Helper method to get the direction number
+    private int getDirectionNumber(String direction) {
+        switch (direction) {
+            case "up":
+                return 1;
+            case "upright":
+                return 2;
+            case "downright":
+                return 3;
+            case "down":
+                return 4;
+            case "downleft":
+                return 5;
+            case "upleft":
+                return 6;
+            default:
+                return Integer.MAX_VALUE; // Unknown direction
+        }
+    }
+
 
     // Helper method to calculate the distance between two cells
     private int calculateDistance(Cell cell1, Cell cell2) {
         int rowDiff = Math.abs(cell1.getRow() - cell2.getRow());
         int colDiff = Math.abs(cell1.getCol() - cell2.getCol());
 
-        // Assuming each vertical move costs 1 and diagonal move costs 2
-        return rowDiff + Math.max(0, (colDiff - rowDiff) / 2);
+        return 10*(rowDiff + (int)Math.floor((double)(colDiff) / 2));
     }
 
     public void Invest(int cost){
@@ -178,6 +211,7 @@ public class CityCrew {
             player.InvestCost(cost);
             position.InvestDeposit(cost);
             position.setPlayer(player);
+            position.setOccupied(true);
         }
 
 

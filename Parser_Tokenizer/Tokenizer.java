@@ -71,6 +71,8 @@ public class Tokenizer {
         }else if(next.equals("rows") || next.equals("cols") || next.equals("currow") || next.equals("curcol") || next.equals("budget")
             || next.equals("deposit") || next.equals("int") || next.equals("maxdeposit") || next.equals("random")){
                 type = "specialVariable";
+        }else if(next.equals("opponent") || next.equals("nearby")){
+            type = "infoExp";
         }else if(next.matches("[a-zA-Z]+")){
                 type = "identifier";
         }

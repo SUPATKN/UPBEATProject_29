@@ -267,9 +267,11 @@ public class ParserGrammar {
             return new SpecialVariable(token.consume(),crew.getPlayer(),crew);
         }else if(token.peek("(") || token.peek(")")){
             token.consume("(");
-            Expr F = parseE();
+            Expr P = parseE();
             token.consume(")");
-            return F;
+            return P;
+        }else if(token.getType().equals("infoExp")){
+            return parseInfoExp();
         }else if(token.peek("+") || token.peek("*") || token.peek("/") || token.peek("%")){
             throw new SyntaxError("Please check your input can't start with '"+ token.peek() + "'");
         }else{
@@ -277,6 +279,13 @@ public class ParserGrammar {
         }
     }
 
+    public Expr parseInfoExp() throws SyntaxError{
+        if(token.peek("opponent")){
+            return new InfoExpr(token.consume(),crew);
+        }else{
+            throw new SyntaxError("Please check your InfoExpression "+ token.peek() +" is not accept");
+        }
+    }
     public static boolean isNumber(String str)
     {
         for (char c : str.toCharArray())
