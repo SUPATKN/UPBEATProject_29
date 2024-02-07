@@ -46,9 +46,6 @@ public class Cell {
         this.deposit = new Deposit(value);
     }
 
-    public void InvestDeposit(int cost){
-        this.deposit.InvestDeposit(cost);
-    }
     public void setPlayer(Player player){
         this.whoBelong = player;
     }

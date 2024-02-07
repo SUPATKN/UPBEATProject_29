@@ -130,7 +130,7 @@ public class ParserGrammar {
         }else if(token.peek("collect")){
             token.consume();
             Expr E = parseE();
-            Region = new CollectCommandNode(E,binding);
+            Region = new CollectCommandNode(E,binding,crew);
         }
         return Region;
     }

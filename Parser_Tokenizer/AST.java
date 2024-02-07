@@ -80,10 +80,11 @@ record InvestCommandNode(Expr expr,Map<String ,Integer> binding,CityCrew crew)im
     }
 }
 
-record CollectCommandNode(Expr expr,Map<String ,Integer> binding)implements AST{
+record CollectCommandNode(Expr expr,Map<String ,Integer> binding,CityCrew crew) implements AST{
     @Override
     public void eval() throws SyntaxError {
-        System.out.println("Collect " + expr.eval(binding));
+        crew.Collect(expr.eval(binding));
+        System.out.println(crew.getPosition().getDeposit().getCurrentdep());
     }
 }
 

@@ -44,9 +44,6 @@ public class Deposit {
 
     public void CollectDeposit(int collect){
         Currentdep -= collect;
-        if(Currentdep <= 0){
-            Currentdep = 0;
-        }
     }
 
 }

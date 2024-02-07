@@ -242,11 +242,25 @@ public class CityCrew {
             player.InvestCost(0);
         }else{
             player.InvestCost(cost);
-            position.InvestDeposit(cost);
+            position.getDeposit().InvestDeposit(cost);
             position.setPlayer(player);
             position.setOccupied(true);
         }
 
+
+    }
+
+    public void Collect(int cost){
+        player.DecreaseBudget(1);
+        if(position.getDeposit().getCurrentdep() >= cost){
+            position.getDeposit().CollectDeposit(cost);
+            player.IncreaseBudget(cost);
+            if(position.getDeposit().getCurrentdep() == 0){
+                position.setPlayer(null);
+                position.setOccupied(false);
+                player.DecreaseRegion();
+            }
+        }
 
     }
 

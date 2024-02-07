@@ -36,6 +36,11 @@ public class Player {
         return map;
     }
     public int getTotolRegion(){return TotolRegion;}
+    public void DecreaseRegion(){
+        TotolRegion--;
+    }
+
+
 
     public Cell getCityCenter(){
         return cityCenter;
@@ -64,6 +69,10 @@ public class Player {
         if (Budget < 0) {
             Budget = 0;
         }
+    }
+
+    public void IncreaseBudget(int cost) {
+        Budget += cost;
     }
     public void InvestCost(int cost){
         DecreaseBudget(cost + 1);
