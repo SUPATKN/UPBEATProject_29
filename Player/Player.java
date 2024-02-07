@@ -1,7 +1,10 @@
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 public class Player {
     private int TotolRegion;
     private Cell cityCenter;
+    private Map<String ,Integer> binding = new HashMap<>();
     private boolean GameStatus = true; // The players haven't lost yet.
     private String name;
     private int Budget;
@@ -22,6 +25,7 @@ public class Player {
         System.out.print("[ " + name + " ]" + " City Center on : ");
         System.out.print("row = " + (crew.getPosition().getRow()+1));
         System.out.println(" | col = " + (crew.getPosition().getCol()+1));
+
     }
 
     public int getBudget(){
@@ -50,7 +54,7 @@ public class Player {
         System.out.println("[ " + name + " ]" + " turn enter plan : ");
         String input = scanner.nextLine();
         tokenizer = new Tokenizer(input);
-        p = new ParserGrammar(tokenizer,crew);
+        p = new ParserGrammar(tokenizer,crew,binding);
         p.ParsePlan();
     }
 

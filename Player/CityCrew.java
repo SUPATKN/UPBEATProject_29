@@ -27,11 +27,9 @@ public class CityCrew {
         Cell newCell = calculateNewCell(currentCell, direction);
 
         if (isValidCell(newCell)) {
-            currentCell.setOccupied(false);
-            newCell.setOccupied(true);
             this.setPosition(newCell);
         } else {
-            throw new InvalidMoveException("Invalid move. Trying to move out of bounds.");
+            this.setPosition(currentCell);
         }
     }
 

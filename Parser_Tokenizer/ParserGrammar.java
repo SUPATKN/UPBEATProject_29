@@ -5,13 +5,14 @@ import java.util.Map;
 
 public class ParserGrammar {
     private Tokenizer token;
-    private Map<String ,Integer> binding = new HashMap<>();
+    private Map<String ,Integer> binding;
     private LinkedList<AST> statement = new LinkedList<>();
     private LinkedList<AST> WhileState = new LinkedList<>();
     private CityCrew crew;
-    public ParserGrammar(Tokenizer t,CityCrew crew){
+    public ParserGrammar(Tokenizer t,CityCrew crew,Map<String ,Integer> binding){
         this.token = t;
         this.crew = crew;
+        this.binding = binding;
     }
 
 
