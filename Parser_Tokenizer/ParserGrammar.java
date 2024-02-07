@@ -282,7 +282,14 @@ public class ParserGrammar {
 
     public Expr parseInfoExp() throws SyntaxError{
         if(token.peek("opponent")){
-            return new InfoExpr(token.consume(),crew);
+            return new InfoExpr(token.consume(),crew,"");
+        }else if(token.peek("nearby")){
+            String nearby = token.consume();
+            if(!token.getType().equals("direction")){
+                throw new SyntaxError("nearby function must follow by direction");
+            }
+            String direction = ParseDirection().eval();
+            return new InfoExpr(nearby,crew,direction);
         }else{
             throw new SyntaxError("Please check your InfoExpression "+ token.peek() +" is not accept");
         }

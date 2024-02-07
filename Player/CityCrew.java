@@ -170,6 +170,42 @@ public class CityCrew {
         return nearestOpponentPosition != null ?  minDistance+minDirection : 0;
     }
 
+    public int nearby(String dir) {
+        Cell nearestOpponentPosition = null;
+        int minDistance = Integer.MAX_VALUE;
+        int minDirection = Integer.MAX_VALUE;
+            try {
+                Cell neighborCell = calculateNewCell(getPosition(), dir);
+                int distance = 0;
+
+                // Check if the neighbor cell has a player and calculate distance
+                while (isValidCell(neighborCell.getRow(),neighborCell.getCol())) {
+                    if (neighborCell.getWhoBelong() != null && !neighborCell.getWhoBelong().equals(this.player)) {
+                        distance = calculateDistance(getPosition(), neighborCell);
+                        // Update nearest opponent position if closer
+                        if (distance < minDistance || (distance == minDistance && getDirectionNumber(dir) < minDirection)) {
+                            minDistance = distance;
+                            minDirection = getDirectionNumber(dir);
+                            nearestOpponentPosition = neighborCell;
+                        }
+                        break; // Exit the loop after finding the first opponent in this direction
+                    }
+                    neighborCell = calculateNewCell(neighborCell, dir);
+                }
+            } catch (InvalidMoveException e) {
+                // Handle invalid moves if necessary
+                e.printStackTrace();
+            }
+            int x = minDistance/10;
+            int curDep = 0;
+            if(nearestOpponentPosition!=null){
+                curDep= (int)nearestOpponentPosition.getDeposit().getCurrentdep();
+            }
+            int y = String.valueOf(curDep).length();
+
+        return nearestOpponentPosition != null ?  (100*x)+y : 0;
+    }
+
     // Helper method to get the direction number
     private int getDirectionNumber(String direction) {
         switch (direction) {

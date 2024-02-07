@@ -22,6 +22,7 @@ public class Player {
         cityCenter.SetCityCenter();
         cityCenter.setPlayer(this);
         TotolRegion = 1;
+        cityCenter.getDeposit().CalDeposit(1);
         System.out.print("[ " + name + " ]" + " City Center on : ");
         System.out.print("row = " + (crew.getPosition().getRow()+1));
         System.out.println(" | col = " + (crew.getPosition().getCol()+1));

@@ -73,9 +73,10 @@ record SpecialVariable(String name,Player player,CityCrew crew) implements Expr 
     }
 }
 
-record InfoExpr(String name,CityCrew crew) implements Expr {
+record InfoExpr(String name,CityCrew crew,String dir) implements Expr {
     public int eval(Map<String, Integer> bindings) throws SyntaxError {
         if(name.equals("opponent")) return crew.nearby();
+        if(name.equals("nearby")) return crew.nearby(dir);
         else throw new SyntaxError("unknown InfoExpression");
     }
     public void prettyPrint(StringBuilder s) {
