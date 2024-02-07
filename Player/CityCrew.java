@@ -196,8 +196,8 @@ public class CityCrew {
         int rowDiff = Math.abs(cell1.getRow() - cell2.getRow());
         int colDiff = Math.abs(cell1.getCol() - cell2.getCol());
         double temp = (double)(colDiff) / 2;
-        if(temp == 0.5) temp = 1;
-        else Math.floor(temp);
+        if(colDiff%2 == 0) temp = Math.ceil(temp);
+        else temp = Math.floor(temp);
         return 10*(rowDiff + (int)temp);
     }
 
