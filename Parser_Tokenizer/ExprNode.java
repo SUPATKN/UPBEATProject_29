@@ -1,5 +1,7 @@
 import java.util.Map;
 import java.lang.Math;
+import java.util.Random;
+
 public interface ExprNode {
     void prettyPrint(StringBuilder s);
 }
@@ -49,3 +51,36 @@ record BinaryArithExpr(Expr left, String op, Expr right) implements Expr {
         s.append(")");
     }
 }
+
+record SpecialVariable(String name,Player player,CityCrew crew) implements Expr {
+    public int eval(Map<String, Integer> bindings) throws SyntaxError {
+        if(name.equals("rows")) return player.getMap().getRows();
+        if (name.equals("cols")) return player.getMap().getCols();
+        if(name.equals("currow")) return crew.getPosition().getRow();
+        if(name.equals("curcol")) return crew.getPosition().getCol();
+        if(name.equals("budget")) return player.getBudget();
+        if(name.equals("deposit")) return (int) crew.getPosition().getDeposit().getCurrentdep();
+        if(name.equals("int")) return (int) crew.getPosition().getDeposit().getInterestRatePer();
+        if(name.equals("maxdeposit")) return crew.getPosition().getDeposit().getMax_dep();
+        if(name.equals("random")){
+            Random rand = new Random();
+            return rand.nextInt(1000);
+        }
+        throw new SyntaxError("unknown special variable");
+    }
+    public void prettyPrint(StringBuilder s) {
+        s.append(name);
+    }
+}
+
+record InfoExpr(String name,CityCrew crew,String dir) implements Expr {
+    public int eval(Map<String, Integer> bindings) throws SyntaxError {
+        if(name.equals("opponent")) return crew.nearby();
+        if(name.equals("nearby")) return crew.nearby(dir);
+        else throw new SyntaxError("unknown InfoExpression");
+    }
+    public void prettyPrint(StringBuilder s) {
+        s.append(name);
+    }
+}
+

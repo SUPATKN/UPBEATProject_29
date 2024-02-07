@@ -4,33 +4,43 @@ import java.util.Map;
 
 
 public class ParserGrammar {
-    private final Tokenizer token;
-    private Map<String ,Integer> binding = new HashMap<>();
+    private Tokenizer token;
+    private Map<String ,Integer> binding;
     private LinkedList<AST> statement = new LinkedList<>();
+    private LinkedList<AST> WhileState = new LinkedList<>();
     private CityCrew crew;
-    public ParserGrammar(Tokenizer t,CityCrew crew){
+    public ParserGrammar(Tokenizer t,CityCrew crew,Map<String ,Integer> binding){
         this.token = t;
         this.crew = crew;
+        this.binding = binding;
     }
+
+
+    public void setToken(Tokenizer token){
+        this.token = token;
+    }
+
 
     public void ParsePlan() throws SyntaxError, InvalidMoveException {
-        while(token.hasNextToken()){
-            statement.addAll(ParseStatement());
-        }
-        while(!statement.isEmpty()){
-            if(statement.peekFirst() == null){
-                statement.remove();
+            while(token.hasNextToken()){
+                statement.addAll(ParseStatement());
             }
-            if(statement.peekFirst() != null)statement.peekFirst().eval();
-            if(!statement.isEmpty()){
-                statement.remove();
+
+            while(!statement.isEmpty()){
+                if(statement.peekFirst() == null){
+                    statement.remove();
+                }
+                if(statement.peekFirst() != null)statement.peekFirst().eval();
+                if(!statement.isEmpty()){
+                    statement.remove();
+                }
+
             }
+
+            System.out.println(binding.keySet());
+            System.out.println(binding.values());
+
         }
-
-        System.out.println(binding.keySet());
-        System.out.println(binding.values());
-
-    }
 
     public LinkedList<AST> ParseStatement() throws SyntaxError, InvalidMoveException {
         LinkedList<AST> localState = new LinkedList<>();
@@ -41,7 +51,7 @@ public class ParserGrammar {
             localState.addAll(ParseBlockStatement());
         }else if(token.getType().equals("ifState") || token.getType().equals("elseState")){
             token.consume();
-            localState.addAll(ParseIfStatement());
+            localState.add(ParseIfStatement());
         }else if(token.getType().equals("whileState")){
             token.consume();
             localState.add(ParseWhileStatement());
@@ -51,9 +61,7 @@ public class ParserGrammar {
         return localState;
     }
 
-    public LinkedList<AST> ParseIfStatement() throws SyntaxError, InvalidMoveException {
-        AST calculateIf = null;
-        LinkedList<AST> ifState = new LinkedList<>();
+    public AST ParseIfStatement() throws SyntaxError, InvalidMoveException {
         token.consume("(");
         Expr E = parseE();
         token.consume(")");
@@ -61,22 +69,14 @@ public class ParserGrammar {
         LinkedList<AST> s1 = ParseStatement();
         token.consume("else");
         LinkedList<AST> s2 = ParseStatement();
-        if(E.eval(binding) > 0){
-            calculateIf = new IfStateNode(ifState,s1);
-            calculateIf.eval();
-        }else if(E.eval(binding) < 0){
-            calculateIf = new IfStateNode(ifState,s2);
-            calculateIf.eval();
-        }
-        return ifState;
+        return new IfStateNode(s1,s2,E,binding);
     }
     public AST ParseWhileStatement() throws SyntaxError, InvalidMoveException {
         token.consume("(");
         Expr E = parseE();
         token.consume(")");
-        LinkedList<AST> s = new LinkedList<>();
-        s.addAll(ParseStatement());
-        AST w = new WhileNode(E,s,binding);
+        WhileState.addAll(ParseStatement());
+        AST w = new WhileNode(E,WhileState,binding);
         return  w;
     }
 
@@ -104,10 +104,11 @@ public class ParserGrammar {
     public AST ParseActionCommand() throws SyntaxError{
         AST Action = null;
         if(token.peek("done")){
-            while(token.hasNextToken()){
-                token.consume();
-            }
-            Action = new DoneCommandNode(statement);
+            token.consume();
+            Action = new DoneCommandNode(statement,WhileState);
+        }else if(token.peek("relocate")){
+            token.consume();
+            Action = new RelocateNode(crew);
         }else if(token.peek("move")){
             token.consume();
             Action = ParseMoveCommand();
@@ -129,7 +130,7 @@ public class ParserGrammar {
         }else if(token.peek("collect")){
             token.consume();
             Expr E = parseE();
-            Region = new CollectCommandNode(E,binding);
+            Region = new CollectCommandNode(E,binding,crew);
         }
         return Region;
     }
@@ -164,7 +165,9 @@ public class ParserGrammar {
             String variable = token.consume();
             Expr Identifier = new Variable(variable);
             Variable var = (Variable) Identifier;
-            binding.put(var.name(), 0);
+            if(!binding.containsKey(var.name())){
+                binding.put(var.name(), 0);
+            }
             token.consume("=");
             Expr E = parseE();
             Assign = new AssignCommandNode(Identifier,E,binding);
@@ -259,13 +262,17 @@ public class ParserGrammar {
         if (isNumber(token.peek())) {
             int num = Integer.parseInt(token.consume());
             return new IntLit(num);
-        }else if(token.peek().matches("^[a-z]+$") || token.peek().matches("^[A-Z]+$")){
+        }else if(token.getType().equals("identifier")){
             return new Variable(token.consume());
+        }else if(token.getType().equals("specialVariable")){
+            return new SpecialVariable(token.consume(),crew.getPlayer(),crew);
         }else if(token.peek("(") || token.peek(")")){
             token.consume("(");
-            Expr F = parseE();
+            Expr P = parseE();
             token.consume(")");
-            return F;
+            return P;
+        }else if(token.getType().equals("infoExp")){
+            return parseInfoExp();
         }else if(token.peek("+") || token.peek("*") || token.peek("/") || token.peek("%")){
             throw new SyntaxError("Please check your input can't start with '"+ token.peek() + "'");
         }else{
@@ -273,6 +280,20 @@ public class ParserGrammar {
         }
     }
 
+    public Expr parseInfoExp() throws SyntaxError{
+        if(token.peek("opponent")){
+            return new InfoExpr(token.consume(),crew,"");
+        }else if(token.peek("nearby")){
+            String nearby = token.consume();
+            if(!token.getType().equals("direction")){
+                throw new SyntaxError("nearby function must follow by direction");
+            }
+            String direction = ParseDirection().eval();
+            return new InfoExpr(nearby,crew,direction);
+        }else{
+            throw new SyntaxError("Please check your InfoExpression "+ token.peek() +" is not accept");
+        }
+    }
     public static boolean isNumber(String str)
     {
         for (char c : str.toCharArray())

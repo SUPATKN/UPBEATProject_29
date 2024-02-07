@@ -13,6 +13,7 @@ record WhileNode(Expr exp,LinkedList<AST> s,Map<String ,Integer> binding) implem
         for(int i = 0 ;i<10000 && exp.eval(binding) > 0 ;i++){
             for (AST temp : s) {
                 temp.eval();
+
             }
         }
     }
@@ -22,9 +23,8 @@ record MoveCommandNode(String direction,CityCrew crew)implements AST{
     @Override
     public void eval() throws InvalidMoveException {
         crew.move(direction);
-
-        System.out.println(crew.getPosition().getRow());
-        System.out.println(crew.getPosition().getCol());
+        System.out.println("row = " +(crew.getPosition().getRow()+1));
+        System.out.println("col = " +(crew.getPosition().getCol()+1));
     }
 }
 
@@ -48,16 +48,26 @@ record AssignCommandNode(Expr identifier, Expr expression,Map<String ,Integer> b
     }
 }
 
-record IfStateNode(LinkedList<AST> statement,LinkedList<AST> s1) implements AST{
+record IfStateNode(LinkedList<AST> s1,LinkedList<AST> s2,Expr exp,Map<String ,Integer> binding) implements AST{
     @Override
-    public void eval(){
-        statement.addAll(s1);
+    public void eval() throws SyntaxError, InvalidMoveException {
+        if(exp.eval(binding) > 0){
+            for(AST temp : s1){
+                temp.eval();
+            }
+        }else{
+            for(AST temp : s2){
+                temp.eval();
+            }
+        }
     }
 }
 
-record DoneCommandNode(LinkedList<AST> statement)implements AST{
+
+record DoneCommandNode(LinkedList<AST> statement,LinkedList<AST> w)implements AST{
     @Override
     public void eval(){
+        w.clear();
         statement.clear();
     }
 }
@@ -70,10 +80,11 @@ record InvestCommandNode(Expr expr,Map<String ,Integer> binding,CityCrew crew)im
     }
 }
 
-record CollectCommandNode(Expr expr,Map<String ,Integer> binding)implements AST{
+record CollectCommandNode(Expr expr,Map<String ,Integer> binding,CityCrew crew) implements AST{
     @Override
     public void eval() throws SyntaxError {
-        System.out.println("Collect " + expr.eval(binding));
+        crew.Collect(expr.eval(binding));
+        System.out.println(crew.getPosition().getDeposit().getCurrentdep());
     }
 }
 
@@ -81,5 +92,12 @@ record AttackCommandNode(String direction,Expr expr,Map<String ,Integer> binding
     @Override
     public void eval() throws SyntaxError {
         System.out.println("Shoot " + direction + " " +  expr.eval(binding));
+    }
+}
+
+record RelocateNode(CityCrew crew)implements AST{
+    @Override
+    public void eval(){
+        crew.getPlayer().Relocate();
     }
 }

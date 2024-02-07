@@ -60,7 +60,7 @@ public class Tokenizer {
         }
         else if(next.equals("while")){
             type = "whileState";
-        }else if(next.equals("done") || next.equals("relocated") ||
+        }else if(next.equals("done") || next.equals("relocate") ||
                 next.equals("move") || next.equals("invest") || next.equals("collect")
                 || next.equals("shoot")) {
                 type = "command";
@@ -71,7 +71,9 @@ public class Tokenizer {
         }else if(next.equals("rows") || next.equals("cols") || next.equals("currow") || next.equals("curcol") || next.equals("budget")
             || next.equals("deposit") || next.equals("int") || next.equals("maxdeposit") || next.equals("random")){
                 type = "specialVariable";
-        }else{
+        }else if(next.equals("opponent") || next.equals("nearby")){
+            type = "infoExp";
+        }else if(next.matches("[a-zA-Z]+")){
                 type = "identifier";
         }
     }

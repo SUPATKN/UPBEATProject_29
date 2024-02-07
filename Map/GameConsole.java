@@ -21,7 +21,7 @@ public class GameConsole {
             }
 
             try {
-                Map.Direction direction = Map.Direction.valueOf(input.toUpperCase());
+                MapCell.Direction direction = MapCell.Direction.valueOf(input   );
                 PlayerForMap currentPlayer = game.getCurrentPlayer();
                 game.move(direction);
                 displayMap();
@@ -41,6 +41,8 @@ public class GameConsole {
 
         for (int i = 0; i < cells.length; i++) {
             for (int j = 0; j < cells[i].length; j++) {
+                System.out.print("    "); // Add extra spaces for alignment
+
                 System.out.print("(" + (i + 1) + "," + (j + 1) + ")");
                 if (cells[i][j].isOccupied()) {
                     PlayerForMap occupyingPlayer = getPlayerAtPosition(i, j);
@@ -49,10 +51,15 @@ public class GameConsole {
                     System.out.print("-");
                 }
                 System.out.print(" ");
+
+                if (j == cells[i].length - 1) {
+                    System.out.println(); // Move to the next line after each row
+                }
             }
-            System.out.println();
         }
     }
+
+
 
 
     private PlayerForMap getPlayerAtPosition(int row, int col) {

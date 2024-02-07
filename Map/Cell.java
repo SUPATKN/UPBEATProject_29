@@ -2,6 +2,7 @@ import java.util.Random;
 
 public class Cell {
     private Player whoBelong;
+    private boolean isCityCenter = false;
     private int row;
     private int col;
     private boolean isOccupied;
@@ -9,6 +10,18 @@ public class Cell {
     public Cell(int row, int col) {
         this.row = row;
         this.col = col;
+    }
+
+    public Player getWhoBelong(){
+        return whoBelong;
+    }
+
+    public void SetCityCenter(){
+        isCityCenter = true;
+    }
+
+    public boolean isCityCenter(){
+        return isCityCenter;
     }
 
     public int getRow() {
@@ -32,6 +45,7 @@ public class Cell {
     public void setDeposit(int value){
         this.deposit = new Deposit(value);
     }
+
     public void setPlayer(Player player){
         this.whoBelong = player;
     }
@@ -44,4 +58,5 @@ public class Cell {
         int randomValue = random.nextInt(1000000);
         return randomValue;
     }
+
 }

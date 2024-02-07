@@ -4,7 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="be3eb78b-7ac1-4402-b453-97bc542039f9" name="Changes" comment="resolve conflict" />
+    <list default="true" id="be3eb78b-7ac1-4402-b453-97bc542039f9" name="Changes" comment="edit Relocate 70%">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Map/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/Map/Cell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Player/CityCrew.java" beforeDir="false" afterPath="$PROJECT_DIR$/Player/CityCrew.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Player/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/Player/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/CityCrew.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UPBEATProject_29/CityCrew.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UPBEATProject_29/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UPBEATProject_29/Player.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -21,7 +28,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="workingY" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -50,6 +57,10 @@
   &quot;associatedIndex&quot;: 8
 }</component>
   <component name="ProjectId" id="2bOKbDSPbAJfnUQelxt1Eichylk" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <OptionsSetting value="false" id="Update" />
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -58,8 +69,12 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;21&quot;
+    &quot;git-widget-placeholder&quot;: &quot;workingY&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;21&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/project/code/OOP/UPBEATProject_29&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
   }
 }</component>
   <component name="RecentsManager">
@@ -69,6 +84,28 @@
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="" />
     </key>
+  </component>
+  <component name="RunManager" selected="Application.StartGame">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="UPBEATProject_29" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="StartGame" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="StartGame" />
+      <module name="UPBEATProject_29" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.StartGame" />
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -271,7 +308,47 @@
       <option name="project" value="LOCAL" />
       <updated>1706942665077</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="add SpecialVariable , can parse SpecialVariable to read only , must edit move method">
+      <option name="closed" value="true" />
+      <created>1706949664247</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1706949664247</updated>
+    </task>
+    <task id="LOCAL-00026" summary="move method don't need to edit(correct already)">
+      <option name="closed" value="true" />
+      <created>1707026465330</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1707026465330</updated>
+    </task>
+    <task id="LOCAL-00027" summary="add CityCenter in Player class">
+      <option name="closed" value="true" />
+      <created>1707035649819</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1707035649819</updated>
+    </task>
+    <task id="LOCAL-00028" summary="edit display map">
+      <option name="closed" value="true" />
+      <created>1707114121650</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1707114121650</updated>
+    </task>
+    <task id="LOCAL-00029" summary="edit Relocate 70%">
+      <option name="closed" value="true" />
+      <created>1707132591044</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1707132591044</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -286,13 +363,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="upgrade some Tokenizer and Parser" />
-    <MESSAGE value="update parser but not finish" />
-    <MESSAGE value="parse 20%" />
-    <MESSAGE value="update parser if while" />
-    <MESSAGE value="create directory" />
-    <MESSAGE value="can parse if while block" />
-    <MESSAGE value="parse, while, if(not finish), assign, move , เหลือ edit Expr Parse" />
     <MESSAGE value="COMIT TEST" />
     <MESSAGE value="rename ParserTest to ParserGrammar" />
     <MESSAGE value="can Parse IfState and add IfStateNode" />
@@ -311,6 +381,36 @@
     <MESSAGE value="make special variable reading can't assign (read only)" />
     <MESSAGE value="commit to main" />
     <MESSAGE value="resolve conflict" />
-    <option name="LAST_COMMIT_MESSAGE" value="resolve conflict" />
+    <MESSAGE value="edit main class" />
+    <MESSAGE value="add SpecialVariable , can parse SpecialVariable to read only" />
+    <MESSAGE value="add SpecialVariable , can parse SpecialVariable to read only , must edit move method" />
+    <MESSAGE value="move method don't need to edit(correct already)" />
+    <MESSAGE value="add CityCenter in Player class" />
+    <MESSAGE value="edit display map" />
+    <MESSAGE value="edit Relocate 70%" />
+    <option name="LAST_COMMIT_MESSAGE" value="edit Relocate 70%" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/Map/GameConsole.java</url>
+          <line>7</line>
+          <properties class="GameConsole" method="&lt;init&gt;">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="((ParserGrammar)this).token.next" custom="ParserGrammar" />
+        <watch expression="((Player)this).Budget" custom="Player" />
+        <watch expression="((HashMap)binding).entrySet().toArray()[0]" custom="java.util.HashMap" />
+        <watch expression="crew.player.Budget" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>
