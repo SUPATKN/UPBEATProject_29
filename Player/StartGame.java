@@ -124,7 +124,7 @@ public class StartGame {
     }
 
     public void RunGame() throws SyntaxError, InvalidMoveException {
-        for(int i = 0; i<12 ; i++){
+        for(int i = 0; i<100000 ; i++){
 
             Turn();
             System.out.println("+---------- Turn : " + CountTurn +" ----------+");
