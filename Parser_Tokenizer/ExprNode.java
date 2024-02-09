@@ -59,7 +59,14 @@ record SpecialVariable(String name,Player player,CityCrew crew) implements Expr 
         if(name.equals("currow")) return crew.getPosition().getRow();
         if(name.equals("curcol")) return crew.getPosition().getCol();
         if(name.equals("budget")) return player.getBudget();
-        if(name.equals("deposit")) return (int) crew.getPosition().getDeposit().getCurrentdep();
+        if(name.equals("deposit")){
+            if(crew.getPosition().getWhoBelong() != crew.getPlayer()){
+                return -1*((int) crew.getPosition().getDeposit().getCurrentdep());
+            }else{
+                return (int) crew.getPosition().getDeposit().getCurrentdep();
+            }
+
+        }
         if(name.equals("int")) return (int) crew.getPosition().getDeposit().getInterestRatePer();
         if(name.equals("maxdeposit")) return crew.getPosition().getDeposit().getMax_dep();
         if(name.equals("random")){
