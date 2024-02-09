@@ -140,7 +140,7 @@ public class ParserGrammar {
             throw new SyntaxError("Move command must follow by direction");
         }
         String direction = ParseDirection().eval();
-        return new MoveCommandNode(direction,crew);
+        return new MoveCommandNode(direction,crew,statement,WhileState);
     }
 
     public AST ParseAttackCommand() throws SyntaxError {
