@@ -27,7 +27,11 @@ public class CityCrew {
         Cell newCell = calculateNewCell(currentCell, direction);
 
         if (isValidCell(newCell)) {
-            this.setPosition(newCell);
+            if(newCell.getWhoBelong() != player && newCell.getWhoBelong() != null){
+                this.setPosition(currentCell);
+            }else{
+                this.setPosition(newCell);
+            }
         } else {
             this.setPosition(currentCell);
         }
