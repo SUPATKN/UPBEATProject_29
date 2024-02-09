@@ -127,43 +127,99 @@ public class Player {
 
         if (cityRow == cityCol && newRow == newCol) {
             System.out.println("case 1");
-            if (Math.abs(cityRow - newRow) % 2 == 0) {
+            if (Math.abs(cityRow - newRow) > 1 ) {
                 distance = (Math.abs(cityRow - newRow) + Math.abs(cityCol - newCol)) - (Math.abs(newRow - cityRow) / 2);
                 cityCenter = crew.getPosition();
                 System.out.println("Distance: " + distance);
                 System.out.println("คู่");
-            } else if (Math.abs(cityRow - newRow) % 2 != 0) {
+            } else if (Math.abs(cityRow - newRow) <= 1) {
                 if (cityRow < newRow) {
-                    distance = (Math.abs(cityRow - newRow) + Math.abs(cityCol - newCol)) - (Math.abs(cityRow));
-                    cityCenter = crew.getPosition();
-                    System.out.println("Distance: " + distance);
+                    if(cityRow % 2 != 0 && newRow % 2 == 0 ){
+                        double rowDiff = Math.pow(Math.abs(cityRow - newRow),2);
+                        double colDiff = Math.pow(Math.abs(cityCol - newCol),2);
+
+                        double calculateDistance = Math.sqrt(rowDiff + colDiff);
+
+                        distance = (int) Math.round(calculateDistance);
+                        cityCenter = crew.getPosition();
+                        System.out.println("Distance: " + distance);
+                    } else if (cityRow % 2 == 0 && newRow % 2 != 0) {
+                        double rowDiff = Math.pow(Math.abs(cityRow - newRow),2);
+                        double colDiff = Math.pow(Math.abs(cityCol - newCol),2);
+
+                        double calculateDistance = Math.sqrt(rowDiff + colDiff + newRow + newCol);
+
+                        distance = (int) Math.round(calculateDistance);
+                        cityCenter = crew.getPosition();
+                        System.out.println("Distance: " + distance);
+                    }
+
                     System.out.println("คี่ : ตัวที่จะไปมากกว่าเรา");
                 } else if (cityRow > newRow) {
-                    distance = Math.abs((Math.abs(cityRow - newRow) + Math.abs(cityCol - newCol)) - (Math.abs(newRow)));
-                    cityCenter = crew.getPosition();
-                    System.out.println("Distance: " + distance);
+                    if(cityRow % 2 != 0 && newRow % 2 == 0 ){
+                        double rowDiff = Math.pow(Math.abs(cityRow - newRow),2);
+                        double colDiff = Math.pow(Math.abs(cityCol - newCol),2);
+
+                        double calculateDistance = Math.sqrt(rowDiff + colDiff + newRow + newCol);
+
+                        distance = (int) Math.round(calculateDistance);
+                        cityCenter = crew.getPosition();
+                        System.out.println("Distance: " + distance);
+                    } else if (cityRow % 2 == 0 && newRow % 2 != 0) {
+                        double rowDiff = Math.pow(Math.abs(cityRow - newRow),2);
+                        double colDiff = Math.pow(Math.abs(cityCol - newCol),2);
+
+
+                        double calculateDistance = Math.sqrt(rowDiff + colDiff);
+
+                        distance = (int) Math.round(calculateDistance);
+                        cityCenter = crew.getPosition();
+                        System.out.println("Distance: " + distance);
+                    }
                     System.out.println("คี่ : ตัวที่จะไปน้อยกว่าเรา");
                 }
             }
 
 
-        } else if (cityRow == newRow && cityCol != newCol) {
+        }else if (cityRow == newCol  && cityCol == newRow ){
+
+            double rowDiff = Math.pow(Math.abs(cityRow - newRow),2);
+            double colDiff = Math.pow(Math.abs(cityCol - newCol),2);
+
+            double calculateDistance = Math.sqrt(rowDiff + colDiff + newCol + newRow);
+
+            distance = (int) Math.round(calculateDistance);
+            cityCenter = crew.getPosition();
+            System.out.println("Distance: " + distance);
             System.out.println("case 2");
+
+        } else if (cityCol % 2 == 0 && newRow % 2 == 0 || cityCol % 2 != 0 && newRow % 2 != 0) {
+            double rowDiff = Math.pow(Math.abs(cityRow - newRow),2);
+            double colDiff = Math.pow(Math.abs(cityCol - newCol),2);
+
+            double calculateDistance = Math.sqrt(rowDiff + colDiff);
+
+            distance = (int) Math.round(calculateDistance);
+            cityCenter = crew.getPosition();
+            System.out.println("Distance: " + distance);
+            System.out.println("case 3");
+        } else if (cityRow == newRow && cityCol != newCol) {
+            System.out.println("case 4");
             distance = Math.abs(cityCol - newCol);
             cityCenter = crew.getPosition();
             System.out.println("Distance: " + distance);
 
 
         } else if (cityRow != newRow && cityCol == newCol) {
-            System.out.println("case 3");
+            System.out.println("case 5");
             distance = Math.abs(cityRow - newRow);
             cityCenter = crew.getPosition();
             System.out.println("Distance: " + distance);
 
 
         } else if (cityRow != newRow && cityCol != newCol) {
-            System.out.println("case 4");
-            if(Math.abs(newRow - cityRow) == 1 && Math.abs(newCol-cityCol) == 1){
+            System.out.println("case 6");
+            if((cityRow % 2 != 0 && cityCol % 2 != 0) && (newRow % 2 == 0 && newCol % 2 == 0)){
                 double rowDiff = Math.pow(Math.abs(cityRow - newRow),2);
                 double colDiff = Math.pow(Math.abs(cityCol - newCol),2);
 
@@ -172,12 +228,12 @@ public class Player {
                 distance = (int) Math.round(calculateDistance);
                 cityCenter = crew.getPosition();
                 System.out.println("Distance: " + distance);
-                System.out.println("คู่คู่");
-            } else if(Math.abs(newRow - cityRow) <= 2 && Math.abs(newCol-cityCol) <= 2){
+//                System.out.println("คู่คู่");
+            } else if((cityRow % 2 == 0 && cityCol % 2 == 0) && (newRow % 2 != 0 && newCol % 2 != 0)){
                 double rowDiff = Math.pow(Math.abs(cityRow - newRow),2);
                 double colDiff = Math.pow(Math.abs(cityCol - newCol),2);
 
-                double calculateDistance = Math.sqrt(rowDiff + colDiff);
+                double calculateDistance = Math.sqrt(rowDiff + colDiff + newRow + newCol);
 
                 distance = (int) Math.round(calculateDistance);
                 cityCenter = crew.getPosition();
@@ -204,61 +260,7 @@ public class Player {
                 System.out.println("Distance: " + distance);
                 System.out.println("else");
             }
-//            if(Math.abs(cityRow - newRow) % 2 ==  0 && Math.abs(cityCol - newCol) % 2 == 0) {
-////                distance = Math.abs(Math.abs(cityRow - newRow) + Math.abs(cityCol - newCol));
-////                distance--;
-//
-//                double rowDiff = Math.pow(Math.abs(cityRow - newRow),2);
-//                double colDiff = Math.pow(Math.abs(cityCol - newCol),2);
-//
-//                double calculateDistance = Math.sqrt(rowDiff + colDiff);
-//
-//                distance = (int) Math.round(calculateDistance);
-//                cityCenter = crew.getPosition();
-//                System.out.println("Distance: " + distance);
-//                System.out.println("คู่คู่");
-//
-//            }else if (Math.abs(cityRow - newRow) % 2 ==  0 && Math.abs(cityCol - newCol) % 2 != 0){
-//                distance = Math.abs(newRow - cityRow);
-//                cityCenter = crew.getPosition();
-//                System.out.println("Distance: " + distance);
-//                System.out.println("คู่คี่");
-//
-//            }else if (Math.abs(cityRow - newRow) % 2 !=  0 && Math.abs(cityCol - newCol) % 2 == 0){
-//                distance = Math.abs(newCol - cityCol);
-//                cityCenter = crew.getPosition();
-//                System.out.println("Distance: " + distance);
-//                System.out.println("คี่คู่");
-//
-//            }else if (Math.abs(cityRow - newRow) % 2 !=  0 && Math.abs(cityCol - newCol) % 2 != 0){
-//                distance = Math.abs(cityRow - newRow) + Math.abs(cityCol - newCol);
-//                cityCenter = crew.getPosition();
-//                System.out.println("Distance: " + distance);
-//                System.out.println("คี่คี่");
-//
-//            }
 
-//            if(Math.abs(cityRow-newRow)%2 == 0 && Math.abs(cityCol-newCol )%2 == 0){
-//                double rowDiff = Math.pow(Math.abs(cityRow - newRow), 2);
-//                double colDiff = Math.pow(Math.abs(cityCol - newCol), 2);
-//
-//                double calculateDistance = Math.sqrt(rowDiff + colDiff - (newRow + newCol));
-//
-//                distance = (int) Math.round(calculateDistance);
-//                cityCenter = crew.getPosition();
-//                System.out.println("Distance: " + distance);
-//                System.out.println("คู่");
-//            } else if (Math.abs(cityRow-newRow)%2 != 0 && Math.abs(cityCol-newCol )%2 != 0) {
-//                double rowDiff = Math.pow(Math.abs(cityRow - newRow), 2);
-//                double colDiff = Math.pow(Math.abs(cityCol - newCol), 2);
-//
-//                double calculateDistance = Math.sqrt(rowDiff + colDiff +(newRow + newCol));
-//
-//                distance = (int) Math.round(calculateDistance);
-//                cityCenter = crew.getPosition();
-//                System.out.println("Distance: " + distance);
-//                System.out.println("คี่");
-//            }
 
         } else {
             distance = 0;
