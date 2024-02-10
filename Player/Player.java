@@ -92,16 +92,11 @@ public class Player {
     public void loseGame() {
         // Set the player's status to indicate that they have lost the game
         this.setGameStatus();
+        Iterator<Cell> Region = TotalRegion.iterator();
 
         // Remove the player's ownership from all cells they own
-        for (int row = 0; row < map.getRows(); row++) {
-            for (int col = 0; col < map.getCols(); col++) {
-                Cell cell = map.getCell(row, col);
-                if (cell.getWhoBelong() != null && cell.getWhoBelong().equals(this)) {
-                    cityCenter.getWhoBelong();
-                    cell.setDeposit(0);  // Reset deposit for ownerless cell
-                }
-            }
+        while(Region.hasNext()){
+            Region.next().setPlayer(null);
         }
         // Inform the player about losing the game
         System.out.println("Player [ " + this.getName() + " ] has lost the game.");
