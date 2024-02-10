@@ -95,44 +95,32 @@ public class CityCrew {
         return row >= 0 && row < mapCell.getRows() && col >= 0 && col < mapCell.getCols();
     }
 
-//    public void Shoot(String direction, int expenditure) throws InvalidMoveException {
-//        int totalCost = expenditure + 1;  // Calculate total attack cost
-//        if (player.getBudget() >= totalCost) {  // Check if player has enough budget
-//            Cell targetCell = calculateNewCell(getPosition(), direction);
-//
-//            if (isValidCell(targetCell)) {
-//                CityCrew targetOwner = targetCell.getWhoBelong().getCrew();
-//                if (targetOwner != null) {
-//                    if (targetOwner.equals(this)) {  // Handle attack on own region
-//                        targetCell.setDeposit((int) Math.max(0, targetCell.getDeposit().getCurrentdep() - expenditure));
-//                        if (targetCell.getDeposit().getCurrentdep() == 0) {
-//                            // Handle loss of region due to self-attack
-//                            targetCell.setPlayer(null);
-//                            targetCell.setOccupied(false);
-//                        }
-//                    } else {  // Handle attack on opponent's region
-//                        targetOwner.player.DecreaseBudget(expenditure);  // Deduct expenditure from opponent's budget
-//                        targetCell.setDeposit((int) Math.max(0, targetCell.getDeposit().getCurrentdep() - expenditure));
-//                        if (targetCell.getDeposit().getCurrentdep() == 0) {
-//                            // Handle opponent's loss of region
-//                            targetCell.setPlayer(null);
-//                            targetCell.setOccupied(false);
-//
-//                            if (targetCell.isCityCenter()) {  // Handle loss of city center
-//                                targetOwner.player.loseGame();  // Opponent loses the game
-//                            }
-//                        }
-//                    }
-//                } else {
-//                    // Player pays the cost, but no effect on the region
-//                }
-//            }
-//
-//            player.DecreaseBudget(totalCost);  // Deduct total attack cost from player's budget
-//        } else {  // Handle insufficient budget
-//            // No-op, attack fails due to lack of budget
-//        }
-//    }
+    public void Shoot(String direction, int cost) throws InvalidMoveException {
+        int totalCost = cost + 1;  // Calculate total attack cost
+        if (player.getBudget() < cost) {
+            player.DecreaseBudget(1);
+        } else if (player.getBudget() >= totalCost) {  // Check if player has enough budget
+            Cell targetCell = calculateNewCell(getPosition(), direction);
+            CityCrew target = targetCell.getWhoBelong().getCrew();
+            if (isValidCell(targetCell)) {
+                if (targetCell.getWhoBelong() != null) {
+                    targetCell.getDeposit().DecreaseDeposit(cost);
+                    player.DecreaseBudget(totalCost);
+                    if (targetCell.getDeposit().getCurrentdep() == 0) {
+                        targetCell.getWhoBelong().DecreaseRegion(targetCell);
+                        targetCell.setPlayer(null);
+                        targetCell.setOccupied(false);
+                        if (targetCell.isCityCenter()) {  // Handle loss of city center
+                            target.player.loseGame();  // Opponent loses the game
+                        }
+                    }
+                }else{
+                    player.DecreaseBudget(totalCost);
+                }
+
+            }
+        }
+    }
 
 
 
@@ -281,9 +269,10 @@ public class CityCrew {
                 position.getDeposit().DecreaseDeposit(cost);
                 player.IncreaseBudget(cost);
                 if(position.getDeposit().getCurrentdep() == 0){
+                    player.DecreaseRegion(position);
                     position.setPlayer(null);
                     position.setOccupied(false);
-                    player.DecreaseRegion(position);
+
                 }
             }
         }

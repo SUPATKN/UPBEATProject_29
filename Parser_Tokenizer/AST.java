@@ -94,10 +94,10 @@ record CollectCommandNode(Expr expr,Map<String ,Integer> binding,CityCrew crew) 
     }
 }
 
-record AttackCommandNode(String direction,Expr expr,Map<String ,Integer> binding)implements AST{
+record AttackCommandNode(String direction,Expr expr,Map<String ,Integer> binding,CityCrew crew)implements AST{
     @Override
-    public void eval() throws SyntaxError {
-        System.out.println("Shoot " + direction + " " +  expr.eval(binding));
+    public void eval() throws SyntaxError, InvalidMoveException {
+        crew.Shoot(direction,expr.eval(binding));
     }
 }
 

@@ -149,7 +149,7 @@ public class ParserGrammar {
         }
         String direction = ParseDirection().eval();
         Expr E = parseE();
-        return new AttackCommandNode(direction,E,binding);
+        return new AttackCommandNode(direction,E,binding,crew);
     }
 
     public AST ParseAssignCommand() throws SyntaxError{
