@@ -266,7 +266,7 @@ public class CityCrew {
             position.getDeposit().IncreaseDeposit(cost);
             position.setPlayer(player);
             position.setOccupied(true);
-            player.IncreaseRegion();
+            player.IncreaseRegion(position);
         }else{
             player.DecreaseBudget(1);
         }
@@ -283,7 +283,7 @@ public class CityCrew {
                 if(position.getDeposit().getCurrentdep() == 0){
                     position.setPlayer(null);
                     position.setOccupied(false);
-                    player.DecreaseRegion();
+                    player.DecreaseRegion(position);
                 }
             }
         }

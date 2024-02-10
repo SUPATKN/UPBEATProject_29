@@ -1,8 +1,7 @@
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
+
 public class Player {
-    private int TotolRegion;
+//    private int TotolRegion;
     private Cell cityCenter;
     private Map<String, Integer> binding = new HashMap<>();
     private boolean GameStatus = true; // The players haven't lost yet.
@@ -12,6 +11,7 @@ public class Player {
     private MapCell map;
     private ParserGrammar p;
     private Tokenizer tokenizer;
+    private Set<Cell> TotalRegion = new HashSet<>();
 
     public Player(String name, MapCell map) {
         Budget = 10000;
@@ -22,7 +22,7 @@ public class Player {
         cityCenter.setDeposit(100);
         cityCenter.SetCityCenter();
         cityCenter.setPlayer(this);
-        TotolRegion = 1;
+        TotalRegion.add(cityCenter);
         cityCenter.getDeposit().CalDeposit(1);
         System.out.print("[ " + name + " ]" + " City Center on : ");
         System.out.print("row = " + (crew.getPosition().getRow() + 1));
@@ -39,15 +39,15 @@ public class Player {
     }
 
     public int getTotolRegion() {
-        return TotolRegion;
+        return TotalRegion.size();
     }
 
-    public void DecreaseRegion() {
-        TotolRegion--;
+    public void DecreaseRegion(Cell element) {
+        TotalRegion.remove(element);
     }
 
-    public void IncreaseRegion() {
-        TotolRegion++;
+    public void IncreaseRegion(Cell element) {
+        TotalRegion.add(element);
     }
 
 
