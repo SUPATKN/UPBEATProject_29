@@ -22,7 +22,7 @@ public class CityCrew {
 
 
     public void move(String direction) throws InvalidMoveException {
-        player.MoveCost();
+        player.DecreaseBudget(1);
         Cell currentCell = this.getPosition();
         Cell newCell = calculateNewCell(currentCell, direction);
 
@@ -210,6 +210,23 @@ public class CityCrew {
         return nearestOpponentPosition != null ?  (100*x)+y : 0;
     }
 
+    private boolean checkAdjacentCell(){
+        String[] directions = {"up", "upright", "downright", "down", "downleft", "upleft"};
+        for (String direction : directions) {
+            try {
+                Cell neighborCell = calculateNewCell(getPosition(), direction);
+                int distance = 0;
+                if(neighborCell.getWhoBelong() == player){
+                    return true;
+                }
+            } catch (InvalidMoveException e) {
+                // Handle invalid moves if necessary
+                e.printStackTrace();
+            }
+        }
+        return position.getWhoBelong() == player;
+    }
+
     // Helper method to get the direction number
     private int getDirectionNumber(String direction) {
         switch (direction) {
@@ -243,12 +260,15 @@ public class CityCrew {
 
     public void Invest(int cost){
         if(player.getBudget() < cost){
-            player.InvestCost(0);
-        }else{
-            player.InvestCost(cost);
-            position.getDeposit().InvestDeposit(cost);
+            player.DecreaseBudget(1);
+        }else if((position.getWhoBelong() == null || position.getWhoBelong() == player) && checkAdjacentCell()){
+            player.DecreaseBudget(cost+1);
+            position.getDeposit().IncreaseDeposit(cost);
             position.setPlayer(player);
             position.setOccupied(true);
+            player.IncreaseRegion();
+        }else{
+            player.DecreaseBudget(1);
         }
 
 
@@ -256,15 +276,18 @@ public class CityCrew {
 
     public void Collect(int cost){
         player.DecreaseBudget(1);
-        if(position.getDeposit().getCurrentdep() >= cost){
-            position.getDeposit().CollectDeposit(cost);
-            player.IncreaseBudget(cost);
-            if(position.getDeposit().getCurrentdep() == 0){
-                position.setPlayer(null);
-                position.setOccupied(false);
-                player.DecreaseRegion();
+        if(position.getWhoBelong() == player){
+            if((position.getDeposit().getCurrentdep() >= cost)){
+                position.getDeposit().DecreaseDeposit(cost);
+                player.IncreaseBudget(cost);
+                if(position.getDeposit().getCurrentdep() == 0){
+                    position.setPlayer(null);
+                    position.setOccupied(false);
+                    player.DecreaseRegion();
+                }
             }
         }
+
 
     }
 

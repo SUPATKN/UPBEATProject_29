@@ -31,7 +31,7 @@ public class Deposit {
         return r;
     }
 
-    public void InvestDeposit(int cost){
+    public void IncreaseDeposit(int cost){
         Currentdep += cost;
         if(Currentdep >= max_dep){
             Currentdep = max_dep;
@@ -42,7 +42,7 @@ public class Deposit {
         return Currentdep;
     }
 
-    public void CollectDeposit(int collect){
+    public void DecreaseDeposit(int collect){
         Currentdep -= collect;
     }
 

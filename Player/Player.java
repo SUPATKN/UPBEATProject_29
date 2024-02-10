@@ -46,6 +46,11 @@ public class Player {
         TotolRegion--;
     }
 
+    public void IncreaseRegion() {
+        TotolRegion++;
+    }
+
+
 
     public Cell getCityCenter() {
         return cityCenter;
@@ -78,22 +83,6 @@ public class Player {
 
     public void IncreaseBudget(int cost) {
         Budget += cost;
-    }
-
-    public void InvestCost(int cost) {
-        DecreaseBudget(cost + 1);
-        TotolRegion += 1;
-        //don't forget to make it not + when it already have this cell
-        if (Budget < 0) {
-            Budget = 0;
-        }
-    }
-
-    public void MoveCost() {
-        DecreaseBudget(1);
-        if (Budget < 0) {
-            Budget = 0;
-        }
     }
 
     public CityCrew getCrew() {
