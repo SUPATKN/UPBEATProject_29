@@ -203,11 +203,40 @@ public class Player {
 
         } else if (cityRow != newRow && cityCol != newCol) {
             System.out.println("case 6");
+            int calDiffBefore = Math.abs(cityRow-cityCol);
+            int calDiffAffter = Math.abs(newRow-newCol);
+
+            if(calDiffBefore % 2 == 0 && calDiffAffter % 2 == 0){
+                double rowDiff = Math.pow(Math.abs(cityRow - newRow),2);
+                double colDiff = Math.pow(Math.abs(cityCol - newCol),2);
+
+                double calculateDistance = Math.sqrt(rowDiff + colDiff + newRow +newCol);
+
+                distance = (int) Math.round(calculateDistance);
+                cityCenter = crew.getPosition();
+                System.out.println("Distance: " + distance);
+
+            } else if (calDiffBefore % 2 == 0 && calDiffAffter % 2 != 0) {
+                double rowDiff = Math.pow(Math.abs(cityRow - newRow),2);
+                double colDiff = Math.pow(Math.abs(cityCol - newCol),2);
+
+                double calculateDistance = Math.sqrt(rowDiff + colDiff );
+
+                distance = (int) Math.round(calculateDistance);
+                cityCenter = crew.getPosition();
+                System.out.println("Distance: " + distance);
+
+            } else if (calDiffBefore % 2 != 0 && calDiffAffter % 2 == 0) {
+
+            } else if (calDiffBefore % 2 != 0 && calDiffAffter % 2 != 0) {
+
+            }
+
             if((cityRow % 2 != 0 && cityCol % 2 != 0) && (newRow % 2 == 0 && newCol % 2 == 0)){
                 double rowDiff = Math.pow(Math.abs(cityRow - newRow),2);
                 double colDiff = Math.pow(Math.abs(cityCol - newCol),2);
 
-                double calculateDistance = Math.sqrt(rowDiff + colDiff);
+                double calculateDistance = Math.sqrt(rowDiff + colDiff + newRow +newCol);
 
                 distance = (int) Math.round(calculateDistance);
                 cityCenter = crew.getPosition();
@@ -233,11 +262,11 @@ public class Player {
                 cityCenter = crew.getPosition();
                 System.out.println("Distance: " + distance);
                 System.out.println("คี่คี่");
-            }else {
+            }else if(newCol == newRow){
                 double rowDiff = Math.pow(Math.abs(cityRow - newRow),2);
                 double colDiff = Math.pow(Math.abs(cityCol - newCol),2);
 
-                double calculateDistance = Math.sqrt(rowDiff + colDiff  - newCol - newRow);
+                double calculateDistance = Math.sqrt(rowDiff + colDiff);
 
                 distance = (int) Math.round(calculateDistance);
                 cityCenter = crew.getPosition();
