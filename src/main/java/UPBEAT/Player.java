@@ -264,7 +264,7 @@ public class Player {
                 cityCenter = crew.getPosition();
                 System.out.println("Distance: " + distance);
                 System.out.println("คี่คี่");
-            }else if(newCol == newRow){
+            }else if(newCol == newRow || cityCol == cityRow ){
                 double rowDiff = Math.pow(Math.abs(cityRow - newRow),2);
                 double colDiff = Math.pow(Math.abs(cityCol - newCol),2);
 
