@@ -1,4 +1,4 @@
-
+package UPBEAT;
 
 public class CityCrew {
     private final Player player;

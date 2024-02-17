@@ -1,3 +1,4 @@
+package UPBEAT;
 import java.util.Random;
 
 public class Cell {

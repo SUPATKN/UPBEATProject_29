@@ -1,3 +1,5 @@
+package UPBEAT;
+
 import java.lang.Math;
 public class Deposit {
     private int max_dep = 1000000;
