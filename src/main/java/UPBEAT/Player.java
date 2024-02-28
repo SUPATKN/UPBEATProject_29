@@ -5,8 +5,8 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.util.*;
 
 public class Player {
-//    private int TotolRegion;
-@JsonManagedReference
+    //    private int TotolRegion;
+    @JsonManagedReference
     private Cell cityCenter;
     private Map<String, Integer> binding = new HashMap<>();
     private boolean GameStatus = true; // The players haven't lost yet.
@@ -17,6 +17,7 @@ public class Player {
     private ParserGrammar p;
     private Tokenizer tokenizer;
     private Set<Cell> TotalRegion = new HashSet<>();
+    private int index;
 
     public Player(String name, MapCell map) {
         Budget = 10000;
@@ -288,6 +289,14 @@ public class Player {
 
         System.out.println("[ " + getName() + " ]" + " Distance to relocate is: " + distance);
 
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
+    public int getIndex() {
+        return index;
     }
 }
 
