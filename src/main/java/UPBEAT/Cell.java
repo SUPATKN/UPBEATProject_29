@@ -1,7 +1,10 @@
 package UPBEAT;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import java.util.Random;
 
 public class Cell {
+    @JsonBackReference
     private Player whoBelong;
     private boolean isCityCenter = false;
     private int row;

@@ -1,9 +1,12 @@
 package UPBEAT;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.util.*;
 
 public class Player {
 //    private int TotolRegion;
+@JsonManagedReference
     private Cell cityCenter;
     private Map<String, Integer> binding = new HashMap<>();
     private boolean GameStatus = true; // The players haven't lost yet.

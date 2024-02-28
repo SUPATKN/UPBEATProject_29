@@ -5,10 +5,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class Controller {
-    MapCell map = new MapCell(2,2);
+    MapCell map = new MapCell(5,5);
 
     @GetMapping("/Map")
-    public Cell getCell(){
-        return map.getRandomEmptyCell();
+    public MapCell getCell(){
+        return map;
     }
 }

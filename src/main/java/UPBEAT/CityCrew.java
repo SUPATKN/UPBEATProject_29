@@ -1,6 +1,9 @@
 package UPBEAT;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 public class CityCrew {
+    @JsonBackReference
     private final Player player;
     private MapCell mapCell;
     private Cell position;
