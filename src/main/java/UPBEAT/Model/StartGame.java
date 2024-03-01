@@ -1,4 +1,4 @@
-package UPBEAT;
+package UPBEAT.Model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,13 +48,13 @@ public class StartGame {
 
     public void CreateMap(){
         if(CountPlayer == 1){
-            map = new MapCell(5,5);
+            map = new MapCell(5,5,1000000);
         }else if(CountPlayer == 2){
-            map = new MapCell(7,7);
+            map = new MapCell(7,7,1000000);
         }else if(CountPlayer >= 3 && CountPlayer <= 5 ){
-            map = new MapCell(15,15);
+            map = new MapCell(15,15,1000000);
         }else{
-            map = new MapCell(30,30);
+            map = new MapCell(30,30,1000000);
         }
     }
 

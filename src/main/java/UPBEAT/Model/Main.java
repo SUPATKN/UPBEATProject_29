@@ -1,8 +1,8 @@
-package UPBEAT;
+package UPBEAT.Model;
 
 public class Main {
     public static void main(String[] args) throws SyntaxError, InvalidMoveException {
-        MapCell mapCell = new MapCell(5,5);
+        MapCell mapCell = new MapCell(5,5,1000000);
         Player p1 = new Player("Y", mapCell);
         Player p2 = new Player("T", mapCell);
         System.out.println(p1.getTotolRegion());

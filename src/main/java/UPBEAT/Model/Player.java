@@ -1,4 +1,4 @@
-package UPBEAT;
+package UPBEAT.Model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 

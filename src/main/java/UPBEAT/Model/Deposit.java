@@ -1,13 +1,14 @@
-package UPBEAT;
+package UPBEAT.Model;
 
 import java.lang.Math;
 public class Deposit {
-    private int max_dep = 1000000;
+    private int max_dep;
     private int interaest_pct = 5;
     double r;
     private double Currentdep;
 
-    public Deposit(double dep){
+    public Deposit(double dep,int Max_dep){
+        this.max_dep = Max_dep;
         this.Currentdep = dep;
         r = interaest_pct * Math.log10(Currentdep) * Math.log(1);
     }

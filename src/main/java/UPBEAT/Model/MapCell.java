@@ -1,12 +1,14 @@
-package UPBEAT;
+package UPBEAT.Model;
 
 import java.util.Random;
 
 public class MapCell {
     private Cell[][] cells;
+    private int max_dep;
 
-    public MapCell(int rows, int cols) {
+    public MapCell(int rows, int cols,int max_dep) {
         cells = new Cell[rows][cols];
+        this.max_dep = max_dep;
         initializeMap();
         randomizeCellValues();
     }
@@ -14,7 +16,7 @@ public class MapCell {
     private void initializeMap() {
         for (int i = 0; i < cells.length; i++) {
             for (int j = 0; j < cells[i].length; j++) {
-                cells[i][j] = new Cell(i, j);
+                cells[i][j] = new Cell(i, j,max_dep);
                 cells[i][j].setDeposit(0);
             }
         }

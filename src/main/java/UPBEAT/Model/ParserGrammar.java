@@ -1,4 +1,4 @@
-package UPBEAT;
+package UPBEAT.Model;
 
 import java.util.LinkedList;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package UPBEAT;
+package UPBEAT.Model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import java.util.Random;
@@ -7,13 +7,15 @@ public class Cell {
     @JsonBackReference
     private Player whoBelong;
     private boolean isCityCenter = false;
+    private int max_dep;
     private int row;
     private int col;
     private boolean isOccupied;
     private Deposit deposit;
-    public Cell(int row, int col) {
+    public Cell(int row, int col,int max_dep) {
         this.row = row;
         this.col = col;
+        this.max_dep = max_dep;
     }
 
     public Player getWhoBelong(){
@@ -47,7 +49,7 @@ public class Cell {
         return deposit;
     }
     public void setDeposit(int value){
-        this.deposit = new Deposit(value);
+        this.deposit = new Deposit(value,max_dep);
     }
 
     public void setPlayer(Player player){

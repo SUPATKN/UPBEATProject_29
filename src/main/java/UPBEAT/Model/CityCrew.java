@@ -1,4 +1,4 @@
-package UPBEAT;
+package UPBEAT.Model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -86,7 +86,7 @@ public class CityCrew {
             if (isValidCell(newRow, newCol)) {
                 return mapCell.getCell(newRow, newCol);
             } else {
-                return new Cell(-1,-1);
+                return new Cell(-1,-1,-1);
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             return mapCell.getCell(currentCell.getRow(), currentCell.getCol());
