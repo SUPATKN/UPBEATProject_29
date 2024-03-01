@@ -34,7 +34,7 @@ public class StartGame {
 
     public void namePlayer(String nameplayer, int i) throws SyntaxError, InvalidMoveException {
         if (nameplayer.isEmpty() || nameplayer.equals(" ")) nameplayer = "Unknown player" + i;
-        Allplayer.add(new Player(nameplayer,map));
+        Allplayer.add(new Player(nameplayer,map,10000));
     }
 
     public void EnterNamePlayer() throws SyntaxError, InvalidMoveException {

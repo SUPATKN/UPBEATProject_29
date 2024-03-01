@@ -19,7 +19,7 @@ public class PController {
     @SendTo("/topic/public")
     public Set<Player> addPlayer(String name, SimpMessageHeaderAccessor headerAccessor){
         headerAccessor.getSessionAttributes().put("username", name);
-        Player player = new Player(name, map);
+        Player player = new Player(name, map,10000);
         players.add(player);
         return players;
     }

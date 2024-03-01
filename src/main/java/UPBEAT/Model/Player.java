@@ -19,8 +19,8 @@ public class Player {
     private Set<Cell> TotalRegion = new HashSet<>();
     private int index;
 
-    public Player(String name, MapCell map) {
-        Budget = 10000;
+    public Player(String name, MapCell map,int Budget) {
+        this.Budget = Budget;
         this.name = name;
         this.map = map;
         crew = new CityCrew(this, map, map.getRandomEmptyCell());

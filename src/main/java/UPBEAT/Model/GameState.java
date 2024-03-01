@@ -15,8 +15,10 @@ public class GameState {
     private int rev_cost = 100;
     private int max_dep = 1000000;
     private int interest_pct = 5;
+
     private Set<Player> allPlayer = new HashSet<>();
     private MapCell map;
+    private Player turn;
     public GameState(){
         map = new MapCell(m,n,max_dep);
     }
@@ -38,11 +40,29 @@ public class GameState {
     }
 
     public void addPlayer(String name){
-        allPlayer.add(new Player(name,map));
+        allPlayer.add(new Player(name,map,init_budget));
     }
 
-    public Set<Player> getAllPlayer(){
-        return allPlayer;
+    public Player[]  getAllPlayer(){
+        return allPlayer.toArray(new Player[0]);
     }
+
+    public Player getPlayer(String name){
+        for(Player player : allPlayer){
+            if(player.getName().equals(name)){
+                return player;
+            }
+        }
+        return null;
+    }
+
+    public GameState getGame(){
+        return this;
+    }
+
+    public void setTurn(Player player){
+        turn = player;
+    }
+
 
 }
