@@ -1,5 +1,7 @@
 package UPBEAT.Model;
 
+import lombok.Getter;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,7 +18,10 @@ public class GameState {
     private int max_dep = 1000000;
     private int interest_pct = 5;
 
+    private boolean gameChange = false;
+
     private Set<Player> allPlayer = new HashSet<>();
+    @Getter
     private MapCell map;
     private Player turn;
     public GameState(){
@@ -41,6 +46,7 @@ public class GameState {
 
     public void addPlayer(String name){
         allPlayer.add(new Player(name,map,init_budget));
+        gameChange = true;
     }
 
     public Player[]  getAllPlayer(){
@@ -56,13 +62,17 @@ public class GameState {
         return null;
     }
 
-    public GameState getGame(){
-        return this;
+    public void ChangeState(){
+        gameChange = !gameChange;
     }
 
+    public boolean isGameChange(){
+        boolean temp = gameChange;
+        ChangeState();
+        return temp;
+    }
     public void setTurn(Player player){
         turn = player;
     }
-
 
 }
