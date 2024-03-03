@@ -1,3 +1,5 @@
+package UPBEAT.Model;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -32,7 +34,7 @@ public class StartGame {
 
     public void namePlayer(String nameplayer, int i) throws SyntaxError, InvalidMoveException {
         if (nameplayer.isEmpty() || nameplayer.equals(" ")) nameplayer = "Unknown player" + i;
-        Allplayer.add(new Player(nameplayer,map));
+        Allplayer.add(new Player(nameplayer,map,10000));
     }
 
     public void EnterNamePlayer() throws SyntaxError, InvalidMoveException {
@@ -46,13 +48,13 @@ public class StartGame {
 
     public void CreateMap(){
         if(CountPlayer == 1){
-            map = new MapCell(5,5);
+            map = new MapCell(5,5,1000000);
         }else if(CountPlayer == 2){
-            map = new MapCell(7,7);
+            map = new MapCell(7,7,1000000);
         }else if(CountPlayer >= 3 && CountPlayer <= 5 ){
-            map = new MapCell(15,15);
+            map = new MapCell(15,15,1000000);
         }else{
-            map = new MapCell(30,30);
+            map = new MapCell(30,30,1000000);
         }
     }
 
@@ -124,7 +126,7 @@ public class StartGame {
     }
 
     public void RunGame() throws SyntaxError, InvalidMoveException {
-        for(int i = 0; i<12 ; i++){
+        for(int i = 0; i<100000 ; i++){
 
             Turn();
             System.out.println("+---------- Turn : " + CountTurn +" ----------+");

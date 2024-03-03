@@ -1,4 +1,5 @@
-import java.util.HashMap;
+package UPBEAT.Model;
+
 import java.util.LinkedList;
 import java.util.Map;
 
@@ -140,7 +141,7 @@ public class ParserGrammar {
             throw new SyntaxError("Move command must follow by direction");
         }
         String direction = ParseDirection().eval();
-        return new MoveCommandNode(direction,crew);
+        return new MoveCommandNode(direction,crew,statement,WhileState);
     }
 
     public AST ParseAttackCommand() throws SyntaxError {
@@ -149,7 +150,7 @@ public class ParserGrammar {
         }
         String direction = ParseDirection().eval();
         Expr E = parseE();
-        return new AttackCommandNode(direction,E,binding);
+        return new AttackCommandNode(direction,E,binding,crew);
     }
 
     public AST ParseAssignCommand() throws SyntaxError{

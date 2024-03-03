@@ -1,3 +1,5 @@
+package UPBEAT.Model;
+
 import java.util.NoSuchElementException;
 
 import static java.lang.Character.*;

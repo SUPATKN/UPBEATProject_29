@@ -1,6 +1,9 @@
+package UPBEAT.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 public class CityCrew {
+    @JsonBackReference
     private final Player player;
     private MapCell mapCell;
     private Cell position;
@@ -22,12 +25,16 @@ public class CityCrew {
 
 
     public void move(String direction) throws InvalidMoveException {
-        player.MoveCost();
+        player.DecreaseBudget(1);
         Cell currentCell = this.getPosition();
         Cell newCell = calculateNewCell(currentCell, direction);
 
         if (isValidCell(newCell)) {
-            this.setPosition(newCell);
+            if(newCell.getWhoBelong() != player && newCell.getWhoBelong() != null){
+                this.setPosition(currentCell);
+            }else{
+                this.setPosition(newCell);
+            }
         } else {
             this.setPosition(currentCell);
         }
@@ -79,7 +86,7 @@ public class CityCrew {
             if (isValidCell(newRow, newCol)) {
                 return mapCell.getCell(newRow, newCol);
             } else {
-                return new Cell(-1,-1);
+                return new Cell(-1,-1,-1);
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             return mapCell.getCell(currentCell.getRow(), currentCell.getCol());
@@ -91,44 +98,32 @@ public class CityCrew {
         return row >= 0 && row < mapCell.getRows() && col >= 0 && col < mapCell.getCols();
     }
 
-//    public void Shoot(String direction, int expenditure) throws InvalidMoveException {
-//        int totalCost = expenditure + 1;  // Calculate total attack cost
-//        if (player.getBudget() >= totalCost) {  // Check if player has enough budget
-//            Cell targetCell = calculateNewCell(getPosition(), direction);
-//
-//            if (isValidCell(targetCell)) {
-//                CityCrew targetOwner = targetCell.getWhoBelong().getCrew();
-//                if (targetOwner != null) {
-//                    if (targetOwner.equals(this)) {  // Handle attack on own region
-//                        targetCell.setDeposit((int) Math.max(0, targetCell.getDeposit().getCurrentdep() - expenditure));
-//                        if (targetCell.getDeposit().getCurrentdep() == 0) {
-//                            // Handle loss of region due to self-attack
-//                            targetCell.setPlayer(null);
-//                            targetCell.setOccupied(false);
-//                        }
-//                    } else {  // Handle attack on opponent's region
-//                        targetOwner.player.DecreaseBudget(expenditure);  // Deduct expenditure from opponent's budget
-//                        targetCell.setDeposit((int) Math.max(0, targetCell.getDeposit().getCurrentdep() - expenditure));
-//                        if (targetCell.getDeposit().getCurrentdep() == 0) {
-//                            // Handle opponent's loss of region
-//                            targetCell.setPlayer(null);
-//                            targetCell.setOccupied(false);
-//
-//                            if (targetCell.isCityCenter()) {  // Handle loss of city center
-//                                targetOwner.player.loseGame();  // Opponent loses the game
-//                            }
-//                        }
-//                    }
-//                } else {
-//                    // Player pays the cost, but no effect on the region
-//                }
-//            }
-//
-//            player.DecreaseBudget(totalCost);  // Deduct total attack cost from player's budget
-//        } else {  // Handle insufficient budget
-//            // No-op, attack fails due to lack of budget
-//        }
-//    }
+    public void Shoot(String direction, int cost) throws InvalidMoveException {
+        int totalCost = cost + 1;  // Calculate total attack cost
+        if (player.getBudget() < cost) {
+            player.DecreaseBudget(1);
+        } else if (player.getBudget() >= totalCost) {  // Check if player has enough budget
+            Cell targetCell = calculateNewCell(getPosition(), direction);
+            CityCrew target = targetCell.getWhoBelong().getCrew();
+            if (isValidCell(targetCell)) {
+                if (targetCell.getWhoBelong() != null) {
+                    targetCell.getDeposit().DecreaseDeposit(cost);
+                    player.DecreaseBudget(totalCost);
+                    if (targetCell.getDeposit().getCurrentdep() == 0) {
+                        targetCell.getWhoBelong().DecreaseRegion(targetCell);
+                        targetCell.setPlayer(null);
+                        targetCell.setOccupied(false);
+                        if (targetCell.isCityCenter()) {  // Handle loss of city center
+                            target.player.loseGame();  // Opponent loses the game
+                        }
+                    }
+                }else{
+                    player.DecreaseBudget(totalCost);
+                }
+
+            }
+        }
+    }
 
 
 
@@ -206,6 +201,23 @@ public class CityCrew {
         return nearestOpponentPosition != null ?  (100*x)+y : 0;
     }
 
+    private boolean checkAdjacentCell(){
+        String[] directions = {"up", "upright", "downright", "down", "downleft", "upleft"};
+        for (String direction : directions) {
+            try {
+                Cell neighborCell = calculateNewCell(getPosition(), direction);
+                int distance = 0;
+                if(neighborCell.getWhoBelong() == player){
+                    return true;
+                }
+            } catch (InvalidMoveException e) {
+                // Handle invalid moves if necessary
+                e.printStackTrace();
+            }
+        }
+        return position.getWhoBelong() == player;
+    }
+
     // Helper method to get the direction number
     private int getDirectionNumber(String direction) {
         switch (direction) {
@@ -239,12 +251,15 @@ public class CityCrew {
 
     public void Invest(int cost){
         if(player.getBudget() < cost){
-            player.InvestCost(0);
-        }else{
-            player.InvestCost(cost);
-            position.getDeposit().InvestDeposit(cost);
+            player.DecreaseBudget(1);
+        }else if((position.getWhoBelong() == null || position.getWhoBelong() == player) && checkAdjacentCell()){
+            player.DecreaseBudget(cost+1);
+            position.getDeposit().IncreaseDeposit(cost);
             position.setPlayer(player);
             position.setOccupied(true);
+            player.IncreaseRegion(position);
+        }else{
+            player.DecreaseBudget(1);
         }
 
 
@@ -252,15 +267,19 @@ public class CityCrew {
 
     public void Collect(int cost){
         player.DecreaseBudget(1);
-        if(position.getDeposit().getCurrentdep() >= cost){
-            position.getDeposit().CollectDeposit(cost);
-            player.IncreaseBudget(cost);
-            if(position.getDeposit().getCurrentdep() == 0){
-                position.setPlayer(null);
-                position.setOccupied(false);
-                player.DecreaseRegion();
+        if(position.getWhoBelong() == player){
+            if((position.getDeposit().getCurrentdep() >= cost)){
+                position.getDeposit().DecreaseDeposit(cost);
+                player.IncreaseBudget(cost);
+                if(position.getDeposit().getCurrentdep() == 0){
+                    player.DecreaseRegion(position);
+                    position.setPlayer(null);
+                    position.setOccupied(false);
+
+                }
             }
         }
+
 
     }
 

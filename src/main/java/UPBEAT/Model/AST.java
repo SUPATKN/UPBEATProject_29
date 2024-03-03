@@ -1,3 +1,5 @@
+package UPBEAT.Model;
+
 import java.util.LinkedList;
 import java.util.Map;
 
@@ -19,10 +21,16 @@ record WhileNode(Expr exp,LinkedList<AST> s,Map<String ,Integer> binding) implem
     }
 }
 
-record MoveCommandNode(String direction,CityCrew crew)implements AST{
+record MoveCommandNode(String direction,CityCrew crew,LinkedList<AST> statement,LinkedList<AST> w)implements AST{
     @Override
     public void eval() throws InvalidMoveException {
-        crew.move(direction);
+        if(crew.getPlayer().getBudget() > 0){
+            crew.move(direction);
+        }else{
+            w.clear();
+            statement.clear();
+        }
+
         System.out.println("row = " +(crew.getPosition().getRow()+1));
         System.out.println("col = " +(crew.getPosition().getCol()+1));
     }
@@ -88,10 +96,10 @@ record CollectCommandNode(Expr expr,Map<String ,Integer> binding,CityCrew crew) 
     }
 }
 
-record AttackCommandNode(String direction,Expr expr,Map<String ,Integer> binding)implements AST{
+record AttackCommandNode(String direction,Expr expr,Map<String ,Integer> binding,CityCrew crew)implements AST{
     @Override
-    public void eval() throws SyntaxError {
-        System.out.println("Shoot " + direction + " " +  expr.eval(binding));
+    public void eval() throws SyntaxError, InvalidMoveException {
+        crew.Shoot(direction,expr.eval(binding));
     }
 }
 
