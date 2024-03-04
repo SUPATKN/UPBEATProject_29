@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.Set;
 
 @CrossOrigin
@@ -16,17 +18,17 @@ public class Controller {
     @Autowired
     private SimpMessagingTemplate messagingTemplate;
 
-    @PostMapping("/addplayer")
+    @PutMapping("/addplayer")
     public Player addPlayer(@RequestBody String name) {
         game.addPlayer(name);
         Player player = game.getPlayer(name);
-        messagingTemplate.convertAndSend("/topic/players", player);
+        messagingTemplate.convertAndSend("/topic/gameState", player);
 
         return player;
     }
 
     @GetMapping("/allPlayer")
-    public Player [] getAllPlayer(){
+    public Set<Player> getAllPlayer(){
         return game.getAllPlayer();
     }
 
@@ -43,5 +45,12 @@ public class Controller {
     @GetMapping("/StateChange")
     public boolean getState(){
         return game.isGameChange();
+    }
+
+    @PostMapping("/Ready")
+    public boolean PlayerReady(@RequestBody String name) throws UnsupportedEncodingException {
+            game.getPlayer(name).setReady();
+        messagingTemplate.convertAndSend("/topic/ready", game.getPlayer(name).isReady());
+        return game.getPlayer(name).isReady();
     }
 }

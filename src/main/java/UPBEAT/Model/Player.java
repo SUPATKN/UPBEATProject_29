@@ -1,6 +1,7 @@
 package UPBEAT.Model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.Getter;
 
 import java.util.*;
 
@@ -18,6 +19,9 @@ public class Player {
     private Tokenizer tokenizer;
     private Set<Cell> TotalRegion = new HashSet<>();
     private int index;
+
+    @Getter
+    private boolean isReady = false;
 
     public Player(String name, MapCell map,int Budget) {
         this.Budget = Budget;
@@ -42,6 +46,11 @@ public class Player {
 
     public MapCell getMap() {
         return map;
+    }
+
+    public void setReady(){
+        isReady = !isReady;
+        System.out.println(name + " Ready :" + isReady);
     }
 
     public int getTotolRegion() {
@@ -297,6 +306,10 @@ public class Player {
 
     public int getIndex() {
         return index;
+    }
+
+    public void ToggleReady(){
+        this.isReady = !this.isReady;
     }
 }
 

@@ -49,8 +49,8 @@ public class GameState {
         gameChange = true;
     }
 
-    public Player[]  getAllPlayer(){
-        return allPlayer.toArray(new Player[0]);
+    public Set<Player>  getAllPlayer(){
+        return allPlayer;
     }
 
     public Player getPlayer(String name){
