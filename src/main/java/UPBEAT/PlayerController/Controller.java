@@ -18,8 +18,9 @@ public class Controller {
     @Autowired
     private SimpMessagingTemplate messagingTemplate;
 
-    @PutMapping("/addplayer")
+    @PostMapping("/addplayer")
     public Player addPlayer(@RequestBody String name) {
+        name = name.substring(1, name.length() - 1);
         game.addPlayer(name);
         Player player = game.getPlayer(name);
         messagingTemplate.convertAndSend("/topic/gameState", player);
@@ -42,15 +43,23 @@ public class Controller {
         return game.getMap();
     }
 
-    @GetMapping("/StateChange")
-    public boolean getState(){
-        return game.isGameChange();
-    }
-
-    @PostMapping("/Ready")
+    @PutMapping("/Ready")
     public boolean PlayerReady(@RequestBody String name) throws UnsupportedEncodingException {
+        name = name.substring(1, name.length() - 1);
             game.getPlayer(name).setReady();
         messagingTemplate.convertAndSend("/topic/ready", game.getPlayer(name).isReady());
+        messagingTemplate.convertAndSend("/topic/Allready", game.Allready());
         return game.getPlayer(name).isReady();
+    }
+
+    @GetMapping("/allReady")
+    public boolean AllPlayerReady(){
+        return getGame().Allready();
+    }
+
+    @PostMapping("/gamestart")
+    public void startGame(){
+        messagingTemplate.convertAndSend("/topic/startgame", game.Allready());
+        game.StartGame();
     }
 }

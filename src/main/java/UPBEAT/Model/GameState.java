@@ -19,6 +19,7 @@ public class GameState {
     private int interest_pct = 5;
 
     private boolean gameChange = false;
+    private boolean allReady = true;
 
     private Set<Player> allPlayer = new HashSet<>();
     @Getter
@@ -45,8 +46,11 @@ public class GameState {
     }
 
     public void addPlayer(String name){
-        allPlayer.add(new Player(name,map,init_budget));
-        gameChange = true;
+        Player newPlayer = new Player(name,map,init_budget);
+        if(allPlayer.isEmpty()){
+            newPlayer.setHost();
+        }
+        allPlayer.add(newPlayer);
     }
 
     public Set<Player>  getAllPlayer(){
@@ -73,6 +77,20 @@ public class GameState {
     }
     public void setTurn(Player player){
         turn = player;
+    }
+
+    public boolean Allready(){
+        for(Player player : allPlayer){
+            if(!player.isReady()){
+                return false;
+            }
+        }
+        System.out.println("All player ready status : " + allReady);
+        return allReady;
+    }
+
+    public void StartGame(){
+        System.out.println("Game Start!!!");
     }
 
 }

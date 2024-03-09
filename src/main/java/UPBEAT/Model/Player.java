@@ -6,7 +6,6 @@ import lombok.Getter;
 import java.util.*;
 
 public class Player {
-    //    private int TotolRegion;
     @JsonManagedReference
     private Cell cityCenter;
     private Map<String, Integer> binding = new HashMap<>();
@@ -22,6 +21,8 @@ public class Player {
 
     @Getter
     private boolean isReady = false;
+    @Getter
+    private boolean isHost = false;
 
     public Player(String name, MapCell map,int Budget) {
         this.Budget = Budget;
@@ -51,6 +52,10 @@ public class Player {
     public void setReady(){
         isReady = !isReady;
         System.out.println(name + " Ready :" + isReady);
+    }
+    public void setHost(){
+        isHost = true;
+        System.out.println(name + " is host" );
     }
 
     public int getTotolRegion() {
