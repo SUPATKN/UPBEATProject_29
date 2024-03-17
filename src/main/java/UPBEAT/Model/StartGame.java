@@ -125,23 +125,23 @@ public class StartGame {
 
     }
 
-    public void RunGame() throws SyntaxError, InvalidMoveException {
-        for(int i = 0; i<100000 ; i++){
-
-            Turn();
-            System.out.println("+---------- Turn : " + CountTurn +" ----------+");
-            displayMap();
-            for(int j=0;j < CountPlayer ; j++){
-//                Allplayer.get(j).Relocate();
-                Allplayer.get(j).Plan();
-//                displayMap();
-                if(j==CountPlayer){
-                    j=0;
-                    displayMap();
-                }
-            }
-        }
-    }
+//    public void RunGame() throws SyntaxError, InvalidMoveException {
+//        for(int i = 0; i<100000 ; i++){
+//
+//            Turn();
+//            System.out.println("+---------- Turn : " + CountTurn +" ----------+");
+//            displayMap();
+//            for(int j=0;j < CountPlayer ; j++){
+////                Allplayer.get(j).Relocate();
+//                Allplayer.get(j).Plan();
+////                displayMap();
+//                if(j==CountPlayer){
+//                    j=0;
+//                    displayMap();
+//                }
+//            }
+//        }
+//    }
 
     public void Start() throws SyntaxError, InvalidMoveException {
         System.out.println("+----------------------------------------+");
@@ -159,7 +159,7 @@ public class StartGame {
         EnterNamePlayer();
 
         // Run Turn
-        RunGame();
+//        RunGame();
 
     }
 

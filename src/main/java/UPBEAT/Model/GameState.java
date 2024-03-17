@@ -6,8 +6,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class GameState {
-    private int m = 20;
-    private int n = 15;
+    private int m = 5;
+    private int n = 5;
     private int init_plan_min = 5;
     private int init_plan_sec = 0;
     private int init_budget = 10000;

@@ -1,8 +1,6 @@
 package UPBEAT.PlayerController;
 
-import UPBEAT.Model.GameState;
-import UPBEAT.Model.MapCell;
-import UPBEAT.Model.Player;
+import UPBEAT.Model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
@@ -61,5 +59,15 @@ public class Controller {
     public void startGame(){
         messagingTemplate.convertAndSend("/topic/startgame", game.Allready());
         game.StartGame();
+    }
+
+    @PutMapping("/Plan")
+    public void Plan(@RequestBody PlanRequestBody requestBody) throws SyntaxError, InvalidMoveException {
+        System.out.println(requestBody.getPlan());
+        String name = requestBody.getName();
+        String plan = requestBody.getPlan();
+        game.getPlayer(name).Plan(plan);
+        messagingTemplate.convertAndSend("/topic/updateMap", game.getMap());
+
     }
 }

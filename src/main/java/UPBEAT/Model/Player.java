@@ -2,6 +2,8 @@ package UPBEAT.Model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 
 import java.util.*;
 
@@ -17,6 +19,9 @@ public class Player {
     private ParserGrammar p;
     private Tokenizer tokenizer;
     private Set<Cell> TotalRegion = new HashSet<>();
+
+    @Getter
+    private boolean Parsing = false;
     private int index;
 
     @Getter
@@ -84,14 +89,15 @@ public class Player {
         GameStatus = false; // players has lost
     }
 
-    public void Plan() throws SyntaxError, InvalidMoveException {
-        Scanner scanner = new Scanner(System.in);
+    public void Plan(String plan) throws SyntaxError, InvalidMoveException {
+        Parsing = true;
         System.out.println();
         System.out.println("[ " + name + " ]" + " turn enter plan : ");
-        String input = scanner.nextLine();
-        tokenizer = new Tokenizer(input);
+        System.out.println("My plan : " + plan);
+        tokenizer = new Tokenizer(plan);
         p = new ParserGrammar(tokenizer, crew, binding);
         p.ParsePlan();
+        Parsing = false;
     }
 
     public void DecreaseBudget(int cost) {
