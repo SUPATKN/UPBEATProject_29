@@ -1,5 +1,7 @@
 package UPBEAT.Model;
 
+import org.springframework.messaging.simp.SimpMessagingTemplate;
+
 import java.util.LinkedList;
 import java.util.Map;
 
@@ -8,13 +10,19 @@ public interface AST {
 
 }
 
-record WhileNode(Expr exp,LinkedList<AST> s,Map<String ,Integer> binding) implements AST{
+record WhileNode(Expr exp, LinkedList<AST> s, Map<String ,Integer> binding, SimpMessagingTemplate messagingTemplate) implements AST{
 
     @Override
     public void eval() throws SyntaxError, InvalidMoveException {
         for(int i = 0 ;i<10000 && exp.eval(binding) > 0 ;i++){
             for (AST temp : s) {
                 temp.eval();
+                messagingTemplate.convertAndSend("/topic/updateMap", exp.eval(binding) );
+                try {
+                    Thread.sleep(300);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
 
             }
         }

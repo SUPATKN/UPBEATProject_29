@@ -66,8 +66,8 @@ public class Controller {
         System.out.println(requestBody.getPlan());
         String name = requestBody.getName();
         String plan = requestBody.getPlan();
-        game.getPlayer(name).Plan(plan);
-        messagingTemplate.convertAndSend("/topic/updateMap", game.getMap());
+        game.getPlayer(name).Plan(plan,messagingTemplate);
+//        messagingTemplate.convertAndSend("/topic/updateMap", game.getMap());
 
     }
 }

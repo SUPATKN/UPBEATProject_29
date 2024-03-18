@@ -1,11 +1,14 @@
 package UPBEAT.Model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.Getter;
 
 import java.util.Random;
 
 public class Cell {
     @JsonBackReference
     private Player whoBelong;
+    @Getter
+    private String whoBelongName;
     private boolean isCityCenter = false;
     private int max_dep;
     private int row;
@@ -22,8 +25,8 @@ public class Cell {
         return whoBelong;
     }
 
-    public void SetCityCenter(){
-        isCityCenter = true;
+    public void SetCityCenter(boolean set){
+        isCityCenter = set;
     }
 
     public boolean isCityCenter(){
@@ -54,6 +57,11 @@ public class Cell {
 
     public void setPlayer(Player player){
         this.whoBelong = player;
+        if(whoBelong == null){
+            whoBelongName = "";
+        }else{
+            whoBelongName = whoBelong.getName();
+        }
     }
 
     public void printCellValues() {

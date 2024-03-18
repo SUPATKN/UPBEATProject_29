@@ -1,6 +1,9 @@
 package UPBEAT.Model;
 
+import lombok.Getter;
+
 import java.lang.Math;
+@Getter
 public class Deposit {
     private int max_dep;
     private int interaest_pct = 5;
