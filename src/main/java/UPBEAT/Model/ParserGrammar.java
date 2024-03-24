@@ -3,17 +3,22 @@ package UPBEAT.Model;
 import java.util.LinkedList;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 
 public class ParserGrammar {
+    @Autowired
+    private SimpMessagingTemplate messagingTemplate;
     private Tokenizer token;
     private Map<String ,Integer> binding;
     private LinkedList<AST> statement = new LinkedList<>();
     private LinkedList<AST> WhileState = new LinkedList<>();
     private CityCrew crew;
-    public ParserGrammar(Tokenizer t,CityCrew crew,Map<String ,Integer> binding){
+    public ParserGrammar(Tokenizer t,CityCrew crew,Map<String ,Integer> binding,SimpMessagingTemplate messagingTemplate){
         this.token = t;
         this.crew = crew;
         this.binding = binding;
+        this.messagingTemplate = messagingTemplate;
     }
 
 
@@ -31,7 +36,15 @@ public class ParserGrammar {
                 if(statement.peekFirst() == null){
                     statement.remove();
                 }
-                if(statement.peekFirst() != null)statement.peekFirst().eval();
+                if(statement.peekFirst() != null){
+                    statement.peekFirst().eval();
+                    messagingTemplate.convertAndSend("/topic/updateMap", crew.getPlayer().getMap());
+                    try {
+                        Thread.sleep(300);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
                 if(!statement.isEmpty()){
                     statement.remove();
                 }
@@ -77,7 +90,7 @@ public class ParserGrammar {
         Expr E = parseE();
         token.consume(")");
         WhileState.addAll(ParseStatement());
-        AST w = new WhileNode(E,WhileState,binding);
+        AST w = new WhileNode(E,WhileState,binding,messagingTemplate);
         return  w;
     }
 

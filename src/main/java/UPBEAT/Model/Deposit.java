@@ -1,23 +1,26 @@
 package UPBEAT.Model;
 
+import lombok.Getter;
+
 import java.lang.Math;
+@Getter
 public class Deposit {
     private int max_dep;
-    private int interaest_pct = 5;
+    private int interaest_pct;
     double r;
     private double Currentdep;
 
-    public Deposit(double dep,int Max_dep){
+    public Deposit(double dep,int Max_dep,int interaest_pct){
         this.max_dep = Max_dep;
         this.Currentdep = dep;
+        this.interaest_pct = interaest_pct;
         r = interaest_pct * Math.log10(Currentdep) * Math.log(1);
     }
 
     public void CalDeposit(int turn){
         int b = interaest_pct;
-        int t = turn;
         double d = Currentdep;
-        r = b * Math.log10(d) * Math.log(t);
+        r = b * Math.log10(d) * Math.log(turn);
         double result = (d*r)/100;
         Currentdep += result;
 

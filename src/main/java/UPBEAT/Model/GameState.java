@@ -1,13 +1,17 @@
 package UPBEAT.Model;
 
 import lombok.Getter;
+import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 
 import java.util.HashSet;
 import java.util.Set;
 
+@Getter
 public class GameState {
-    private int m = 20;
-    private int n = 15;
+    private int m = 5;
+    private int n = 5;
     private int init_plan_min = 5;
     private int init_plan_sec = 0;
     private int init_budget = 10000;
@@ -18,14 +22,25 @@ public class GameState {
     private int max_dep = 1000000;
     private int interest_pct = 5;
 
-    private boolean gameChange = false;
+    @Setter
+    private boolean receive = false;
+
+    private boolean allReady = true;
+    private boolean allIninitial = true;
+    private boolean newTurn = false;
+
+    private int currentNumPlayer = 1;
+    @Getter
+    private int TotalTurn = 1;
+    private int Pturn = 1;
 
     private Set<Player> allPlayer = new HashSet<>();
     @Getter
     private MapCell map;
+    @Getter
     private Player turn;
     public GameState(){
-        map = new MapCell(m,n,max_dep);
+        map = new MapCell(m,n,max_dep,interest_pct);
     }
 
     public GameState(int m,int n,int init_plan_min,int init_plan_sec,int init_budget,int init_center_dep,int plan_rev_min,
@@ -41,16 +56,21 @@ public class GameState {
         this.rev_cost = rev_cost;
         this.max_dep = max_dep;
         this.interest_pct = interest_pct;
-        map = new MapCell(m,n,max_dep);
+        map = new MapCell(m,n,max_dep,interest_pct);
     }
 
     public void addPlayer(String name){
-        allPlayer.add(new Player(name,map,init_budget));
-        gameChange = true;
+        Player newPlayer = new Player(name,map,init_budget);
+        if(allPlayer.isEmpty()){
+            newPlayer.setHost();
+        }
+        newPlayer.setMyTurn(currentNumPlayer);
+        currentNumPlayer++;
+        allPlayer.add(newPlayer);
     }
 
-    public Player[]  getAllPlayer(){
-        return allPlayer.toArray(new Player[0]);
+    public Set<Player>  getAllPlayer(){
+        return allPlayer;
     }
 
     public Player getPlayer(String name){
@@ -62,17 +82,89 @@ public class GameState {
         return null;
     }
 
-    public void ChangeState(){
-        gameChange = !gameChange;
+    public boolean Allready(){
+        for(Player player : allPlayer){
+            if(!player.isReady()){
+                return false;
+            }
+        }
+        System.out.println("All player ready status : " + allReady);
+        return allReady;
     }
 
-    public boolean isGameChange(){
-        boolean temp = gameChange;
-        ChangeState();
-        return temp;
-    }
-    public void setTurn(Player player){
-        turn = player;
+    public boolean Allinitial(SimpMessagingTemplate messagingTemplate){
+        for(Player player : allPlayer){
+            if(!player.isInitial()){
+                return false;
+            }
+        }
+        System.out.println("All player initial status : " + allIninitial);
+        if(allIninitial){
+            messagingTemplate.convertAndSend("/topic/StartRun",this);
+        }
+
+        return allIninitial;
     }
 
+    public void StartGame(){
+        System.out.println("Game Start!!!");
+        computeNextTurn();
+    }
+
+    public void computeNextTurn(){
+        if(newTurn){
+            IncreaseTurn();
+            newTurn = false;
+        }
+        for(Player player : allPlayer) {
+            if (player.getMyTurn() == Pturn) {
+                turn = player;
+            }
+        }
+        Pturn++;
+        if(Pturn > allPlayer.size()){
+            Pturn = 1;
+            newTurn = true;
+        }
+    }
+
+    public boolean Checkname(String name){
+        if(name.isEmpty()){
+            return false;
+        }
+        return allPlayer.contains(getPlayer(name));
+    }
+
+    public void IncreaseTurn(){
+        TotalTurn++;
+        for(Player player : allPlayer) {
+            player.sendTurnToDep(TotalTurn);
+        }
+    }
+
+    public boolean isNumeric(String str) {
+        for (char c : str.toCharArray()) {
+            if (!Character.isDigit(c)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void CheckLoseGame(SimpMessagingTemplate messagingTemplate) {
+        int temp = 0;
+        for (Player player : allPlayer) {
+            if (!player.isAlive()) {
+                temp = player.getMyTurn();
+                allPlayer.remove(player);
+                System.out.println(player.getName() + " has lose and remove from game");
+                for (Player remainingPlayer : allPlayer) {
+                    if (remainingPlayer.getMyTurn() > temp) {
+                        remainingPlayer.setMyTurn(remainingPlayer.getMyTurn() - 1);
+                    }
+                }
+                messagingTemplate.convertAndSend("/topic/playerLose", player);
+            }
+        }
+    }
 }

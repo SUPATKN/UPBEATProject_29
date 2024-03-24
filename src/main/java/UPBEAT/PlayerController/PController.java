@@ -12,10 +12,5 @@ import java.util.Set;
 
 @Controller
 public class PController {
-    @MessageMapping("/updatePlayers")
-    @SendTo("/topic/players")
-    public void updatePlayers() {
-        // Call your existing method to fetch all players from the database
-        // Notify clients about the updated players
-    }
+
 }
