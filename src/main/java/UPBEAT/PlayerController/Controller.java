@@ -5,8 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.util.Set;
 
 @CrossOrigin
@@ -17,18 +15,31 @@ public class Controller {
     private SimpMessagingTemplate messagingTemplate;
 
     @PostMapping("/addplayer")
-    public Player addPlayer(@RequestBody String name) {
-        name = name.substring(1, name.length() - 1);
+    public void addPlayer(@RequestBody String name) {
+        if(!game.isNumeric(name)){
+            name = name.substring(1, name.length() - 1);
+        }
         game.addPlayer(name);
         Player player = game.getPlayer(name);
         messagingTemplate.convertAndSend("/topic/gameState", player);
-
-        return player;
     }
 
     @GetMapping("/allPlayer")
     public Set<Player> getAllPlayer(){
         return game.getAllPlayer();
+    }
+
+    @PostMapping("/checkName")
+    public boolean checkName(@RequestBody String name){
+        if(!game.isNumeric(name)){
+            name = name.substring(1, name.length() - 1);
+        }
+        System.out.println("check name :" + name);
+        if(game.Checkname(name)){
+            messagingTemplate.convertAndSend("/topic/tryAgain", game.getAllPlayer());
+            return true;
+        }
+        return false;
     }
 
     @GetMapping("/getGameState")
@@ -42,7 +53,7 @@ public class Controller {
     }
 
     @PutMapping("/Ready")
-    public boolean PlayerReady(@RequestBody String name) throws UnsupportedEncodingException {
+    public boolean PlayerReady(@RequestBody String name) {
         name = name.substring(1, name.length() - 1);
             game.getPlayer(name).setReady();
         messagingTemplate.convertAndSend("/topic/ready", game.getPlayer(name).isReady());
@@ -50,15 +61,42 @@ public class Controller {
         return game.getPlayer(name).isReady();
     }
 
+    @PutMapping("/InitialPlan")
+    public boolean PlayerInitial(@RequestBody String name) {
+        name = name.substring(1, name.length() - 1);
+        game.getPlayer(name).setInitial();
+        messagingTemplate.convertAndSend("/topic/initial", game.getPlayer(name).isInitial());
+        return game.getPlayer(name).isInitial();
+    }
+
     @GetMapping("/allReady")
     public boolean AllPlayerReady(){
         return getGame().Allready();
     }
 
+    @GetMapping("/allInitialPlan")
+    public boolean AllInitial(){
+        return game.Allinitial(messagingTemplate);
+    }
+
     @PostMapping("/gamestart")
     public void startGame(){
-        messagingTemplate.convertAndSend("/topic/startgame", game.Allready());
+
         game.StartGame();
+        messagingTemplate.convertAndSend("/topic/startgame", game.Allready());
+    }
+
+    @PutMapping("/ParsePlan")
+    public void ParsePlan(@RequestBody String name) throws SyntaxError, InvalidMoveException {
+        name = name.substring(1, name.length() - 1);
+        System.out.println("Parse!!!");
+        System.out.println("name it "+name);
+        System.out.println("game turn name " + game.getTurn().getName());
+        if(game.getTurn().getName().equals(name)){
+            game.getPlayer(name).Plan(messagingTemplate);
+            game.computeNextTurn();
+            messagingTemplate.convertAndSend("/topic/nextPlayerTurn", game.Allready());
+        }
     }
 
     @PutMapping("/Plan")
@@ -66,8 +104,8 @@ public class Controller {
         System.out.println(requestBody.getPlan());
         String name = requestBody.getName();
         String plan = requestBody.getPlan();
-        game.getPlayer(name).Plan(plan,messagingTemplate);
-//        messagingTemplate.convertAndSend("/topic/updateMap", game.getMap());
-
+        game.getPlayer(name).setMyPlan(plan);
     }
+
 }
+

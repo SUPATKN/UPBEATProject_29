@@ -1,12 +1,15 @@
 package UPBEAT.Model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.Getter;
 
 public class CityCrew {
     @JsonBackReference
     private final Player player;
     private MapCell mapCell;
     private Cell position;
+    @Getter
+    private String MyownName;
 
 
     public CityCrew(Player player, MapCell mapCell, Cell initialPosition){
@@ -14,6 +17,7 @@ public class CityCrew {
         this.mapCell = mapCell;
         this.position = initialPosition;
         position.setOccupied(true);
+        MyownName = player.getName();
     }
     public Cell getPosition() {
         return position;
@@ -86,7 +90,7 @@ public class CityCrew {
             if (isValidCell(newRow, newCol)) {
                 return mapCell.getCell(newRow, newCol);
             } else {
-                return new Cell(-1,-1,-1);
+                return new Cell(-1,-1,-1,-1);
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             return mapCell.getCell(currentCell.getRow(), currentCell.getCol());

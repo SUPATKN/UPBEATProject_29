@@ -14,11 +14,13 @@ public class Cell {
     private int row;
     private int col;
     private boolean isOccupied;
+    private int Ip;
     private Deposit deposit;
-    public Cell(int row, int col,int max_dep) {
+    public Cell(int row, int col,int max_dep,int Ip) {
         this.row = row;
         this.col = col;
         this.max_dep = max_dep;
+        this.Ip = Ip;
     }
 
     public Player getWhoBelong(){
@@ -52,7 +54,7 @@ public class Cell {
         return deposit;
     }
     public void setDeposit(int value){
-        this.deposit = new Deposit(value,max_dep);
+        this.deposit = new Deposit(value,max_dep,Ip);
     }
 
     public void setPlayer(Player player){

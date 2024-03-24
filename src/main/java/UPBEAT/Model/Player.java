@@ -2,7 +2,7 @@ package UPBEAT.Model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.Setter;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 
 import java.util.*;
@@ -12,7 +12,8 @@ public class Player {
     @JsonManagedReference
     private Cell cityCenter;
     private Map<String, Integer> binding = new HashMap<>();
-    private boolean GameStatus = true; // The players haven't lost yet.
+    @Getter
+    private boolean Alive = true; // The players haven't lost yet.
     private String name;
     private int Budget;
     private CityCrew crew;
@@ -22,13 +23,18 @@ public class Player {
     private Set<Cell> TotalRegion = new HashSet<>();
 
     @Getter
-    private boolean Parsing = false;
-    private int index;
+    @Setter
+    private int MyTurn;
+
+    @Getter
+    private String MyPlan;
 
     @Getter
     private boolean isReady = false;
     @Getter
     private boolean isHost = false;
+    @Getter
+    private boolean isInitial = false;
 
     public Player(String name, MapCell map,int Budget) {
         this.Budget = Budget;
@@ -59,6 +65,11 @@ public class Player {
         isReady = !isReady;
         System.out.println(name + " Ready :" + isReady);
     }
+
+    public void setInitial(){
+        isInitial = !isInitial;
+        System.out.println(name + " initial :" + isInitial);
+    }
     public void setHost(){
         isHost = true;
         System.out.println(name + " is host" );
@@ -77,6 +88,15 @@ public class Player {
     }
 
 
+    public void sendTurnToDep(int turn){
+        Iterator<Cell> Region = TotalRegion.iterator();
+        while(Region.hasNext()){
+            Region.next().getDeposit().CalDeposit(turn);
+        }
+        System.out.println(name + " receive Turn");
+    }
+
+
 
     public Cell getCityCenter() {
         return cityCenter;
@@ -86,19 +106,21 @@ public class Player {
         return name;
     }
 
-    public void setGameStatus() {
-        GameStatus = false; // players has lost
+    public void setLose() {
+        Alive = false; // players has lost
     }
 
-    public void Plan(String plan,SimpMessagingTemplate messagingTemplate) throws SyntaxError, InvalidMoveException {
-        Parsing = true;
+    public void setMyPlan(String plan){
+        MyPlan = plan;
+    }
+
+    public void Plan(SimpMessagingTemplate messagingTemplate) throws SyntaxError, InvalidMoveException {
         System.out.println();
         System.out.println("[ " + name + " ]" + " turn enter plan : ");
-        System.out.println("My plan : " + plan);
-        tokenizer = new Tokenizer(plan);
+        System.out.println("My plan : " + MyPlan);
+        tokenizer = new Tokenizer(MyPlan);
         p = new ParserGrammar(tokenizer, crew, binding,messagingTemplate);
         p.ParsePlan();
-        Parsing = false;
     }
 
     public void DecreaseBudget(int cost) {
@@ -118,7 +140,7 @@ public class Player {
 
     public void loseGame() {
         // Set the player's status to indicate that they have lost the game
-        this.setGameStatus();
+        this.setLose();
         Iterator<Cell> Region = TotalRegion.iterator();
 
         // Remove the player's ownership from all cells they own
@@ -349,13 +371,6 @@ public class Player {
 
     }
 
-    public void setIndex(int index) {
-        this.index = index;
-    }
-
-    public int getIndex() {
-        return index;
-    }
 
     public void ToggleReady(){
         this.isReady = !this.isReady;
