@@ -8,6 +8,7 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import java.util.HashSet;
 import java.util.Set;
 
+@Getter
 public class GameState {
     private int m = 5;
     private int n = 5;
@@ -128,6 +129,9 @@ public class GameState {
     }
 
     public boolean Checkname(String name){
+        if(name.isEmpty()){
+            return false;
+        }
         return allPlayer.contains(getPlayer(name));
     }
 
@@ -147,15 +151,20 @@ public class GameState {
         return true;
     }
 
-    public void CheckLoseGame(){
-        for(Player player : allPlayer) {
-            if(!player.isAlive()){
+    public void CheckLoseGame(SimpMessagingTemplate messagingTemplate) {
+        int temp = 0;
+        for (Player player : allPlayer) {
+            if (!player.isAlive()) {
+                temp = player.getMyTurn();
                 allPlayer.remove(player);
                 System.out.println(player.getName() + " has lose and remove from game");
+                for (Player remainingPlayer : allPlayer) {
+                    if (remainingPlayer.getMyTurn() > temp) {
+                        remainingPlayer.setMyTurn(remainingPlayer.getMyTurn() - 1);
+                    }
+                }
+                messagingTemplate.convertAndSend("/topic/playerLose", player);
             }
         }
     }
-
-
-
 }

@@ -94,6 +94,7 @@ public class Controller {
         System.out.println("game turn name " + game.getTurn().getName());
         if(game.getTurn().getName().equals(name)){
             game.getPlayer(name).Plan(messagingTemplate);
+            game.CheckLoseGame(messagingTemplate);
             game.computeNextTurn();
             messagingTemplate.convertAndSend("/topic/nextPlayerTurn", game.Allready());
         }
