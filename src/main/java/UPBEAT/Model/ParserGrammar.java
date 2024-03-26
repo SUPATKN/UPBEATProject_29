@@ -22,11 +22,6 @@ public class ParserGrammar {
     }
 
 
-    public void setToken(Tokenizer token){
-        this.token = token;
-    }
-
-
     public void ParsePlan() throws SyntaxError, InvalidMoveException {
             while(token.hasNextToken()){
                 statement.addAll(ParseStatement());
@@ -294,7 +289,7 @@ public class ParserGrammar {
         }
     }
 
-    public Expr parseInfoExp() throws SyntaxError{
+    private Expr parseInfoExp() throws SyntaxError{
         if(token.peek("opponent")){
             return new InfoExpr(token.consume(),crew,"");
         }else if(token.peek("nearby")){
@@ -308,7 +303,7 @@ public class ParserGrammar {
             throw new SyntaxError("Please check your InfoExpression "+ token.peek() +" is not accept");
         }
     }
-    public static boolean isNumber(String str)
+    private static boolean isNumber(String str)
     {
         for (char c : str.toCharArray())
         {

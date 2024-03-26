@@ -1,4 +1,4 @@
-package UPBEAT.PlayerController;
+package UPBEAT.Controllers;
 
 import UPBEAT.Model.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,6 +93,7 @@ public class Controller {
         System.out.println("name it "+name);
         System.out.println("game turn name " + game.getTurn().getName());
         if(game.getTurn().getName().equals(name)){
+
             game.getPlayer(name).Plan(messagingTemplate);
             game.CheckLoseGame(messagingTemplate);
             game.computeNextTurn();
@@ -105,6 +106,9 @@ public class Controller {
         System.out.println(requestBody.getPlan());
         String name = requestBody.getName();
         String plan = requestBody.getPlan();
+        if(game.getTotalTurn() > 1){
+            game.getPlayer(name).DecreaseBudget(100);
+        }
         game.getPlayer(name).setMyPlan(plan);
     }
 

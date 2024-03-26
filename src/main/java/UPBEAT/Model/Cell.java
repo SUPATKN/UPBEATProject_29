@@ -66,13 +66,4 @@ public class Cell {
         }
     }
 
-    public void printCellValues() {
-        System.out.println("Cell at (" + row + ", " + col + ") is : " );
-    }
-    protected int generateRandomOccupiedValue() {
-        Random random = new Random();
-        int randomValue = random.nextInt(1000000);
-        return randomValue;
-    }
-
 }
