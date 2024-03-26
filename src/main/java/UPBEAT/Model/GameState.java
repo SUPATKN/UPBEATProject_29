@@ -6,15 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 @Getter
 public class GameState {
-    private int m = 5;
-    private int n = 5;
+    private int m = 20;
+    private int n = 20;
     private int init_plan_min = 5;
     private int init_plan_sec = 0;
-    private int init_budget = 10000;
+    private int init_budget = 100000;
     private int init_center_dep = 100;
     private int plan_rev_min = 30;
     private int plan_rev_sec = 0;
@@ -28,6 +29,8 @@ public class GameState {
     private boolean allReady = true;
     private boolean allIninitial = true;
     private boolean newTurn = false;
+    @Getter
+    private String PLoserName;
 
     private int currentNumPlayer = 1;
     @Getter
@@ -152,12 +155,14 @@ public class GameState {
     }
 
     public void CheckLoseGame(SimpMessagingTemplate messagingTemplate) {
-        int temp = 0;
-        for (Player player : allPlayer) {
+        Iterator<Player> iterator = allPlayer.iterator();
+        while (iterator.hasNext()) {
+            Player player = iterator.next();
             if (!player.isAlive()) {
-                temp = player.getMyTurn();
-                allPlayer.remove(player);
-                System.out.println(player.getName() + " has lose and remove from game");
+                int temp = player.getMyTurn();
+                PLoserName = player.getName();
+                iterator.remove(); // ลบ player ออกจากลิสต์โดยใช้ Iterator
+                System.out.println(player.getName() + " has lost and removed from the game");
                 for (Player remainingPlayer : allPlayer) {
                     if (remainingPlayer.getMyTurn() > temp) {
                         remainingPlayer.setMyTurn(remainingPlayer.getMyTurn() - 1);
@@ -167,4 +172,5 @@ public class GameState {
             }
         }
     }
+
 }

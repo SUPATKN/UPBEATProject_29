@@ -1,4 +1,4 @@
-package UPBEAT.PlayerController;
+package UPBEAT.Controllers;
 
 import lombok.Getter;
 
